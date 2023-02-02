@@ -1,13 +1,16 @@
 Mouvement
-
+8 axes
+Saut
+attaque sur les côtés
 
 
 Physique
-
+effet de recul quand le joueur ou les ennemis prennent des coups
 
 
 Niveaux (graphisme)
-
+niveau de la rue
+niveau de l'ascenseur avec boss
 
 
 Animations
@@ -15,7 +18,14 @@ Animations
 
 
 Combat
-
+Jet d'objets
+Gestion des dégats
 
 
 Caméra
+Shake de caméra à certains moments dans le niveau de l'ascenseur
+
+Ennemis
+grunts
+gros grunt
+boss
