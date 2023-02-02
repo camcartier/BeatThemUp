@@ -1,8 +1,10 @@
 Mouvement
 8 axes
 Saut
+Dash
 attaque sur les côtés
-
+attaque vers le bas apres saut
+attaque speciale
 
 Physique
 effet de recul quand le joueur ou les ennemis prennent des coups
@@ -28,4 +30,19 @@ Shake de caméra à certains moments dans le niveau de l'ascenseur
 Ennemis
 grunts
 gros grunt
-boss
+boss1 : double demoniaque
+boss2 : robotnik
+
+Objets destructibles 
+Distributeur de soda (PV+)
+Lampadaire
+Borne incendie
+
+HUD
+PV 
+charge d'ult
+nb vies
+points (score)
+
+UI
+Pause
