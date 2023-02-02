@@ -3,12 +3,12 @@ Mouvement
 Saut
 Dash
 attaque sur les côtés
-attaque vers le bas apres saut
-attaque speciale
+attaque vers le bas apres saut AOE
+attaque speciale AOE
 
 Physique
 effet de recul quand le joueur ou les ennemis prennent des coups
-
+onde choc (recul) quand le jouer utilise son coup vers le bas
 
 Niveaux (graphisme)
 niveau de la rue
@@ -16,8 +16,10 @@ niveau de l'ascenseur avec boss
 
 
 Animations
-
-
+saut
+dash
+coup
+lancer
 
 Combat
 Jet d'objets
@@ -45,4 +47,5 @@ nb vies
 points (score)
 
 UI
+Start Screen
 Pause
