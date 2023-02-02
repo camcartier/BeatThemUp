@@ -1,3 +1,7 @@
+Start Screen / Ecran de chargement ou introduction
+Player selection
+Chatting system
+
 Mouvement
 8 axes
 Saut
@@ -6,24 +10,36 @@ attaque sur les côtés
 
 Physique
 effet de recul quand le joueur ou les ennemis prennent des coups
+colli
 
 
 Niveaux (graphisme)
 niveau de la rue
 niveau de l'ascenseur avec boss
+quelques objets sont destructibles
 
 
 Animations
-
+coups de poings
+saut
+attaque en sautant
+prend un coup
+ult
 
 
 Combat
-Jet d'objets
+Ramassage/Jet d'objets
+Spawn de cassettes et CD à ramasser avec un timer de despawn (objet qui clignotte)
 Gestion des dégats
+Cooldown sur les attaques:
+- entre les attaques
+- après avoir été touché par un coup
+Ult avec barre de chargement
 
 
 Caméra
 Shake de caméra à certains moments dans le niveau de l'ascenseur
+Caméra bloquée pendant les combats, en défilement entre deux zones de combat (affichage d'une flèche GO)
 
 Ennemis
 grunts
