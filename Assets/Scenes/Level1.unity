@@ -286,6 +286,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 326776623}
+  - component: {fileID: 326776625}
+  - component: {fileID: 326776624}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -309,6 +311,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &326776624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326776622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d4c2735d4432b42a2845aba27b0356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 7138882592654405482, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
+  attack: {fileID: -1394658483811270143, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
+  jump: {fileID: -221975627519175846, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
+--- !u!114 &326776625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326776622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Main
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &711290666
 GameObject:
   m_ObjectHideFlags: 3
@@ -583,6 +630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1769493597}
   - component: {fileID: 1769493596}
+  - component: {fileID: 1769493598}
   m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
@@ -657,3 +705,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &1769493598
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769493595}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -30.08405, y: 1.9436777}
+  - {x: -30.066986, y: -1.8752444}
+  - {x: 29.850517, y: -1.8355149}
+  - {x: 29.886227, y: 0.5349027}
+  - {x: -14.629503, y: 0.42818248}
+  - {x: -15.955332, y: 1.9149746}
+  - {x: -19.49671, y: 1.8921834}
+  - {x: -19.508547, y: 0.45857024}
+  - {x: -29.92076, y: 0.44199336}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
