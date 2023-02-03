@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 326776623}
   - component: {fileID: 326776625}
   - component: {fileID: 326776624}
+  - component: {fileID: 326776626}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -326,6 +327,7 @@ MonoBehaviour:
   movement: {fileID: 7138882592654405482, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   attack: {fileID: -1394658483811270143, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   jump: {fileID: -221975627519175846, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
+  _jumpForce: 3
 --- !u!114 &326776625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +358,27 @@ MonoBehaviour:
   m_DefaultActionMap: Main
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!50 &326776626
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326776622}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &711290666
 GameObject:
   m_ObjectHideFlags: 3
