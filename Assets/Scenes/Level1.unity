@@ -289,9 +289,10 @@ GameObject:
   - component: {fileID: 326776625}
   - component: {fileID: 326776624}
   - component: {fileID: 326776626}
+  - component: {fileID: 326776627}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: PlayerBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,6 +380,40 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &326776627
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326776622}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.32}
+  m_Size: {x: 0.27, y: 0.35}
+  m_Direction: 0
+--- !u!1 &534729994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3377139961610534192, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
+  m_PrefabInstance: {fileID: 1666915850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &534729998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534729994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d58466d3cd55a64183b2b4b9dc345e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerHP: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
 --- !u!1 &711290666
 GameObject:
   m_ObjectHideFlags: 3
@@ -478,9 +513,10 @@ GameObject:
   - component: {fileID: 991165498}
   - component: {fileID: 991165500}
   - component: {fileID: 991165499}
+  - component: {fileID: 991165501}
   m_Layer: 0
   m_Name: Graphics
-  m_TagString: Untagged
+  m_TagString: PlayerFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -572,6 +608,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &991165501
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991165497}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.3, y: 0.2}
+  serializedVersion: 2
+  m_Radius: 0.075
 --- !u!1 &1067747914
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845912199309208231, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.2423162
+      value: -4.991
       objectReference: {fileID: 0}
     - target: {fileID: 4845912199309208231, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -694,25 +746,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8744367281280849962, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9189822493656794913, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 326776622}
-    - target: {fileID: 9189822493656794913, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
-      propertyPath: _moveSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 9189822493656794913, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
-      propertyPath: _moveDistance
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 9189822493656794918, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
       propertyPath: m_Name
       value: RedGrunt
-      objectReference: {fileID: 0}
-    - target: {fileID: 9189822493656794918, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
