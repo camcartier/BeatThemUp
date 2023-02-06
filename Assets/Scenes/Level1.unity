@@ -710,6 +710,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedGrunt
       objectReference: {fileID: 0}
+    - target: {fileID: 9189822493656794918, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
 --- !u!1 &1769493595
