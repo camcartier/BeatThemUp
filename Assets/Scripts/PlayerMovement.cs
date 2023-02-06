@@ -15,14 +15,17 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rb;
     [SerializeField] private InputActionReference movement, attack, jump;
-    
+    private GameObject _player;
 
     private Vector2 _move;
     private Vector2 _notmoving = new Vector2(0, 0);
     private float _movespeed = 60;
     private bool _isWalking;
-    private float _lastXposition;
     
+
+    private Vector2 _lastXposition;
+    private Vector2 _currentPosition;
+    private Vector2 _direction;
 
 
     //valeur recuperee (0>>1) lorsque le bouton est active
@@ -43,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
-       
+        _player = GameObject.Find("Player");
     }
 
     // Start is called before the first frame update
@@ -83,22 +86,37 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        _lastXposition = 0;
-        float _currentPosition = _rb.position.x;
+
         _rb.velocity = _move * _movespeed * Time.fixedDeltaTime ;
 
-
-        if (_currentPosition <_lastXposition)
+        #region toupie
+        //toupie
+        /*
+        if (_lastXposition - _currentPosition > 0)
         {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             _lastXposition = _currentPosition;
-            //transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        }
-        else
-        {
-            _lastXposition += _currentPosition;
-
         }
         
+        else
+        {
+            _lastXposition = _currentPosition;
+        }*/
+
+        #endregion
+
+        
+        if (_move.x < 0 )
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX= true;
+        }
+        if (_move.x > 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = false;
+        }
+
+
+
         if (_isWalking)
         {
             //vers l'infini et au dela
@@ -135,17 +153,24 @@ public class PlayerMovement : MonoBehaviour
         _rb.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
         yield return new WaitForSeconds(.1f);
         _animator.SetBool("Jumping", false);
+        _rb.AddForce(transform.up * -_jumpForce, ForceMode2D.Impulse);
 
+        #region tested
         //Debug.Log("waiting");
         //ça marche pas lel
         //_rb.AddForce(transform.up * -_jumpForce*2, ForceMode2D.Impulse);
         //Debug.Log("goingdown");
         //yield return new WaitForSeconds(.1f);
-
+        #endregion
 
     }
 
     
+    IEnumerator doJump2()
+    {
+        //_player.transform.y = new Vector2(transform.position.x, Mathf.Lerp(transform.position.y, transform.position.y + 2, 0.3f));
+        yield return new WaitForSeconds(.1f);
+    }
 
 
     #region Testing Debug
@@ -162,5 +187,9 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
+    public void Death()
+    {
+        _animator.SetBool("Dead", true);
+    }
 
 }
