@@ -5,19 +5,18 @@ Chatting system
 Mouvement
 8 axes
 Saut
-Dash
 attaque sur les côtés
-attaque vers le bas apres saut AOE
-attaque speciale AOE
+
 
 Physique
 effet de recul quand le joueur ou les ennemis prennent des coups
-onde choc (recul) quand le jouer utilise son coup vers le bas
 colli
+
 
 Niveaux (graphisme)
 niveau de la rue
 niveau de l'ascenseur avec boss
+niveau du studio d'enregistrement
 quelques objets sont destructibles
 
 
@@ -46,20 +45,11 @@ Caméra bloquée pendant les combats, en défilement entre deux zones de combat 
 Ennemis
 grunts
 gros grunt
-boss1 : double demoniaque
-boss2 : robotnik
+boss
 
-Objets destructibles 
-Distributeur de soda (PV+)
-Lampadaire
-Borne incendie
-
-HUD
-PV 
-charge d'ult
-nb vies
-points (score)
-
-UI
-Start Screen
-Pause
+level scripting
+Faire spawn des vagues d'ennemis
+avancer quand la / les vagues sont finies
+rebelotte
+jusqu'arriver au boss
+fin de niveau
