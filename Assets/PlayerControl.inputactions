@@ -33,9 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "UseObject",
+                    "name": "Use",
                     "type": "Button",
-                    "id": "db588df7-4fa6-4467-b29c-e61fa464b1ba",
+                    "id": "b5b88d7a-f552-4554-93f9-1d42263cec25",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "94ab82d8-b08c-4ab7-98ae-25eaddf48d5b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -177,12 +186,23 @@
                 },
                 {
                     "name": "",
-                    "id": "58a60432-27fc-4368-8f0e-ac14a3728bdd",
+                    "id": "6bae16c1-b102-414f-91fa-53c8a709181b",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "UseObject",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa8c59b2-372f-4aff-bd4f-514dfb58fc20",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

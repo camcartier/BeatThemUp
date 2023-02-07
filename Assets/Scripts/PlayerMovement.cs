@@ -14,16 +14,17 @@ enum PlayerStateMode
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    [SerializeField] private InputActionReference movement, attack, jump, useObject;
+    [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     private GameObject _player;
 
     private Vector2 _move;
     private Vector2 _notmoving = new Vector2(0, 0);
     private float _movespeed = 60;
     private bool _isWalking;
+    private float _runspeed = 120;
     
 
-    private Vector2 _lastXposition;
+    private float _lastXposition;
     private Vector2 _currentPosition;
     private Vector2 _direction;
 
@@ -32,9 +33,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _isJumping;
     //commence a true pour sauter x1
     private bool _canJump = true;
-
-    //[SerializeField] private float _jumpForce = 2f;
-
     //_jumpTime est le delai avant de ressauter
     [SerializeField] private float _jumpTime;
     private float _jumpTimerCounter;
@@ -43,12 +41,14 @@ public class PlayerMovement : MonoBehaviour
 
     //valeur recuperee (0>>1) lorsque le bouton est active
     private bool _isAttacking;
+    private bool _isRunning;
+    private bool _useObject = false;
+
 
     //gestion de l'animator
-    //private PlayerStateMode _currentState;
     private Animator _animator;
 
-    private bool _hasObject;
+
 
 
     private void Awake()
@@ -96,7 +96,11 @@ public class PlayerMovement : MonoBehaviour
         if (!_isJumping) _isJumping = jump.action.ReadValue<float>() > 0.1;
         _isAttacking = attack.action.ReadValue<float>() > 0.1;
 
-        _hasObject = useObject.action.ReadValue<float>() > 0.1;
+        if(!_useObject) _useObject = use.action.ReadValue<float>() > 0.1;
+        //if (_useObject) _useObject = use.action.ReadValue<float>() > 0.1;
+
+        _isRunning = sprint.action.ReadValue<float>() > 0.1;
+
     }
 
     private void Move()
@@ -140,15 +144,18 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Walking", false);
         }
 
-        if (_hasObject)
+        if (_useObject)
         {
-          //_animator.SetBool("HasObject", true);
+            Debug.Log("gets");
+            _animator.SetBool("HasObject", true);
         }
-        else
+        else if (!_useObject) 
         {
-          //_animator.SetBool("HasObject", false);
+            Debug.Log("getsNot");
+            _animator.SetBool("HasObject", false);
         }
 
+        
 
         if (_isJumping && _canJump)
         {
@@ -169,12 +176,26 @@ public class PlayerMovement : MonoBehaviour
         {
             //_animator.SetTrigger("AttackTrigger");
             _animator.SetBool("Attacking", true);
+            if(_useObject)
+            {
+                _animator.SetTrigger("Throws");
+            }
         }
         else
         {
             _animator.SetBool("Attacking", false);
         }
 
+        if (_isRunning)
+        {
+            _rb.velocity = _move * _runspeed * Time.fixedDeltaTime;
+            _animator.SetBool("Running", true);
+        }
+        else
+        {
+            _rb.velocity = _move * _movespeed * Time.fixedDeltaTime;
+            _animator.SetBool("Running", false);
+        }
     }
 
     /*
