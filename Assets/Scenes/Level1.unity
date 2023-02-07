@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d58466d3cd55a64183b2b4b9dc345e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHP: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
+  _isOnRange: 0
 --- !u!1 &711290666
 GameObject:
   m_ObjectHideFlags: 3
@@ -748,12 +748,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744367281280849962, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9189822493656794913, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 326776622}
+    - target: {fileID: 9189822493656794913, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
+      propertyPath: _attPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9189822493656794913, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
+      propertyPath: _moveSpeed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 9189822493656794918, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
       propertyPath: m_Name
       value: RedGrunt

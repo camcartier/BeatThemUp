@@ -25,7 +25,6 @@ public class NPCBehaviour : MonoBehaviour
     {
         _rb= GetComponent<Rigidbody2D>();
         _playerTransform= _player.GetComponent<Transform>(); 
-        GetComponentInChildren<CircleCollider2D>().enabled = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -96,8 +95,8 @@ public class NPCBehaviour : MonoBehaviour
     private void Combat()
     {
         _animator.SetBool("Attack",true);
-        //spawn du collider d'attaque
-        GetComponentInChildren<CircleCollider2D>().enabled = true;
+        //condition pour savoir si on est en range de toucher (le collider d'attaque qui touche le body du player)
+        if (GetComponentInChildren<Damage>()._isOnRange) DealDmg();
         _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         StartCoroutine(AttCD());
     }
@@ -141,7 +140,6 @@ public class NPCBehaviour : MonoBehaviour
     IEnumerator AttCD()
     {
         yield return new WaitForSeconds(0.05f);
-        GetComponentInChildren<CircleCollider2D>().enabled = false;
         _animator.SetBool("Attack", false);
     }
 }

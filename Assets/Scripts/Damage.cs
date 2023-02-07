@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    [SerializeField] IntVariables _playerHP;
+    public bool _isOnRange = false;
+
+    private void Awake()
+    {
+        _isOnRange= false;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerBody"))
         {
-            int dmg = GetComponentInParent<NPCBehaviour>()._attPower;
-            _playerHP.value -= dmg;
+            _isOnRange = true;
         }
     }
 
@@ -19,7 +23,7 @@ public class Damage : MonoBehaviour
     {
         if (collision.CompareTag("PlayerBody"))
         {
-
+            _isOnRange = false;
         }
     }
 }
