@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1367862343038212156}
   - component: {fileID: 6169156895431613616}
+  - component: {fileID: 5785573125326667877}
   m_Layer: 0
   m_Name: Vinyl
   m_TagString: Untagged
@@ -154,3 +155,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.18937041}
   serializedVersion: 2
   m_Radius: 0.17331569
+--- !u!114 &5785573125326667877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6660595527757674785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1c598120414794ebd00f9be16ee3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myObjectSprite: {fileID: 0}
+  _timer: 12

@@ -14,7 +14,7 @@ enum PlayerStateMode
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    [SerializeField] private InputActionReference movement, attack, jump;
+    [SerializeField] private InputActionReference movement, attack, jump, useObject;
     private GameObject _player;
 
     private Vector2 _move;
@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     //gestion de l'animator
     //private PlayerStateMode _currentState;
     private Animator _animator;
+
+    private bool _hasObject;
 
 
     private void Awake()
@@ -85,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         
         _isWalking = movement.action.ReadValue<Vector2>() != new Vector2 (0,0);
         
-        
+
         //prbs de tp
         //_isJumping = jump.action.triggered;
         //_isAttacking= attack.action.triggered;
@@ -93,6 +95,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (!_isJumping) _isJumping = jump.action.ReadValue<float>() > 0.1;
         _isAttacking = attack.action.ReadValue<float>() > 0.1;
+
+        _hasObject = useObject.action.ReadValue<float>() > 0.1;
     }
 
     private void Move()
@@ -126,8 +130,6 @@ public class PlayerMovement : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().flipX = false;
         }
 
-
-
         if (_isWalking)
         {
             //vers l'infini et au dela
@@ -138,11 +140,19 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Walking", false);
         }
 
+        if (_hasObject)
+        {
+          //_animator.SetBool("HasObject", true);
+        }
+        else
+        {
+          //_animator.SetBool("HasObject", false);
+        }
 
 
         if (_isJumping && _canJump)
         {
-            /*
+            /* on ne l'utilse pas car on doit tricher le mvt vers le bas
             _rb.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
             _rb.AddForce(transform.up * -_jumpForce, ForceMode2D.Impulse);*/
 
@@ -152,16 +162,8 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(doJump2());
 
-            //_canJump= false;
-            //_jumpTimerCounter-=Time.deltaTime;
         }
 
-        /*
-        if (_jumpTimerCounter < 0)
-        {
-            _canJump= true;
-            _jumpTimerCounter = _jumpTime;
-        }*/
 
         if (_isAttacking)
         {
