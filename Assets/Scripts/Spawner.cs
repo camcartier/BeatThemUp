@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -8,6 +9,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject _gruntPrefab;
     [SerializeField] private BoolVariables _toFollow; //bool pour dire s'il faut déplacer la caméra pour la raccrocher au joueur
     [SerializeField] private BoolVariables _wave;
+    private GameObject _gameManager;
+
+    private void Awake()
+    {
+        _gameManager = GameObject.FindGameObjectWithTag("GameManager");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +76,9 @@ public class Spawner : MonoBehaviour
             //random du x et y
             float x = Random.Range(3, 5) + transform.position.x;
             float y = Random.Range(0, 1.7f);
-            Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
+            //Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
+            GameObject grunt = Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
+            _gameManager.GetComponent<GameManager>()._inactiveGruntList.Add(grunt);
         }
 
     }
@@ -82,7 +91,9 @@ public class Spawner : MonoBehaviour
             //random du x et y
             float x = transform.position.x - Random.Range(4, 6);
             float y = Random.Range(0, 1.7f);
-            Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
+            //Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
+            GameObject grunt = Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
+            _gameManager.GetComponent<GameManager>()._inactiveGruntList.Add(grunt);
         }
     }
 }

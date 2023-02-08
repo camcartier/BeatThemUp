@@ -178,7 +178,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.8
+  orthographic size: 1.87
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 1856328844}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -739,11 +739,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHP: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
-  _camera: {fileID: 11449362}
-  _playerTransform: {fileID: 326776623}
-  _toFollow: {fileID: 11400000, guid: eaa55043343762e409235bbdc0e5d18d, type: 2}
   _wave: {fileID: 11400000, guid: 5ed434f7397bac54ab22b8a06bf3957c, type: 2}
   _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
+  _inactiveGruntList: []
+  _activeGruntAmount: 3
+  _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
 --- !u!4 &1856328845
 Transform:
   m_ObjectHideFlags: 0
@@ -877,7 +877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1455038653420024615, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}
       propertyPath: _gruntQt
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}

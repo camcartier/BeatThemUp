@@ -14,19 +14,23 @@ public class NPCBehaviour : MonoBehaviour
     private float _distance;
     [SerializeField] private float _moveDistance;
     [SerializeField] public IntVariables _playerHealth; //player health scriptableobject to modify it's value on hit
-    [SerializeField] private bool _isActive; //is the NPC active (move and attack the player) or inactive
+    [SerializeField] public bool _isActive; //is the NPC active (move and attack the player) or inactive
     [SerializeField] private float _attackCD; //attack cooldown timer
     [SerializeField] private bool _onCombat; //is the NPC already fighting or not
     [SerializeField] private Animator _animator;
 
     [SerializeField] private float _nextAttack =0;
     [SerializeField] private IntVariables _enemyCount;
+    [SerializeField] private IntVariables _currentActiveGrunt; //quantité de grunts active à l'instant T
+    private bool _isDead;
 
     private void Awake()
     {
         _rb= GetComponent<Rigidbody2D>();
         _player = GameObject.FindGameObjectWithTag("PlayerBody");
         _playerTransform= _player.GetComponent<Transform>();
+        _isActive= false;
+        _isDead= false;
     }
     // Start is called before the first frame update
     void Start()
@@ -37,20 +41,19 @@ public class NPCBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_hp >=0 && _isDead==false) { Death(); _isDead = true; }
     }
 
     private void FixedUpdate()
     {
-        Behaviour();
+        if (_isActive) Behaviour();
+        else if (!_isActive) InactiveBehaviour();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void InactiveBehaviour()
     {
-        //if (collision.)
-        //{
-        //    DealDmg();
-        //}
+        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance * 6) Move();
+        else Stop();
     }
 
     //NPC behaviour method
@@ -67,11 +70,6 @@ public class NPCBehaviour : MonoBehaviour
             {
                 Combat();
             }
-            //if (_isActive && _onCombat==false)
-            //{
-            //    _onCombat = true;
-            //    StartCoroutine(Combat()); 
-            //}
         }
 
     }
@@ -97,11 +95,6 @@ public class NPCBehaviour : MonoBehaviour
         _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
     }
 
-    private void FlipCol()
-    {
-        
-    }
-
     private void Stop()
     {
         _animator.SetBool("Idle", true);
@@ -117,23 +110,6 @@ public class NPCBehaviour : MonoBehaviour
         StartCoroutine(AttCD());
     }
 
-    //Coroutine de combat
-    //IEnumerator Combat()
-    //{
-    //    _animator.SetTrigger("Attack");
-    //    Attack();
-
-    //    yield return new WaitForSeconds(_attackCD);
-    //    _onCombat= false;
-    //}
-    
-    //public void Damage(int damage)
-    //{
-    //    _hp -= damage;
-    //    if (_hp<=0) StartCoroutine(Death());
-    //    GetComponentInChildren<CapsuleCollider2D>().enabled = false;
-    //}
-
     private void DealDmg()
     {
         _playerHealth.value -= _attPower;
@@ -145,12 +121,14 @@ public class NPCBehaviour : MonoBehaviour
         
         for (int i = 0; i<4;i++)
         {
+            yield return new WaitForSeconds(0.1f);
             GetComponentInChildren<SpriteRenderer>().enabled= false;
             yield return new WaitForSeconds(0.1f);
             GetComponentInChildren<SpriteRenderer>().enabled= true;
         }
-        Destroy(gameObject);
         _enemyCount.value--;
+        _currentActiveGrunt.value--;
+        Destroy(gameObject);
         yield return null;
     }
 
