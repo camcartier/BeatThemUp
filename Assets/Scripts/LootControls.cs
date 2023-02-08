@@ -33,7 +33,7 @@ public class LootControls : MonoBehaviour
         {
             //StartCoroutine(Clignote());
             //Clignote();
-            Destroy(gameObject);
+            StartCoroutine(Clignote());
         }
 
         if (_timer - _timerCounter < 0)
@@ -122,5 +122,35 @@ public class LootControls : MonoBehaviour
 
 
     }*/
+
+
+    /*
+    //l'ennemi va clignoter un peu avant de mourrir
+    IEnumerator Death()
+    {
+
+        for (int i = 0; i < 4; i++)
+        {
+            GetComponentInChildren<SpriteRenderer>().enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            GetComponentInChildren<SpriteRenderer>().enabled = true;
+        }
+        Destroy(gameObject);
+        _enemyCount.value--;
+        yield return null;
+    }
+    */
+
+
+    IEnumerator Clignote()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            yield return new WaitForSeconds(0.05f);
+            GetComponentInChildren<SpriteRenderer>().enabled = false;
+            yield return new WaitForSeconds(0.05f);
+            GetComponentInChildren<SpriteRenderer>().enabled = true;
+        }
+    }
 
 }

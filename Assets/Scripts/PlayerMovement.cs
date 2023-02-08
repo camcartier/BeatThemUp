@@ -13,23 +13,18 @@ enum PlayerStateMode
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D _rb;
-    [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     private GameObject _player;
-    [SerializeField] private GameObject _throwableCanPrefab;
+    private Rigidbody2D _rb;
+    private Animator _animator;
+    [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
+    [SerializeField] public IntVariables _playerHealth;
+    [SerializeField] public IntVariables _currentplayerHealth;
+
 
     private Vector2 _move;
-    private Vector2 _notmoving = new Vector2(0, 0);
     private float _movespeed = 60;
+    private float _runspeed = 140;
     private bool _isWalking;
-    private float _runspeed = 120;
-    
-
-    private float _lastXposition;
-    private Vector2 _currentPosition;
-    private Vector2 _direction;
-
-
     //valeur recuperee (0>>1) lorsque le bouton est active
     private bool _isJumping;
     //commence a true pour sauter x1
@@ -46,15 +41,12 @@ public class PlayerMovement : MonoBehaviour
     private bool _isUsing;
     private float _useFloat;
 
-    private bool _readyToThrow = true;
+
+    [SerializeField] private GameObject _throwableCanPrefab;
+    private GameObject _objectThrown;
+    private GameObject _readyToThrow;
     bool _hasCan;
     bool _canPickUp;
-
-
-    //gestion de l'animator
-    private Animator _animator;
-
-
 
 
     private void Awake()
@@ -77,73 +69,62 @@ public class PlayerMovement : MonoBehaviour
     {
         GetInput();
 
+        if (_playerHealth.value < 0)
+        {
+            Death();
+        }
     }
 
     private void FixedUpdate()
     {
         Move();
 
-
     }
 
-    //prbs de tp
-    //_isJumping = jump.action.triggered;
-    //_isAttacking= attack.action.triggered;
 
     private void GetInput()
     {
         _move = movement.action.ReadValue<Vector2>();
-        
+
         _isWalking = movement.action.ReadValue<Vector2>() != new Vector2 (0,0);
-        
 
         if (!_isJumping) _isJumping = jump.action.ReadValue<float>() > 0.1;
-        
+
         _isAttacking = attack.action.ReadValue<float>() > 0.1;
 
-        //if(!_isUsing) _isUsing = use.action.ReadValue<float>() > 0.1;
         _useFloat = use.action.ReadValue<float>();
-        //Debug.Log($"{_useFloat}");
 
         _isRunning = sprint.action.ReadValue<float>() > 0.1;
-        
+
+
+
+
+        //prbs de tp
+        //_isJumping = jump.action.triggered;
+        //if(!_isUsing) _isUsing = use.action.ReadValue<float>() > 0.1;
     }
 
     private void Move()
     {
 
         _rb.velocity = _move * _movespeed * Time.fixedDeltaTime ;
+        Vector2 _offset = GetComponentInChildren<CircleCollider2D>().offset;
         _animator.SetBool("Grounded", true);
-
-        #region toupie
-        //toupie
-        /*
-        if (_lastXposition - _currentPosition > 0)
-        {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-            _lastXposition = _currentPosition;
-        }
-        
-        else
-        {
-            _lastXposition = _currentPosition;
-        }*/
-
-        #endregion
-
 
         if (_move.x < 0 )
         {
             GetComponentInChildren<SpriteRenderer>().flipX= true;
+            if (_offset.x > 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(-0.3f, _offset.y);
+
         }
         if (_move.x > 0)
         {
             GetComponentInChildren<SpriteRenderer>().flipX = false;
+            if (_offset.x < 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(0.3f, _offset.y);
         }
 
         if (_isWalking)
         {
-            //vers l'infini et au dela
             _animator.SetBool("Walking", true); 
         }
         else
@@ -153,9 +134,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (_isJumping && _canJump)
         {
-            /* on ne l'utilse pas car on doit tricher le mvt vers le bas
-            _rb.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
-            _rb.AddForce(transform.up * -_jumpForce, ForceMode2D.Impulse);*/
 
             _animator.SetBool("Jumping", true);
             _animator.SetBool("Walking", false);
@@ -167,7 +145,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (_isAttacking)
         {
-            //_animator.SetTrigger("AttackTrigger");
+            _movespeed = 0f;
+            _runspeed = 0f;
             _animator.SetBool("Attacking", true);
             if(_isUsing)
             {
@@ -176,6 +155,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            _movespeed = 60f;
+            _runspeed = 140f;
             _animator.SetBool("Attacking", false);
         }
 
@@ -194,41 +175,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (_useFloat > 0)
         {
-            //Debug.Log("gets");
             _animator.SetBool("HasObject", true);
             PicksUp();
         }
         else
         {
-            //Debug.Log("getsnot");
             _animator.SetBool("HasObject", false);
             Throw ();
         }
 
 
-        /*
-        if (_isUsing && _isAttacking)
-        {
-            Throw();
-        }*/
 
     }
 
-    /*
-    IEnumerator doJump()
-    {
-        _rb.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(.1f);
-        _animator.SetBool("Jumping", false);
-    }*/
 
 
-    //prbs avec la coroutine
+
     IEnumerator doJump2()
     {
-        //transform.position = new Vector2(transform.position.x, Mathf.Lerp(transform.position.y, transform.position.y + 0.1f, 0.2f));
-        //transform.position = new Vector2(transform.position.x, Mathf.Lerp(transform.position.y, transform.position.y + 0.1f, 0.5f));
-
         transform.position = new Vector2(transform.position.x, Mathf.Lerp(transform.position.y, transform.position.y + 0.2f, 0.3f));
         yield return new WaitForSeconds(.3f);
         _animator.SetBool("Jumping", false);
@@ -236,35 +200,19 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("Grounded", true);
         
         _isJumping= false;
-        //yield return new WaitForSeconds(5);
     }
 
 
-
-
-    #region Testing Debug
-
-    void OnJump()
+    public void TakesHit()
     {
-        //Debug.Log("Jump pressed");
-
+        _animator.SetTrigger("GetsHit");
     }
-
-    void OnAttack()
-    {
-        //Debug.Log("Attack");
-    }
-    #endregion
 
     public void Death()
     {
         _animator.SetBool("Dead", true);
     }
 
-    public void TakesHit()
-    {
-        _animator.SetTrigger("GetsHit");
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -273,13 +221,11 @@ public class PlayerMovement : MonoBehaviour
             _canPickUp = true;
             Debug.Log("canpickup");
         }
-
         if (_hasCan)
         {
             Destroy(collision.gameObject);
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Throwable"))
@@ -295,10 +241,8 @@ public class PlayerMovement : MonoBehaviour
         GameObject _pickupPos = _player.transform.Find("pickupPos").gameObject;
         if (!_hasCan && _canPickUp)
         {
-            //Debug.Log("entredansleif");
-            GameObject readyToThrow = Instantiate(_throwableCanPrefab, _pickupPos.transform) as GameObject;
-            //Debug.Log("instantiated");
-            readyToThrow.transform.parent = GameObject.Find("Player").transform;
+            _readyToThrow = Instantiate(_throwableCanPrefab, _pickupPos.transform) as GameObject;
+            _readyToThrow.transform.parent = GameObject.Find("Player").transform;
             _hasCan = true;
             _canPickUp= false;
             
@@ -307,24 +251,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    public void DestroyPickup()
-    {
-
-    }
-
     
     public void Throw()
     {
-        _readyToThrow = false;
-        /*
-        if (_hasCan)
-        {
-            GameObject childThrowable = _player.transform.Find("ThrowableBlueCan(Clone)").gameObject;
+        Destroy(_readyToThrow);
 
-            Rigidbody2D _rbchild = childThrowable.GetComponent<Rigidbody2D>();
-            _rbchild.velocity = new Vector2(100, 0);
-        }*/
-
+    
     }
 
 }
