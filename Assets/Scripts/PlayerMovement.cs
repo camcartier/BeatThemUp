@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     [SerializeField] public IntVariables _playerHealth;
-    [SerializeField] public IntVariables _currentplayerHealth;
 
 
     private Vector2 _move;
@@ -69,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GetInput();
 
-        if (_playerHealth.value < 0)
+        if (_playerHealth.value <= 0)
         {
             Death();
         }
