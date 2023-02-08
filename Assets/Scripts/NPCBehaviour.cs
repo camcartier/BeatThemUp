@@ -23,6 +23,7 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private IntVariables _enemyCount;
     [SerializeField] private IntVariables _currentActiveGrunt; //quantité de grunts active à l'instant T
     private bool _isDead;
+    private bool _flipX;
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class NPCBehaviour : MonoBehaviour
     private void InactiveBehaviour()
     {
         if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance * 6) Move();
+        else if(Vector2.Distance(transform.position, _playerTransform.position) < _moveDistance * 4) MoveAway();
         else Stop();
     }
 
@@ -95,8 +97,32 @@ public class NPCBehaviour : MonoBehaviour
         _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
     }
 
+    private void MoveAway()
+    {
+        if(!_flipX) { _flipX = true; }
+        //deplacement vers le joueur, le sprite flip sur X en fonction de la direction du mouvement
+        _direction2Player = _playerTransform.position - transform.position;
+        _direction2Player.x = -_direction2Player.x;
+        _animator.SetFloat("DirX", _direction2Player.x);
+        _animator.SetBool("Idle", false);
+        Vector2 _offset = GetComponentInChildren<CircleCollider2D>().offset;
+        if (_direction2Player.x > 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = false;
+            if (_offset.x < 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(0.3f, _offset.y);
+        }
+        else if (_direction2Player.x < 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = true;
+            if (_offset.x > 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(-0.3f, _offset.y);
+        }
+        _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
+    }
+
     private void Stop()
     {
+        if(_flipX) { _flipX = false; GetComponentInChildren<SpriteRenderer>().flipX = !GetComponentInChildren<SpriteRenderer>().flipX; }
+        //s'assurer que le NPC regarde le joueur (flip X une fois quand il move away)
         _animator.SetBool("Idle", true);
         _rb.velocity = UnityEngine.Vector2.zero;
     }

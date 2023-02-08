@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         _enemyCount.value = 0;
         _wave.value = false;
         _inactiveGruntList= new List<GameObject>();
+        _currentActiveGrunt.value = 0;
     }
 
     // Update is called once per frame
