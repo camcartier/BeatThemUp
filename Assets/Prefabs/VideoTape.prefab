@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7230497159499269109}
   - component: {fileID: 1060081225349357495}
+  - component: {fileID: 1757435394188291597}
   m_Layer: 0
   m_Name: VideoTape
   m_TagString: Untagged
@@ -164,3 +165,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24606454, y: 0.15163366}
   m_EdgeRadius: 0
+--- !u!114 &1757435394188291597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705707444421604513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1c598120414794ebd00f9be16ee3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _myObjectSprite: {fileID: 0}
+  _timer: 12

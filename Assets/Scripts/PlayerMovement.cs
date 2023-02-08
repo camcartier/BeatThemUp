@@ -14,16 +14,18 @@ enum PlayerStateMode
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    [SerializeField] private InputActionReference movement, attack, jump;
+    [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     private GameObject _player;
+    [SerializeField] private GameObject _throwableCanPrefab;
 
     private Vector2 _move;
     private Vector2 _notmoving = new Vector2(0, 0);
     private float _movespeed = 60;
     private bool _isWalking;
+    private float _runspeed = 120;
     
 
-    private Vector2 _lastXposition;
+    private float _lastXposition;
     private Vector2 _currentPosition;
     private Vector2 _direction;
 
@@ -32,9 +34,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _isJumping;
     //commence a true pour sauter x1
     private bool _canJump = true;
-
-    //[SerializeField] private float _jumpForce = 2f;
-
     //_jumpTime est le delai avant de ressauter
     [SerializeField] private float _jumpTime;
     private float _jumpTimerCounter;
@@ -43,10 +42,19 @@ public class PlayerMovement : MonoBehaviour
 
     //valeur recuperee (0>>1) lorsque le bouton est active
     private bool _isAttacking;
+    private bool _isRunning;
+    private bool _isUsing;
+    private float _useFloat;
+
+    private bool _readyToThrow = true;
+    bool _hasCan;
+    bool _canPickUp;
+
 
     //gestion de l'animator
-    //private PlayerStateMode _currentState;
     private Animator _animator;
+
+
 
 
     private void Awake()
@@ -76,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
         Move();
 
 
-
     }
 
     private void GetInput()
@@ -85,14 +92,22 @@ public class PlayerMovement : MonoBehaviour
         
         _isWalking = movement.action.ReadValue<Vector2>() != new Vector2 (0,0);
         
-        
+
         //prbs de tp
         //_isJumping = jump.action.triggered;
         //_isAttacking= attack.action.triggered;
         //
 
         if (!_isJumping) _isJumping = jump.action.ReadValue<float>() > 0.1;
+        
         _isAttacking = attack.action.ReadValue<float>() > 0.1;
+
+        //if(!_isUsing) _isUsing = use.action.ReadValue<float>() > 0.1;
+        _useFloat = use.action.ReadValue<float>();
+        //Debug.Log($"{_useFloat}");
+
+        _isRunning = sprint.action.ReadValue<float>() > 0.1;
+        
     }
 
     private void Move()
@@ -100,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
         _rb.velocity = _move * _movespeed * Time.fixedDeltaTime ;
         _animator.SetBool("Grounded", true);
+
         #region toupie
         //toupie
         /*
@@ -126,8 +142,6 @@ public class PlayerMovement : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().flipX = false;
         }
 
-
-
         if (_isWalking)
         {
             //vers l'infini et au dela
@@ -139,10 +153,23 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
+        if (_useFloat > 0)
+        {
+            //Debug.Log("gets");
+            _animator.SetBool("HasObject", true);
+            PicksUp();
+        }
+        else
+        {
+            //Debug.Log("getsnot");
+            _animator.SetBool("HasObject", false);
+        }
+        
+
 
         if (_isJumping && _canJump)
         {
-            /*
+            /* on ne l'utilse pas car on doit tricher le mvt vers le bas
             _rb.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
             _rb.AddForce(transform.up * -_jumpForce, ForceMode2D.Impulse);*/
 
@@ -152,27 +179,33 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(doJump2());
 
-            //_canJump= false;
-            //_jumpTimerCounter-=Time.deltaTime;
         }
 
-        /*
-        if (_jumpTimerCounter < 0)
-        {
-            _canJump= true;
-            _jumpTimerCounter = _jumpTime;
-        }*/
 
         if (_isAttacking)
         {
             //_animator.SetTrigger("AttackTrigger");
             _animator.SetBool("Attacking", true);
+            if(_isUsing)
+            {
+                _animator.SetTrigger("Throws");
+            }
         }
         else
         {
             _animator.SetBool("Attacking", false);
         }
 
+        if (_isRunning)
+        {
+            _rb.velocity = _move * _runspeed * Time.fixedDeltaTime;
+            _animator.SetBool("Running", true);
+        }
+        else
+        {
+            _rb.velocity = _move * _movespeed * Time.fixedDeltaTime;
+            _animator.SetBool("Running", false);
+        }
     }
 
     /*
@@ -235,4 +268,43 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetTrigger("GetsHit");
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Throwable"))
+        {
+            _canPickUp = true;
+            Debug.Log("canpickup");
+        }
+
+        if (_hasCan)
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void PicksUp()
+    {
+
+        GameObject _pickupPos = _player.transform.Find("pickupPos").gameObject;
+        if (!_hasCan && _canPickUp)
+        {
+            Debug.Log("entredansleif");
+            GameObject readyToThrow = Instantiate(_throwableCanPrefab, _pickupPos.transform) as GameObject;
+            readyToThrow.transform.parent = GameObject.Find("Player").transform;
+            _hasCan = true;
+            _canPickUp= false;
+            
+        }
+
+    }
+
+    public void Throw()
+    {
+        _readyToThrow = false;
+        Transform childThrowable = _player.transform.Find("ThrowableCan");
+          
+
+    }
+
 }
