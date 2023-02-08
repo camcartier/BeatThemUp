@@ -86,17 +86,16 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    //prbs de tp
+    //_isJumping = jump.action.triggered;
+    //_isAttacking= attack.action.triggered;
+
     private void GetInput()
     {
         _move = movement.action.ReadValue<Vector2>();
         
         _isWalking = movement.action.ReadValue<Vector2>() != new Vector2 (0,0);
         
-
-        //prbs de tp
-        //_isJumping = jump.action.triggered;
-        //_isAttacking= attack.action.triggered;
-        //
 
         if (!_isJumping) _isJumping = jump.action.ReadValue<float>() > 0.1;
         
@@ -152,21 +151,6 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Walking", false);
         }
 
-
-        if (_useFloat > 0)
-        {
-            //Debug.Log("gets");
-            _animator.SetBool("HasObject", true);
-            PicksUp();
-        }
-        else
-        {
-            //Debug.Log("getsnot");
-            _animator.SetBool("HasObject", false);
-        }
-        
-
-
         if (_isJumping && _canJump)
         {
             /* on ne l'utilse pas car on doit tricher le mvt vers le bas
@@ -180,7 +164,6 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(doJump2());
 
         }
-
 
         if (_isAttacking)
         {
@@ -206,6 +189,29 @@ public class PlayerMovement : MonoBehaviour
             _rb.velocity = _move * _movespeed * Time.fixedDeltaTime;
             _animator.SetBool("Running", false);
         }
+
+
+
+        if (_useFloat > 0)
+        {
+            //Debug.Log("gets");
+            _animator.SetBool("HasObject", true);
+            PicksUp();
+        }
+        else
+        {
+            //Debug.Log("getsnot");
+            _animator.SetBool("HasObject", false);
+            Throw ();
+        }
+
+
+        /*
+        if (_isUsing && _isAttacking)
+        {
+            Throw();
+        }*/
+
     }
 
     /*
@@ -214,17 +220,8 @@ public class PlayerMovement : MonoBehaviour
         _rb.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
         yield return new WaitForSeconds(.1f);
         _animator.SetBool("Jumping", false);
-        _rb.AddForce(transform.up * -_jumpForce, ForceMode2D.Impulse);
-
-        #region tested
-        //Debug.Log("waiting");
-        //ça marche pas lel
-        //_rb.AddForce(transform.up * -_jumpForce*2, ForceMode2D.Impulse);
-        //Debug.Log("goingdown");
-        //yield return new WaitForSeconds(.1f);
-        #endregion
-
     }*/
+
 
     //prbs avec la coroutine
     IEnumerator doJump2()
@@ -269,7 +266,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetTrigger("GetsHit");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Throwable"))
         {
@@ -283,14 +280,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Throwable"))
+        {
+            _canPickUp = false;
+        }
+    }
+
+
     public void PicksUp()
     {
 
         GameObject _pickupPos = _player.transform.Find("pickupPos").gameObject;
         if (!_hasCan && _canPickUp)
         {
-            Debug.Log("entredansleif");
+            //Debug.Log("entredansleif");
             GameObject readyToThrow = Instantiate(_throwableCanPrefab, _pickupPos.transform) as GameObject;
+            //Debug.Log("instantiated");
             readyToThrow.transform.parent = GameObject.Find("Player").transform;
             _hasCan = true;
             _canPickUp= false;
@@ -299,11 +306,24 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    
+    public void DestroyPickup()
+    {
+
+    }
+
+    
     public void Throw()
     {
         _readyToThrow = false;
-        Transform childThrowable = _player.transform.Find("ThrowableCan");
-          
+        /*
+        if (_hasCan)
+        {
+            GameObject childThrowable = _player.transform.Find("ThrowableBlueCan(Clone)").gameObject;
+
+            Rigidbody2D _rbchild = childThrowable.GetComponent<Rigidbody2D>();
+            _rbchild.velocity = new Vector2(100, 0);
+        }*/
 
     }
 
