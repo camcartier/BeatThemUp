@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7333663820026933782}
   - component: {fileID: 7668556386504849691}
   - component: {fileID: 8744367281280849962}
+  - component: {fileID: 8509432458491717593}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: EnemyFist
@@ -122,6 +123,19 @@ CircleCollider2D:
   m_Offset: {x: 0.3, y: 0.2}
   serializedVersion: 2
   m_Radius: 0.075
+--- !u!114 &8509432458491717593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3377139961610534192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d58466d3cd55a64183b2b4b9dc345e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isOnRange: 0
 --- !u!1 &9189822493656794918
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,10 +200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 40
-  _attPower: 15
+  _attPower: 10
   _defPower: 0
-  _moveSpeed: 65
-  _player: {fileID: 0}
+  _moveSpeed: 40
   _moveDistance: 0.4
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   _isActive: 1
@@ -197,6 +210,7 @@ MonoBehaviour:
   _onCombat: 0
   _animator: {fileID: 7668556386504849691}
   _nextAttack: 0
+  _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
 --- !u!50 &-6084313575471613132
 Rigidbody2D:
   serializedVersion: 4

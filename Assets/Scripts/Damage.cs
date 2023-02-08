@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Damage : MonoBehaviour
@@ -15,6 +16,7 @@ public class Damage : MonoBehaviour
     {
         if (collision.CompareTag("PlayerBody"))
         {
+            Debug.Log("on range");
             _isOnRange = true;
         }
     }
@@ -24,6 +26,7 @@ public class Damage : MonoBehaviour
         if (collision.CompareTag("PlayerBody"))
         {
             _isOnRange = false;
+            Debug.Log("plus on range");
         }
     }
 }
