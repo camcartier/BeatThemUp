@@ -8,7 +8,7 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] public int _hp, _attPower, _defPower;
     [SerializeField] private float _moveSpeed;
     private Rigidbody2D _rb; //npc RB2D
-    [SerializeField] GameObject _player;
+    private GameObject _player;
     private Vector2 _direction2Player; //vector2 to have the direction towards the player
     private Transform _playerTransform;
     private float _distance;
@@ -20,16 +20,18 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private Animator _animator;
 
     [SerializeField] private float _nextAttack =0;
+    [SerializeField] private IntVariables _enemyCount;
 
     private void Awake()
     {
         _rb= GetComponent<Rigidbody2D>();
-        _playerTransform= _player.GetComponent<Transform>(); 
+        _player = GameObject.FindGameObjectWithTag("PlayerBody");
+        _playerTransform= _player.GetComponent<Transform>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        _enemyCount.value++;
     }
 
     // Update is called once per frame
@@ -81,22 +83,36 @@ public class NPCBehaviour : MonoBehaviour
         _direction2Player = _playerTransform.position - transform.position;
         _animator.SetFloat("DirX", _direction2Player.x);
         _animator.SetBool("Idle", false);
-        if (_direction2Player.x >0) GetComponentInChildren<SpriteRenderer>().flipX= false;
-        else if (_direction2Player.x <0) GetComponentInChildren<SpriteRenderer>().flipX= true;
+        Vector2 _offset = GetComponentInChildren<CircleCollider2D>().offset;
+        if (_direction2Player.x > 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = false;
+            if (_offset.x<0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(0.3f, _offset.y);
+        }
+        else if (_direction2Player.x < 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = true;
+            if (_offset.x > 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(-0.3f, _offset.y);
+        }
         _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
+    }
+
+    private void FlipCol()
+    {
+        
     }
 
     private void Stop()
     {
         _animator.SetBool("Idle", true);
-        _rb.velocity = Vector2.zero;
+        _rb.velocity = UnityEngine.Vector2.zero;
     }
 
     private void Combat()
     {
         _animator.SetBool("Attack",true);
         //condition pour savoir si on est en range de toucher (le collider d'attaque qui touche le body du player)
-        if (GetComponentInChildren<Damage>()._isOnRange) DealDmg();
+        if (GetComponentInChildren<Damage>()._isOnRange==true) DealDmg();
         _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         StartCoroutine(AttCD());
     }
@@ -134,6 +150,7 @@ public class NPCBehaviour : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().enabled= true;
         }
         Destroy(gameObject);
+        _enemyCount.value--;
         yield return null;
     }
 

@@ -8,6 +8,7 @@ TagManager:
   - PlayerFist
   - EnemyBody
   - EnemyFist
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Spawn
   - 
   - 
   - 
