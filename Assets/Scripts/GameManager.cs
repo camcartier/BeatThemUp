@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BoolVariables _toStop;
     [SerializeField] private BoolVariables _wave;
     [SerializeField] private IntVariables _enemyCount;
-    [SerializeField] private GameObject _gruntPrefab;
     Vector2 _center;
 
     // Start is called before the first frame update
