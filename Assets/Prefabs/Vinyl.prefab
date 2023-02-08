@@ -167,5 +167,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1c598120414794ebd00f9be16ee3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myObjectSprite: {fileID: 0}
-  _timer: 12
+  _myObjectSprite: {fileID: 7257196608879205120}
+  _timer: 7
