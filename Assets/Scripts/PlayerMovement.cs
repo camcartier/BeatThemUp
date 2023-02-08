@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     [SerializeField] public IntVariables _playerHealth;
-
+    private float _storedHealth;
 
     private Vector2 _move;
     private float _movespeed = 60;
@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpTimerCounter;
     private Vector2 _initialPos;
 
+    //private Collider2D _fistCollider;
 
     //valeur recuperee (0>>1) lorsque le bouton est active
     private bool _isAttacking;
@@ -55,6 +56,10 @@ public class PlayerMovement : MonoBehaviour
         _player = GameObject.Find("Player");
 
         _jumpTimerCounter = _jumpTime;
+        _storedHealth = _playerHealth.value;
+
+        //_fistCollider = FindGameObjectWithTag("PlayerFist").Collider2D;
+        //_fistCollider.enabled = false;
     }
 
     // Start is called before the first frame update
@@ -67,6 +72,18 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GetInput();
+        /*
+        if (_storedHealth.value > _playerHealth.value )
+        {
+            Debug.Log($"{_storedHealth}");
+            Debug.Log("aouch");
+        }*/
+        if (_storedHealth != _playerHealth.value)
+        {
+            _storedHealth = _playerHealth.value;
+            KnockBack();
+        }
+
 
         if (_playerHealth.value <= 0)
         {
@@ -144,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_isAttacking)
         {
+            //_fistCollider.enabled = true;
             _movespeed = 0f;
             _runspeed = 0f;
             _animator.SetBool("Attacking", true);
@@ -157,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
             _movespeed = 60f;
             _runspeed = 140f;
             _animator.SetBool("Attacking", false);
+            //_fistCollider.enabled = false;
         }
 
         if (_isRunning)
@@ -258,4 +277,13 @@ public class PlayerMovement : MonoBehaviour
     
     }
 
+
+    public void KnockBack()
+    {
+        _animator.SetTrigger("GetsHit");
+        /*
+        float force = 1000;
+        _rb.AddForce(transform.right *force);
+        Debug.Log("aouch");*/
+    }
 }
