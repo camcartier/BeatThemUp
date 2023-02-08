@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     //_jumpTime est le delai avant de ressauter
     [SerializeField] private float _jumpTime;
     private float _jumpTimerCounter;
+    [SerializeField] AnimationCurve _jumpCurve;
     private Vector2 _initialPos;
 
     //private Collider2D _fistCollider;
