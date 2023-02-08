@@ -9,6 +9,7 @@ TagManager:
   - EnemyBody
   - EnemyFist
   - Loot
+  - Throwable
   layers:
   - Default
   - TransparentFX

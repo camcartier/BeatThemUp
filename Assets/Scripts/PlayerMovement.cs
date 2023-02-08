@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     private GameObject _player;
+    [SerializeField] private GameObject _throwableCanPrefab;
 
     private Vector2 _move;
     private Vector2 _notmoving = new Vector2(0, 0);
@@ -42,7 +43,12 @@ public class PlayerMovement : MonoBehaviour
     //valeur recuperee (0>>1) lorsque le bouton est active
     private bool _isAttacking;
     private bool _isRunning;
-    private bool _useObject = false;
+    private bool _isUsing;
+    private float _useFloat;
+
+    private bool _readyToThrow = true;
+    bool _hasCan;
+    bool _canPickUp;
 
 
     //gestion de l'animator
@@ -78,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
         Move();
 
 
-
     }
 
     private void GetInput()
@@ -94,13 +99,15 @@ public class PlayerMovement : MonoBehaviour
         //
 
         if (!_isJumping) _isJumping = jump.action.ReadValue<float>() > 0.1;
+        
         _isAttacking = attack.action.ReadValue<float>() > 0.1;
 
-        if(!_useObject) _useObject = use.action.ReadValue<float>() > 0.1;
-        //if (_useObject) _useObject = use.action.ReadValue<float>() > 0.1;
+        //if(!_isUsing) _isUsing = use.action.ReadValue<float>() > 0.1;
+        _useFloat = use.action.ReadValue<float>();
+        //Debug.Log($"{_useFloat}");
 
         _isRunning = sprint.action.ReadValue<float>() > 0.1;
-
+        
     }
 
     private void Move()
@@ -108,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
         _rb.velocity = _move * _movespeed * Time.fixedDeltaTime ;
         _animator.SetBool("Grounded", true);
+
         #region toupie
         //toupie
         /*
@@ -144,18 +152,20 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Walking", false);
         }
 
-        if (_useObject)
+
+        if (_useFloat > 0)
         {
-            Debug.Log("gets");
+            //Debug.Log("gets");
             _animator.SetBool("HasObject", true);
+            PicksUp();
         }
-        else if (!_useObject) 
+        else
         {
-            Debug.Log("getsNot");
+            //Debug.Log("getsnot");
             _animator.SetBool("HasObject", false);
         }
-
         
+
 
         if (_isJumping && _canJump)
         {
@@ -176,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //_animator.SetTrigger("AttackTrigger");
             _animator.SetBool("Attacking", true);
-            if(_useObject)
+            if(_isUsing)
             {
                 _animator.SetTrigger("Throws");
             }
@@ -258,4 +268,43 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetTrigger("GetsHit");
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Throwable"))
+        {
+            _canPickUp = true;
+            Debug.Log("canpickup");
+        }
+
+        if (_hasCan)
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void PicksUp()
+    {
+
+        GameObject _pickupPos = _player.transform.Find("pickupPos").gameObject;
+        if (!_hasCan && _canPickUp)
+        {
+            Debug.Log("entredansleif");
+            GameObject readyToThrow = Instantiate(_throwableCanPrefab, _pickupPos.transform) as GameObject;
+            readyToThrow.transform.parent = GameObject.Find("Player").transform;
+            _hasCan = true;
+            _canPickUp= false;
+            
+        }
+
+    }
+
+    public void Throw()
+    {
+        _readyToThrow = false;
+        Transform childThrowable = _player.transform.Find("ThrowableCan");
+          
+
+    }
+
 }
