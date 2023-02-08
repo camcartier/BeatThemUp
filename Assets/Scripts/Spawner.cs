@@ -7,7 +7,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int _gruntQt;
     [SerializeField] private GameObject _gruntPrefab;
     [SerializeField] private BoolVariables _toFollow; //bool pour dire s'il faut déplacer la caméra pour la raccrocher au joueur
-    [SerializeField] private BoolVariables _toStop;
     [SerializeField] private BoolVariables _wave;
 
     // Start is called before the first frame update
@@ -47,7 +46,7 @@ public class Spawner : MonoBehaviour
     public void Spawn(int gruntQt)
     {
         //stop de la caméra
-        _toStop.value = true;
+        _toFollow.value = false;
         if (gruntQt > 0)
         {
             if (gruntQt == 1) { SpawnRight(gruntQt); }
@@ -81,7 +80,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < gruntQt; i++)
         {
             //random du x et y
-            float x = transform.position.x - Random.Range(3, 5);
+            float x = transform.position.x - Random.Range(4, 6);
             float y = Random.Range(0, 1.7f);
             Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
         }
