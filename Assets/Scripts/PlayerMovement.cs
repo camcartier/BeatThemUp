@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public bool _isAttacking;
     private bool _isRunning;
     private bool _isUsing;
-    private new float _useFloat;
+    private float _useFloat;
 
     //private bool _canDmg; //booléen qui dit si le joueur peut faire des dégâts ou pas, conditionné par le collider des poings du joueur qui touche le body de l'ennemi
 
@@ -269,10 +269,10 @@ public class PlayerMovement : MonoBehaviour
         {
             _canPickUp = true;
             Debug.Log("canpickup");
-        }
-        if (_hasCan)
-        {
-            Destroy(collision.gameObject);
+            if (_hasCan)
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -306,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Destroy(_readyToThrow);
         GameObject _pickupPos = _player.transform.Find("pickupPos").gameObject;
-        Instantiate(_thrownCanPrefab, _pickupPos.transform);
+        Instantiate(_thrownCanPrefab, _throwPos.transform);
         _hasCan= false;
         _canThrow= false;
     }
