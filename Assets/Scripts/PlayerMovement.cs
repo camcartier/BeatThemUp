@@ -11,6 +11,14 @@ public class PlayerMovement : MonoBehaviour
     private GameObject _throwPos;
     private Rigidbody2D _rb;
     private Animator _animator;
+
+    #region sounds
+    AudioSource _playerpunch;
+    AudioSource _gruntpunch;
+    AudioSource _playerdeath;
+    AudioSource _jumpsound;
+
+    #endregion
     [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     [SerializeField] public IntVariables _playerHealth;
     private float _storedHealth;
@@ -21,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private float _runspeed = 140;
     private bool _isWalking;
     //valeur recuperee (0>>1) lorsque le bouton est active
-    private bool _isJumping;
+    public bool _isJumping;
     //commence a true pour sauter x1
     private bool _canJump = true;
     //_jumpTime est le delai avant de ressauter
@@ -37,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     public bool _isAttacking;
     private bool _isRunning;
     private bool _isUsing;
-    private new float _useFloat;
+    private float _useFloat;
     
 
 
@@ -67,6 +75,11 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _player = GameObject.Find("Player");
         _throwPos = GameObject.Find("throwPos");
+
+        _playerpunch = GameObject.Find("PlayerPunch").GetComponent<AudioSource>();
+        _gruntpunch = GameObject.Find("GruntPunch").GetComponent<AudioSource>();
+        _playerdeath = GameObject.Find("DeathSound").GetComponent<AudioSource>();
+        _jumpsound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
 
         _jumpTimerCounter = 0;
         _storedHealth = _playerHealth.value;
@@ -174,6 +187,9 @@ public class PlayerMovement : MonoBehaviour
             _jumpY = transform.position.y;
             //StartCoroutine(doJump2());
 
+            StartCoroutine(doJump2());
+            //DoJump3();
+            _jumpsound.Play();
         }
         if (_jumpyjump)
         {
@@ -186,8 +202,9 @@ public class PlayerMovement : MonoBehaviour
             _movespeed = 0f;
             _runspeed = 0f;
             _animator.SetBool("Attacking", true);
+            _playerpunch.Play();
 
-            if(_isUsing)
+            if (_isUsing)
             {
                 _animator.SetTrigger("Throws");
             }
@@ -274,11 +291,13 @@ public class PlayerMovement : MonoBehaviour
     public void TakesHit()
     {
         _animator.SetTrigger("GetsHit");
+        _gruntpunch.Play();
     }
 
     public void Death()
     {
         _animator.SetBool("Dead", true);
+        _playerdeath.Play();
     }
 
 
