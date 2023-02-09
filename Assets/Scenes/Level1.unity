@@ -321,8 +321,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _isAttacking: 0
   _throwableCanPrefab: {fileID: 8320437373720986423, guid: 9c13476c96378d4488645945f57b73e1, type: 3}
-  _thrownCanPrefab: {fileID: 0}
+  _thrownCanPrefab: {fileID: 8320437373720986423, guid: bcf9fe29e46ff224b989c489d2728c1f, type: 3}
   _healthbarGreen: {fileID: 1601347018}
   _healthbarRed: {fileID: 1774226785}
 --- !u!114 &326776625
@@ -508,6 +509,7 @@ GameObject:
   - component: {fileID: 991165500}
   - component: {fileID: 991165499}
   - component: {fileID: 991165501}
+  - component: {fileID: 991165502}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: PlayerFist
@@ -612,12 +614,26 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.3, y: 0.2}
   serializedVersion: 2
   m_Radius: 0.075
+--- !u!114 &991165502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991165497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 963f8243fb5d2164b8cc2f68dfb66bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canDmg: 0
+  _AttackCD: 0.5
 --- !u!1 &1081588320
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,8 +58,8 @@ public class NPCBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isActive) Behaviour();
-        else if (!_isActive) InactiveBehaviour();
+        if (_isActive && _isDead==false) Behaviour();
+        else if (!_isActive && _isDead == false ) InactiveBehaviour();
     }
 
     private void InactiveBehaviour()
@@ -190,7 +190,7 @@ public class NPCBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("PlayerFist"))
         {
-            TakeDamage();
+            //TakeDamage();
         }
     }
     //je pige pas tout le fonctionnement du Death() de plus haut

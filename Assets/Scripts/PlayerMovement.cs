@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     [SerializeField] public IntVariables _playerHealth;
     private float _storedHealth;
-    public int PlayerAttPower = 5;
+    public int PlayerAttPower;
 
     private Vector2 _move;
     private float _movespeed = 60;
@@ -33,10 +33,12 @@ public class PlayerMovement : MonoBehaviour
     //private Collider2D _fistCollider;
 
     //valeur recuperee (0>>1) lorsque le bouton est active
-    private bool _isAttacking;
+    public bool _isAttacking;
     private bool _isRunning;
     private bool _isUsing;
     private float _useFloat;
+
+    //private bool _canDmg; //booléen qui dit si le joueur peut faire des dégâts ou pas, conditionné par le collider des poings du joueur qui touche le body de l'ennemi
 
 
     [SerializeField] private GameObject _throwableCanPrefab;
@@ -170,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
             _movespeed = 0f;
             _runspeed = 0f;
             _animator.SetBool("Attacking", true);
+
             if(_isUsing)
             {
                 _animator.SetTrigger("Throws");
@@ -298,4 +301,7 @@ public class PlayerMovement : MonoBehaviour
         _rb.AddForce(transform.right *force);
         Debug.Log("aouch");*/
     }
+
+
+
 }
