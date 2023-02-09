@@ -314,6 +314,12 @@ MonoBehaviour:
   sprint: {fileID: -8570287740624912749, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   _jumpTime: 2
+  _jumpCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _throwableCanPrefab: {fileID: 8320437373720986423, guid: 9c13476c96378d4488645945f57b73e1, type: 3}
 --- !u!114 &326776625
 MonoBehaviour:
@@ -743,7 +749,7 @@ MonoBehaviour:
   _wave: {fileID: 11400000, guid: 5ed434f7397bac54ab22b8a06bf3957c, type: 2}
   _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
   _inactiveGruntList: []
-  _activeGruntAmount: 3
+  _activeGruntAmount: 2
   _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
 --- !u!4 &1856328845
 Transform:

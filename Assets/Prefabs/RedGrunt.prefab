@@ -117,7 +117,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.3, y: 0.2}
@@ -211,6 +211,7 @@ MonoBehaviour:
   _animator: {fileID: 7668556386504849691}
   _nextAttack: 0
   _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
+  _currentActiveGrunt: {fileID: 0}
 --- !u!50 &-6084313575471613132
 Rigidbody2D:
   serializedVersion: 4
