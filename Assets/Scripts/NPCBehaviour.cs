@@ -43,16 +43,16 @@ public class NPCBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_hp >=0 && _isDead==false) { Death(); _isDead = true; }
+        if (_hp <=0 && _isDead==false) { StartCoroutine(Death()); _isDead = true; }
 
         //fishtree
         //ajout pour test a supprimer
-        if (_hp <= 0)
-        {
-            _isDead = true;
-            _isActive= false;
-            Death2();
-        }
+        //if (_hp <= 0)
+        //{
+        //    _isDead = true;
+        //    _isActive= false;
+        //    Death2();
+        //}
         //Debug.Log($"{_hp}");
     }
 
@@ -79,7 +79,7 @@ public class NPCBehaviour : MonoBehaviour
         else 
         { 
             Stop(); 
-            if (_isActive && Time.timeSinceLevelLoad>_nextAttack)
+            if (_isActive && Time.timeSinceLevelLoad>_nextAttack && _isDead == false)
             {
                 Combat();
             }
@@ -155,12 +155,14 @@ public class NPCBehaviour : MonoBehaviour
     //l'ennemi va clignoter un peu avant de mourrir
     IEnumerator Death()
     {
-
-        for (int i = 0; i<4;i++)
+        _animator.SetBool("Death", true);
+        _rb.velocity = UnityEngine.Vector2.zero;
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i<8;i++)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
             GetComponentInChildren<SpriteRenderer>().enabled= false;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
             GetComponentInChildren<SpriteRenderer>().enabled= true;
         }
         _enemyCount.value--;

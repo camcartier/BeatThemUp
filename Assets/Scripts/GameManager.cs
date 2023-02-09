@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (_enemyCount.value == 0 && _inactiveGruntList.Count>0) { _inactiveGruntList.Clear(); }
-        if (_enemyCount.value > 0)
+        if (_enemyCount.value > 0 && _inactiveGruntList.Count>0)
         {
             //si on a une quantité d'ennemis inférieur ou égale au max d'actifs et que le nombre de grunt actifs est inférieur à la quantité d'ennemis, on active ce qu'il reste dans la liste
             if (_enemyCount.value <= _activeGruntAmount && _currentActiveGrunt.value < _enemyCount.value)
@@ -46,12 +46,18 @@ public class GameManager : MonoBehaviour
 
     private void ActivateAllGrunt()
     {
-        foreach (var item in _inactiveGruntList)
+        for (int i = 0; i < _inactiveGruntList.Count; i++)
         {
-            item.GetComponent<NPCBehaviour>()._isActive = true;
-            _inactiveGruntList.Remove(item);
+            _inactiveGruntList[0].GetComponent<NPCBehaviour>()._isActive = true;
+            _inactiveGruntList.Remove(_inactiveGruntList[0]);
             _currentActiveGrunt.value++;
         }
+        //foreach (var item in _inactiveGruntList)
+        //{
+        //    item.GetComponent<NPCBehaviour>()._isActive = true;
+        //    _inactiveGruntList.Remove(item);
+        //    _currentActiveGrunt.value++;
+        //}
     }
 
     private void ActivateGrunt(int qt)
