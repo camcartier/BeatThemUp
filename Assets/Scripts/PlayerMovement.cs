@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isRunning;
     private bool _isUsing;
     private float _useFloat;
+    private bool _isDead;
 
     //private bool _canDmg; //booléen qui dit si le joueur peut faire des dégâts ou pas, conditionné par le collider des poings du joueur qui touche le body de l'ennemi
 
@@ -80,7 +81,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInput();
+        if (!_isDead)
+        {
+            GetInput();
+        }
+        
 
         if (_storedHealth != _playerHealth.value)
         {
@@ -260,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
     public void Death()
     {
         _animator.SetBool("Dead", true);
+        _isDead = true;
     }
 
 
