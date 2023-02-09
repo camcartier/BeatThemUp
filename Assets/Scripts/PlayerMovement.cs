@@ -185,10 +185,6 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Grounded", false);
             _jumpyjump = true;
             _jumpY = transform.position.y;
-            //StartCoroutine(doJump2());
-
-            StartCoroutine(doJump2());
-            //DoJump3();
             _jumpsound.Play();
         }
         if (_jumpyjump)
