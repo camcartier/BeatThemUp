@@ -304,11 +304,12 @@ public class PlayerMovement : MonoBehaviour
     
     public void Throw()
     {
+        _hasCan = false;
+        _canThrow = false;
         Destroy(_readyToThrow);
         GameObject _pickupPos = _player.transform.Find("pickupPos").gameObject;
         Instantiate(_thrownCanPrefab, _throwPos.transform);
-        _hasCan= false;
-        _canThrow= false;
+
     }
 
 
