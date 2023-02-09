@@ -1,24 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-enum PlayerStateMode
-{
-    IDLE,
-    WALK,
-    JUMP,
-    ATTACK
-}
 
 public class PlayerMovement : MonoBehaviour
 {
     private GameObject _player;
+    private GameObject _throwPos;
     private Rigidbody2D _rb;
     private Animator _animator;
     [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     [SerializeField] public IntVariables _playerHealth;
     private float _storedHealth;
+    public int PlayerAttPower = 5;
 
     private Vector2 _move;
     private float _movespeed = 60;
@@ -44,23 +40,32 @@ public class PlayerMovement : MonoBehaviour
 
 
     [SerializeField] private GameObject _throwableCanPrefab;
+    [SerializeField] private GameObject _thrownCanPrefab;
     private GameObject _objectThrown;
     private GameObject _readyToThrow;
+    bool _canThrow;
     bool _hasCan;
     bool _canPickUp;
 
+    [Header("HealthBar")]
+    [SerializeField] Image _healthbarGreen;
+    [SerializeField] Image _healthbarRed;
+    private HealthBar _healthbar;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
         _player = GameObject.Find("Player");
+        _throwPos = GameObject.Find("throwPos");
 
         _jumpTimerCounter = _jumpTime;
         _storedHealth = _playerHealth.value;
 
         //_fistCollider = FindGameObjectWithTag("PlayerFist").Collider2D;
         //_fistCollider.enabled = false;
+
+        _healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
     }
 
     // Start is called before the first frame update
@@ -73,15 +78,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GetInput();
-        /*
-        if (_storedHealth.value > _playerHealth.value )
-        {
-            Debug.Log($"{_storedHealth}");
-            Debug.Log("aouch");
-        }*/
+
         if (_storedHealth != _playerHealth.value)
         {
             _storedHealth = _playerHealth.value;
+            _healthbar.SetHealth(_playerHealth.value);
             KnockBack();
         }
 
@@ -89,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         if (_playerHealth.value <= 0)
         {
             Death();
+
         }
     }
 
@@ -133,11 +135,13 @@ public class PlayerMovement : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().flipX= true;
             if (_offset.x > 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(-0.3f, _offset.y);
 
+
         }
         if (_move.x > 0)
         {
             GetComponentInChildren<SpriteRenderer>().flipX = false;
             if (_offset.x < 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(0.3f, _offset.y);
+
         }
 
         if (_isWalking)
@@ -200,7 +204,11 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _animator.SetBool("HasObject", false);
-            Throw ();
+            if (_canThrow)
+            {
+                Throw();
+            }
+
         }
 
 
@@ -264,6 +272,7 @@ public class PlayerMovement : MonoBehaviour
             _readyToThrow.transform.parent = GameObject.Find("Player").transform;
             _hasCan = true;
             _canPickUp= false;
+            _canThrow = true;
             
         }
 
@@ -274,8 +283,10 @@ public class PlayerMovement : MonoBehaviour
     public void Throw()
     {
         Destroy(_readyToThrow);
-
-    
+        GameObject _pickupPos = _player.transform.Find("pickupPos").gameObject;
+        Instantiate(_thrownCanPrefab, _pickupPos.transform);
+        _hasCan= false;
+        _canThrow= false;
     }
 
 

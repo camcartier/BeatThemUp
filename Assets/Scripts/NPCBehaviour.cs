@@ -24,6 +24,7 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private IntVariables _currentActiveGrunt; //quantité de grunts active à l'instant T
     private bool _isDead;
     private bool _flipX;
+    [SerializeField] GameObject _prefabVynil;
 
     private void Awake()
     {
@@ -43,6 +44,16 @@ public class NPCBehaviour : MonoBehaviour
     void Update()
     {
         if (_hp >=0 && _isDead==false) { Death(); _isDead = true; }
+
+        //fishtree
+        //ajout pour test a supprimer
+        if (_hp <= 0)
+        {
+            _isDead = true;
+            _isActive= false;
+            Death2();
+        }
+        //Debug.Log($"{_hp}");
     }
 
     private void FixedUpdate()
@@ -144,7 +155,7 @@ public class NPCBehaviour : MonoBehaviour
     //l'ennemi va clignoter un peu avant de mourrir
     IEnumerator Death()
     {
-        
+
         for (int i = 0; i<4;i++)
         {
             yield return new WaitForSeconds(0.1f);
@@ -154,6 +165,7 @@ public class NPCBehaviour : MonoBehaviour
         }
         _enemyCount.value--;
         _currentActiveGrunt.value--;
+        Instantiate(_prefabVynil, transform.position, Quaternion.identity);
         Destroy(gameObject);
         yield return null;
     }
@@ -163,4 +175,31 @@ public class NPCBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         _animator.SetBool("Attack", false);
     }
+
+
+
+    //fishtree
+    private void TakeDamage()
+    {
+        _hp -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
+    }
+    //fishtree
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerFist"))
+        {
+            TakeDamage();
+        }
+    }
+    //je pige pas tout le fonctionnement du Death() de plus haut
+    //je met ici bas un scotch provisoire
+    //fishtree
+    void Death2()
+    {
+        _animator.SetBool("Death", true);
+        _rb.velocity = UnityEngine.Vector2.zero;
+        StartCoroutine(Death());
+    }
+
+
 }

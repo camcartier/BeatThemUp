@@ -85,7 +85,8 @@ MonoBehaviour:
   jump: {fileID: -221975627519175846, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   use: {fileID: 1119545002048852840, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   sprint: {fileID: -8570287740624912749, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
-  _playerHealth: {fileID: 0}
+  _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
+  PlayerAttPower: 5
   _jumpTime: 2
   _jumpCurve:
     serializedVersion: 2
@@ -112,6 +113,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _throwableCanPrefab: {fileID: 8320437373720986423, guid: 9c13476c96378d4488645945f57b73e1, type: 3}
+  _thrownCanPrefab: {fileID: 8320437373720986423, guid: bcf9fe29e46ff224b989c489d2728c1f, type: 3}
+  _healthbarGreen: {fileID: 0}
+  _healthbarRed: {fileID: 0}
 --- !u!50 &5609852434891097606
 Rigidbody2D:
   serializedVersion: 4
@@ -295,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8181826131360567294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.319, y: 0.594, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -326,7 +330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8622069479484743533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
