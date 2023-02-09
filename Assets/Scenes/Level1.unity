@@ -375,9 +375,28 @@ MonoBehaviour:
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   PlayerAttPower: 15
   _jumpDuration: 1
+  _jumpTimerCounter: 0
   _jumpCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.2504525
+      outSlope: 4.2504525
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.026846996
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.7392848
+      outSlope: -3.7392848
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.03153038
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -387,6 +406,7 @@ MonoBehaviour:
   _thrownCanPrefab: {fileID: 8320437373720986423, guid: bcf9fe29e46ff224b989c489d2728c1f, type: 3}
   _healthbarGreen: {fileID: 1601347018}
   _healthbarRed: {fileID: 1774226785}
+  _jumpCD: 0
 --- !u!114 &326776625
 MonoBehaviour:
   m_ObjectHideFlags: 0

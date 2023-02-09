@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _canJump = true;
     //_jumpTime est le delai avant de ressauter
     [SerializeField] private float _jumpDuration = 1 ;
-    private float _jumpTimerCounter;
+    [SerializeField] private float _jumpTimerCounter;
     [SerializeField] AnimationCurve _jumpCurve;
     [SerializeField] private float _jumpHeight;
     private Vector2 _initialPos;
@@ -54,7 +54,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Image _healthbarRed;
     private HealthBar _healthbar;
 
-    private bool _isDead;
+    private bool _isDead;//bool qui s'active quand le joueur meurt la première fois
+    [SerializeField] private float _jumpCD; //cooldown entre 2 jumps
+    private float _nextJump; //timer avant le prochain saut
+    private float _jumpY;
+    [SerializeField] private bool _jumpyjump;
+
 
     private void Awake()
     {
@@ -70,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         //_fistCollider.enabled = false;
 
         _healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        _jumpyjump = false;
     }
 
     // Start is called before the first frame update
@@ -142,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
-        if (_move.x > 0)
+        else if (_move.x > 0)
         {
             GetComponentInChildren<SpriteRenderer>().flipX = false;
             if (_offset.x < 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(0.3f, _offset.y);
@@ -158,16 +164,20 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Walking", false);
         }
 
-        if (_isJumping && _canJump)
+        if (_isJumping && !_jumpyjump)
         {
 
             _animator.SetBool("Jumping", true);
             _animator.SetBool("Walking", false);
             _animator.SetBool("Grounded", false);
-            _jumpTimerCounter= 0;
+            _jumpyjump = true;
+            _jumpY = transform.position.y;
+            //StartCoroutine(doJump2());
 
-            StartCoroutine(doJump2());
-            //DoJump3();
+        }
+        if (_jumpyjump)
+        {
+            DoJump3();
         }
 
         if (_isAttacking)
@@ -235,23 +245,30 @@ public class PlayerMovement : MonoBehaviour
         
         _isJumping= false;
     }
-    /*
+    
     void DoJump3()
     {
-
-        _canJump = false;
-        float y = _jumpCurve.Evaluate(_jumpDuration);
-
-        transform.position = new Vector2(transform.position.x, transform.position.y * y);
-
+        if (_jumpTimerCounter<_jumpDuration)
+        {
+            _jumpTimerCounter += Time.fixedDeltaTime;
+            float y = _jumpCurve.Evaluate(_jumpTimerCounter/_jumpDuration);
+            transform.position = new Vector2(transform.position.x, _jumpY + 1f* y);
+            if (_jumpTimerCounter>_jumpDuration*0.75f) _animator.SetBool("Jumping", false);
+        }
+        else
+        {
+            _jumpTimerCounter= 0;
+            _isJumping = false;
+            _jumpyjump= false;
+            _animator.SetBool("Grounded", true);
+        }
         //verifier sii on est pas a la fin dusaut)
         //demarrer timer -(0 au debut du saut)
         //regarde la courbe en fonction du timer (evaluate parametrex temps )
         //augmente le timer 
 
         //
-        _isJumping = false;
-    }*/
+    }
 
 
     public void TakesHit()
