@@ -201,10 +201,10 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (_useFloat > 0)
+        if (_useFloat > 0 && _canPickUp)
         {
             _animator.SetBool("HasObject", true);
-            PicksUp();
+            if (!_hasCan) { PicksUp(); _hasCan = true; }
         }
         else
         {
@@ -292,7 +292,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _readyToThrow = Instantiate(_throwableCanPrefab, _pickupPos.transform) as GameObject;
             _readyToThrow.transform.parent = GameObject.Find("Player").transform;
-            _hasCan = true;
+            //_hasCan = true;
             _canPickUp= false;
             _canThrow = true;
             
