@@ -258,6 +258,64 @@ MonoBehaviour:
   _toFollow: {fileID: 11400000, guid: eaa55043343762e409235bbdc0e5d18d, type: 2}
   _wave: {fileID: 11400000, guid: 5ed434f7397bac54ab22b8a06bf3957c, type: 2}
   _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
+--- !u!1 &265554563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 265554564}
+  - component: {fileID: 265554565}
+  m_Layer: 0
+  m_Name: footCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &265554564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265554563}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 326776623}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &265554565
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265554563}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.013017654, y: 0.037711263}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.22627258, y: 0.057451963}
+  m_EdgeRadius: 0
 --- !u!1 &326776622
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +351,7 @@ Transform:
   - {fileID: 591397826}
   - {fileID: 991165498}
   - {fileID: 1739569918}
+  - {fileID: 265554564}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1171,15 +1230,23 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -30.08405, y: 1.9436777}
-  - {x: -30.066986, y: -1.8752444}
-  - {x: 29.850517, y: -1.8355149}
-  - {x: 29.886227, y: 0.5349027}
+  - {x: -26.920284, y: 0.70773137}
+  - {x: -26.888147, y: -1.8752444}
+  - {x: 27.443844, y: -1.8355149}
+  - {x: 27.43948, y: 0.44671977}
+  - {x: 17.419056, y: 0.43128502}
+  - {x: 16.109655, y: 1.7232543}
+  - {x: 12.489433, y: 1.7694813}
+  - {x: 12.465828, y: 0.470582}
+  - {x: 1.4272656, y: 0.4298247}
+  - {x: 0.12572932, y: 1.7451574}
+  - {x: -3.5558548, y: 1.7239189}
+  - {x: -3.5854056, y: 0.4252298}
   - {x: -14.629503, y: 0.42818248}
-  - {x: -15.955332, y: 1.9149746}
-  - {x: -19.49671, y: 1.8921834}
+  - {x: -15.836575, y: 1.7113911}
+  - {x: -19.513676, y: 1.7394959}
   - {x: -19.508547, y: 0.45857024}
-  - {x: -29.92076, y: 0.44199336}
+  - {x: -26.91186, y: 0.45198965}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

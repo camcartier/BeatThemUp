@@ -38,8 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isRunning;
     private bool _isUsing;
     private new float _useFloat;
-
-    //private bool _canDmg; //booléen qui dit si le joueur peut faire des dégâts ou pas, conditionné par le collider des poings du joueur qui touche le body de l'ennemi
+    
 
 
     [SerializeField] private GameObject _throwableCanPrefab;
@@ -55,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Image _healthbarRed;
     private HealthBar _healthbar;
 
+    private bool _isDead;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -64,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
         _jumpTimerCounter = 0;
         _storedHealth = _playerHealth.value;
-
+        _isDead= false;
         //_fistCollider = FindGameObjectWithTag("PlayerFist").Collider2D;
         //_fistCollider.enabled = false;
 
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GetInput();
 
-        if (_storedHealth != _playerHealth.value)
+        if (_storedHealth != _playerHealth.value && !_isDead)
         {
             _storedHealth = _playerHealth.value;
             _healthbar.SetHealth(_playerHealth.value);
@@ -90,8 +91,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (_playerHealth.value <= 0)
+        if (_playerHealth.value <= 0 && _isDead == false)
         {
+            _isDead = true;
             Death();
 
         }
@@ -99,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!_isDead) Move();
 
     }
 
