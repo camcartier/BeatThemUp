@@ -87,7 +87,7 @@ MonoBehaviour:
   sprint: {fileID: -8570287740624912749, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   PlayerAttPower: 5
-  _jumpTime: 2
+  _jumpDuration: 1
   _jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -101,13 +101,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.65426636
+      value: 0.58018494
+      inSlope: -0.33532125
+      outSlope: -0.33532125
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.13519627
+      outWeight: 0.2237491
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.4164424
+      outSlope: -3.4164424
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10382974
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
