@@ -5,16 +5,22 @@ using UnityEngine;
 public class ShadowControl : MonoBehaviour
 {
     private Animator _animator;
+    private GameObject _player;
+    private float _posYPlayer;
+    private bool _hasPos;
 
     private void Awake()
     {
         _animator= GetComponent<Animator>();
+        _player= GameObject.Find("Player");
     }
 
 
     // Update is called once per frame
     void Update()
     {
+
+
         if (GameObject.Find("Player").GetComponent<PlayerMovement>()._isJumping == true)
         {
             _animator.SetBool("IsJumping", true);
@@ -23,5 +29,9 @@ public class ShadowControl : MonoBehaviour
         {
             _animator.SetBool("IsJumping", false);
         }
+
     }
+
+
+
 }
