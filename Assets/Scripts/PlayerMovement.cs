@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,9 +25,10 @@ public class PlayerMovement : MonoBehaviour
     //commence a true pour sauter x1
     private bool _canJump = true;
     //_jumpTime est le delai avant de ressauter
-    [SerializeField] private float _jumpTime;
+    [SerializeField] private float _jumpDuration = 1 ;
     private float _jumpTimerCounter;
     [SerializeField] AnimationCurve _jumpCurve;
+    [SerializeField] private float _jumpHeight;
     private Vector2 _initialPos;
 
     //private Collider2D _fistCollider;
@@ -36,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isAttacking;
     private bool _isRunning;
     private bool _isUsing;
-    private float _useFloat;
+    private new float _useFloat;
 
 
     [SerializeField] private GameObject _throwableCanPrefab;
@@ -59,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         _player = GameObject.Find("Player");
         _throwPos = GameObject.Find("throwPos");
 
-        _jumpTimerCounter = _jumpTime;
+        _jumpTimerCounter = 0;
         _storedHealth = _playerHealth.value;
 
         //_fistCollider = FindGameObjectWithTag("PlayerFist").Collider2D;
@@ -159,9 +160,10 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Jumping", true);
             _animator.SetBool("Walking", false);
             _animator.SetBool("Grounded", false);
+            _jumpTimerCounter= 0;
 
             StartCoroutine(doJump2());
-
+            //DoJump3();
         }
 
         if (_isAttacking)
@@ -228,6 +230,23 @@ public class PlayerMovement : MonoBehaviour
         
         _isJumping= false;
     }
+    /*
+    void DoJump3()
+    {
+
+        _canJump = false;
+        float y = _jumpCurve.Evaluate(_jumpDuration);
+
+        transform.position = new Vector2(transform.position.x, transform.position.y * y);
+
+        //verifier sii on est pas a la fin dusaut)
+        //demarrer timer -(0 au debut du saut)
+        //regarde la courbe en fonction du timer (evaluate parametrex temps )
+        //augmente le timer 
+
+        //
+        _isJumping = false;
+    }*/
 
 
     public void TakesHit()
