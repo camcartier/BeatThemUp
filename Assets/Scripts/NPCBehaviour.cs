@@ -6,6 +6,7 @@ using UnityEngine;
 public class NPCBehaviour : MonoBehaviour
 {
     [SerializeField] public int _hp, _attPower, _defPower;
+    private int _lastHP;
     [SerializeField] private float _moveSpeed;
     private Rigidbody2D _rb; //npc RB2D
     private GameObject _player;
@@ -34,6 +35,7 @@ public class NPCBehaviour : MonoBehaviour
         _playerTransform= _player.GetComponent<Transform>();
         _isActive= false;
         _isDead= false;
+        _lastHP = 40;
     }
     // Start is called before the first frame update
     void Start()
@@ -46,15 +48,12 @@ public class NPCBehaviour : MonoBehaviour
     {
         if (_hp <=0 && _isDead==false) { StartCoroutine(Death()); _isDead = true; }
 
-        //fishtree
-        //ajout pour test a supprimer
-        //if (_hp <= 0)
-        //{
-        //    _isDead = true;
-        //    _isActive= false;
-        //    Death2();
-        //}
-        //Debug.Log($"{_hp}");
+        if (_lastHP != _hp && !_isDead)
+        {
+            _lastHP = _hp;
+            KnockBack();
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+        }
     }
 
     private void FixedUpdate()
@@ -195,14 +194,10 @@ public class NPCBehaviour : MonoBehaviour
             //TakeDamage();
         }
     }
-    //je pige pas tout le fonctionnement du Death() de plus haut
-    //je met ici bas un scotch provisoire
-    //fishtree
-    void Death2()
+
+    public void KnockBack()
     {
-        _animator.SetBool("Death", true);
-        _rb.velocity = UnityEngine.Vector2.zero;
-        StartCoroutine(Death());
+        _animator.SetTrigger("GetsHit");
     }
 
 
