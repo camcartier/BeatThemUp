@@ -213,6 +213,7 @@ MonoBehaviour:
   _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
   _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
   _prefabVynil: {fileID: 6660595527757674785, guid: ea7f6f6c2dee52642b77eb3dde8c1a16, type: 3}
+  _prefabPoofingFX: {fileID: 8506768773289262660, guid: 6a7a8b71d5abb4940b92d675de6ee473, type: 3}
 --- !u!50 &-6084313575471613132
 Rigidbody2D:
   serializedVersion: 4

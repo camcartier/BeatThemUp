@@ -25,6 +25,7 @@ public class NPCBehaviour : MonoBehaviour
     private bool _isDead;
     private bool _flipX;
     [SerializeField] GameObject _prefabVynil;
+    [SerializeField] GameObject _prefabPoofingFX;
 
     private void Awake()
     {
@@ -167,6 +168,7 @@ public class NPCBehaviour : MonoBehaviour
         }
         _enemyCount.value--;
         _currentActiveGrunt.value--;
+        Instantiate(_prefabPoofingFX, transform.position , Quaternion.identity);
         Instantiate(_prefabVynil, transform.position, Quaternion.identity);
         Destroy(gameObject);
         yield return null;

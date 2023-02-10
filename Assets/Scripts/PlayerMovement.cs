@@ -200,13 +200,18 @@ public class PlayerMovement : MonoBehaviour
             DoJump3();
         }
 
+
         if (_isAttacking)
         {
             //_fistCollider.enabled = true;
             _movespeed = 0f;
             _runspeed = 0f;
             _animator.SetBool("Attacking", true);
-            _playerpunch.Play();
+            
+            if (!_playerpunch.isPlaying)
+            {
+                _playerpunch.Play();
+            }
 
             if (_isUsing)
             {
@@ -231,7 +236,6 @@ public class PlayerMovement : MonoBehaviour
                 _sprintingFXexist = true;
                 if (_move.x < 0)
                 {
-                    Debug.Log("flip");
                     _prefabSprintingFX.GetComponent<SpriteRenderer>().flipX =false;
                 }
                 else
@@ -334,7 +338,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("Throwable"))
         {
             _canPickUp = true;
-            Debug.Log("canpickup");
+            //Debug.Log("canpickup");
         }
         if (_hasCan)
         {
