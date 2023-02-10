@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject _throwPos;
     private Rigidbody2D _rb;
     private Animator _animator;
+    [SerializeField] GameObject _continueMenu;
 
     #region sounds
     AudioSource _playerpunch;
@@ -21,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
     [SerializeField] public IntVariables _playerHealth;
+    [SerializeField] private int _lives;
     private float _storedHealth;
     public int PlayerAttPower;
 
@@ -30,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _isWalking;
     //valeur recuperee (0>>1) lorsque le bouton est active
     public bool _isJumping;
-    //commence a true pour sauter x1
-    private bool _canJump = true;
     //_jumpTime est le delai avant de ressauter
     [SerializeField] private float _jumpDuration = 1 ;
     [SerializeField] private float _jumpTimerCounter;
@@ -112,9 +113,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (_playerHealth.value <= 0 && _isDead == false)
         {
-            _isDead = true;
-            Death();
-
+            if (_lives == 0)
+            {
+                _isDead = true;
+                Death();
+                //activer le menu gameover
+            }
+            else if (_lives > 0)
+            {
+                _isDead = true;
+                Death();
+                _continueMenu.SetActive(true);
+            }
+            
         }
     }
 
@@ -355,6 +366,14 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("aouch");*/
     }
 
-
+    public void Respawn()
+    {
+        _continueMenu.SetActive(false);
+        _animator.SetBool("Dead", false);
+        _animator.SetBool("Walking", true);
+        _lives--;
+        _playerHealth.value = 100;
+        _isDead = false;
+    }
 
 }

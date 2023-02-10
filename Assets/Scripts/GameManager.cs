@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -70,9 +71,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //faire une liste de gameobject grunt inactif (au spawn)
-    //enemy count compte combien y'a de grunt
-    //activer jusqu'à 3 grunts (le grunt est inactif au spawn) et les retirer de la liste
-    // quand l'enemycount change voir combien sont actifs, si <3
-    //activer le complément
+    public void GameOver()
+    {
+        SceneManager.LoadScene(0);
+        //faire un loadscene du gameover
+    }
+
 }
