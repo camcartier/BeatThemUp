@@ -32,10 +32,14 @@ public class CameraMovement : MonoBehaviour
         Vector2 cammove = transform.position;
         Vector2 pPos = _playerTransform.position;
         cammove.y = pPos.y = 1.5f;
-        if (Vector2.Distance(cammove, pPos) > 0.2f) transform.position = Vector2.Lerp(cammove, pPos, 1);
-        else 
-        { 
-            transform.position = new Vector3 (pPos.x,pPos.y,-10);
+        if (Vector2.Distance(cammove, pPos) > 0.1f)
+        {
+            Vector2 temp = Vector2.Lerp(cammove, pPos,Time.deltaTime);
+            transform.position = new Vector3(temp.x, temp.y, -10);
+        }
+        else
+        {
+            transform.position = new Vector3(pPos.x, pPos.y, -10);
         }
     }
 }

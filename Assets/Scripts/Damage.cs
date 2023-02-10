@@ -16,7 +16,6 @@ public class Damage : MonoBehaviour
     {
         if (collision.CompareTag("PlayerBody"))
         {
-            Debug.Log("on range");
             _isOnRange = true;
         }
     }
@@ -26,7 +25,6 @@ public class Damage : MonoBehaviour
         if (collision.CompareTag("PlayerBody"))
         {
             _isOnRange = false;
-            Debug.Log("plus on range");
         }
     }
 }

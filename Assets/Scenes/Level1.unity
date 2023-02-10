@@ -2323,7 +2323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Points:'
+  m_text: 'Score:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a748f2098f08134cbeed56fa07e220f, type: 2}
   m_sharedMaterial: {fileID: 1471867990357555713, guid: 8a748f2098f08134cbeed56fa07e220f, type: 2}

@@ -33,7 +33,6 @@ public class Spawner : MonoBehaviour
         Debug.Log("collision enter");
         if (collision.collider.CompareTag("PlayerBody"))
         {
-            Debug.Log("spawn enter");
             Spawn(_gruntQt);
             Destroy(gameObject);
         }
@@ -43,7 +42,6 @@ public class Spawner : MonoBehaviour
         Debug.Log("collision");
         if (collision.CompareTag("PlayerBody"))
         {
-            Debug.Log("spawn");
             Spawn(_gruntQt);
             Destroy(gameObject);
         }
