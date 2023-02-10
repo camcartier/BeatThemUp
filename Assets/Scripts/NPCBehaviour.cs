@@ -27,6 +27,7 @@ public class NPCBehaviour : MonoBehaviour
     private bool _flipX;
     [SerializeField] GameObject _prefabVynil;
     [SerializeField] GameObject _prefabPoofingFX;
+    private GameObject _gameManager;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class NPCBehaviour : MonoBehaviour
         _isActive= false;
         _isDead= false;
         _lastHP = 40;
+        _gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
     // Start is called before the first frame update
     void Start()
@@ -167,6 +169,7 @@ public class NPCBehaviour : MonoBehaviour
         }
         _enemyCount.value--;
         _currentActiveGrunt.value--;
+        _gameManager.GetComponent<GameManager>()._activeGruntList.Remove(gameObject);
         Instantiate(_prefabPoofingFX, transform.position , Quaternion.identity);
         Instantiate(_prefabVynil, transform.position, Quaternion.identity);
         Destroy(gameObject);

@@ -639,6 +639,7 @@ MonoBehaviour:
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   _lives: 2
   PlayerAttPower: 15
+  PlayerSuperAttPower: 80
   _isJumping: 0
   _jumpDuration: 1
   _jumpTimerCounter: 0
@@ -3077,6 +3078,7 @@ MonoBehaviour:
   _wave: {fileID: 11400000, guid: 5ed434f7397bac54ab22b8a06bf3957c, type: 2}
   _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
   _inactiveGruntList: []
+  _activeGruntList: []
   _activeGruntAmount: 2
   _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
   _scoreCounter: {fileID: 11400000, guid: 274ea020afa76e741a4340c3828370f4, type: 2}
