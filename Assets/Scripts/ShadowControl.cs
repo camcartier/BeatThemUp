@@ -8,11 +8,13 @@ public class ShadowControl : MonoBehaviour
     private GameObject _player;
     private float _posYPlayer;
     private bool _hasPos;
+    private SpriteRenderer _shadowSprite;
 
     private void Awake()
     {
         _animator= GetComponent<Animator>();
         _player= GameObject.Find("Player");
+        _shadowSprite = GetComponent<SpriteRenderer>();
     }
 
 
@@ -23,11 +25,11 @@ public class ShadowControl : MonoBehaviour
 
         if (GameObject.Find("Player").GetComponent<PlayerMovement>()._isJumping == true)
         {
-            _animator.SetBool("IsJumping", true);
+            _shadowSprite.enabled = false;
         }
         else
         {
-            _animator.SetBool("IsJumping", false);
+            _shadowSprite.enabled = true;
         }
 
     }
