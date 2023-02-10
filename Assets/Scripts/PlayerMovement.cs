@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (_isAttacking)
+        if (_isAttacking && !_isJumping)
         {
             //_fistCollider.enabled = true;
             _movespeed = 0f;
