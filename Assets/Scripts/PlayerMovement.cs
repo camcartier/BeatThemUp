@@ -229,6 +229,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 Instantiate(_prefabSprintingFX, transform.position, Quaternion.identity);
                 _sprintingFXexist = true;
+                if (_move.x < 0)
+                {
+                    Debug.Log("flip");
+                    _prefabSprintingFX.GetComponent<SpriteRenderer>().flipX =false;
+                }
+                else
+                {
+                    _prefabSprintingFX.GetComponent<SpriteRenderer>().flipX = true;
+                }
             }
             
         }
