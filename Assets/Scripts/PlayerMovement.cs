@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
     private float _nextJump; //timer avant le prochain saut
     private float _jumpY;
     [SerializeField] private bool _jumpyjump;
+    private bool _isInvulnerable;
 
     #region VFX
     [SerializeField] private GameObject _prefabSprintingFX;
@@ -92,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
         _jumpTimerCounter = 0;
         _storedHealth = 100;
-        _isDead= false;
+        _isDead = _isInvulnerable = false;
         //_fistCollider = FindGameObjectWithTag("PlayerFist").Collider2D;
         //_fistCollider.enabled = false;
 
@@ -404,12 +405,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void Respawn()
     {
+        _isInvulnerable = true;
         _continueMenu.SetActive(false);
         _animator.SetBool("Dead", false);
         _animator.SetBool("Walking", true);
         _lives--;
         _playerHealth.value = 100;
         _isDead = false;
+        StartCoroutine(Invulnerability());
+    }
+
+    IEnumerator Invulnerability()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        }
+        _isInvulnerable= false;
     }
 
 }
