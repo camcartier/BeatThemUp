@@ -165,12 +165,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d4c2735d4432b42a2845aba27b0356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _continueMenu: {fileID: 0}
   movement: {fileID: 7138882592654405482, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   attack: {fileID: -1394658483811270143, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   jump: {fileID: -221975627519175846, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   use: {fileID: 1119545002048852840, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   sprint: {fileID: -8570287740624912749, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
+  attackspe: {fileID: 1180351520374875670, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
+  _lives: 0
   PlayerAttPower: 5
   _isJumping: 0
   _jumpDuration: 1
