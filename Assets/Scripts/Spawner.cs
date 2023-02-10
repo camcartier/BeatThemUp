@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private int _gruntQt;
-    [SerializeField] private GameObject _gruntPrefab;
+    [SerializeField] private int _gruntQt, _bigGruntQT;
+    [SerializeField] private GameObject _gruntPrefab, _bigGruntPrefab;
     [SerializeField] private BoolVariables _toFollow; //bool pour dire s'il faut déplacer la caméra pour la raccrocher au joueur
     [SerializeField] private BoolVariables _wave;
     private GameObject _gameManager;
@@ -33,7 +33,8 @@ public class Spawner : MonoBehaviour
         Debug.Log("collision enter");
         if (collision.collider.CompareTag("PlayerBody"))
         {
-            Spawn(_gruntQt);
+            Spawn(_gruntQt,_gruntPrefab);
+            if (_bigGruntQT>0) Spawn(_bigGruntQT,_bigGruntPrefab);
             Destroy(gameObject);
         }
     }
@@ -42,32 +43,44 @@ public class Spawner : MonoBehaviour
         Debug.Log("collision");
         if (collision.CompareTag("PlayerBody"))
         {
-            Spawn(_gruntQt);
+            Spawn(_gruntQt, _gruntPrefab);
+            if (_bigGruntQT > 0) Spawn(_bigGruntQT, _bigGruntPrefab);
             Destroy(gameObject);
         }
     }
 
     //supervision du spawn de mob avec un peu de random
-    public void Spawn(int gruntQt)
+    public void Spawn(int gruntQt, GameObject prefab)
     {
         //stop de la caméra
         _toFollow.value = false;
         if (gruntQt > 0)
         {
-            if (gruntQt == 1) { SpawnRight(gruntQt); }
-            else if (gruntQt >= 2)
+            int right = 0;
+            int left = 0;
+            if (gruntQt == 1) { right = 1; left = 0 ; }
+            else if (gruntQt == 2)
             {
-                int right = Random.Range(0, gruntQt);
-                int left = gruntQt - right;
-                if (right > 0) SpawnRight(right);
-                if (left > 0) SpawnLeft(left);
+                right = left = 1;
+                    Random.Range(0, gruntQt);
+                left = gruntQt - right;
             }
+            else if (gruntQt >= 3)
+            {
+                right = left = gruntQt / 3;
+                int rand = gruntQt - right -left;
+                int add = Random.Range(0, rand+1);
+                right += add;
+                left = left + rand - add;
+            }
+            if (right>0) SpawnRight(right,prefab);
+            if (left> 0) SpawnLeft(left,prefab);
         }
         _wave.value = true;
     }
 
     //spawn de mob à droite de l'écran
-    public void SpawnRight(int gruntQt)
+    public void SpawnRight(int gruntQt, GameObject prefab)
     {
         for (int i = 0; i < gruntQt; i++)
         {
@@ -75,14 +88,14 @@ public class Spawner : MonoBehaviour
             float x = Random.Range(3, 5) + transform.position.x;
             float y = Random.Range(0, 1.7f);
             //Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
-            GameObject grunt = Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
+            GameObject grunt = Instantiate(prefab, new Vector2(x, y), Quaternion.identity);
             _gameManager.GetComponent<GameManager>()._inactiveGruntList.Add(grunt);
         }
 
     }
 
     //spawn de mob à gauche de l'écran
-    public void SpawnLeft(int gruntQt)
+    public void SpawnLeft(int gruntQt, GameObject prefab)
     {
         for (int i = 0; i < gruntQt; i++)
         {
@@ -90,7 +103,7 @@ public class Spawner : MonoBehaviour
             float x = transform.position.x - Random.Range(4, 6);
             float y = Random.Range(0, 1.7f);
             //Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
-            GameObject grunt = Instantiate(_gruntPrefab, new Vector2(x, y), Quaternion.identity);
+            GameObject grunt = Instantiate(prefab, new Vector2(x, y), Quaternion.identity);
             _gameManager.GetComponent<GameManager>()._inactiveGruntList.Add(grunt);
         }
     }
