@@ -13,7 +13,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<GameObject> _inactiveGruntList;
     [SerializeField] private int _activeGruntAmount; //combien on autorise de grunt à être actif en même temps
     [SerializeField] private IntVariables _currentActiveGrunt; //quantité de grunts active à l'instant T
+    [SerializeField] private IntVariables _scoreCounter;
 
+    private void Awake()
+    {
+        _scoreCounter.value = 0;
+    }
 
     // Start is called before the first frame update
     void Start()

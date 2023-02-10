@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _isRunning;
     private bool _isUsing;
     private float _useFloat;
-    
 
 
     [SerializeField] private GameObject _throwableCanPrefab;
@@ -68,6 +67,15 @@ public class PlayerMovement : MonoBehaviour
     private float _nextJump; //timer avant le prochain saut
     private float _jumpY;
     [SerializeField] private bool _jumpyjump;
+
+    #region VFX
+    [SerializeField] private GameObject _prefabSprintingFX;
+    private bool _sprintingFXexist;
+    [SerializeField] private GameObject _prefabJumpingFX;
+    private bool _jumpingFXexist;
+    [SerializeField] private GameObject _prefabLandingFX;
+    private bool _landingFXexist;
+    #endregion
 
 
     private void Awake()
@@ -190,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_isJumping && !_jumpyjump)
         {
-
+            Instantiate(_prefabJumpingFX, transform.position, Quaternion.identity);
             _animator.SetBool("Jumping", true);
             _animator.SetBool("Walking", false);
             _animator.SetBool("Grounded", false);
@@ -203,13 +211,18 @@ public class PlayerMovement : MonoBehaviour
             DoJump3();
         }
 
+
         if (_isAttacking)
         {
             //_fistCollider.enabled = true;
             _movespeed = 0f;
             _runspeed = 0f;
             _animator.SetBool("Attacking", true);
-            _playerpunch.Play();
+            
+            if (!_playerpunch.isPlaying)
+            {
+                _playerpunch.Play();
+            }
 
             if (_isUsing)
             {
@@ -228,11 +241,26 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.velocity = _move * _runspeed * Time.fixedDeltaTime;
             _animator.SetBool("Running", true);
+            if (!_sprintingFXexist)
+            {
+                Instantiate(_prefabSprintingFX, transform.position, Quaternion.identity);
+                _sprintingFXexist = true;
+                if (_move.x < 0)
+                {
+                    _prefabSprintingFX.GetComponent<SpriteRenderer>().flipX =false;
+                }
+                else
+                {
+                    _prefabSprintingFX.GetComponent<SpriteRenderer>().flipX = true;
+                }
+            }
+            
         }
         else
         {
             _rb.velocity = _move * _movespeed * Time.fixedDeltaTime;
             _animator.SetBool("Running", false);
+            _sprintingFXexist = false;
         }
 
 
@@ -285,7 +313,15 @@ public class PlayerMovement : MonoBehaviour
             _isJumping = false;
             _jumpyjump= false;
             _animator.SetBool("Grounded", true);
+            if (!_landingFXexist)
+            {
+                Instantiate(_prefabLandingFX, transform.position, Quaternion.identity);
+                _landingFXexist= true;
+            }
+
         }
+
+        _landingFXexist = false;
         //verifier sii on est pas a la fin dusaut)
         //demarrer timer -(0 au debut du saut)
         //regarde la courbe en fonction du timer (evaluate parametrex temps )
@@ -313,7 +349,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("Throwable"))
         {
             _canPickUp = true;
-            Debug.Log("canpickup");
+            //Debug.Log("canpickup");
         }
         if (_hasCan)
         {

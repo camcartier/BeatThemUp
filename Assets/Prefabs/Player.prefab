@@ -172,7 +172,9 @@ MonoBehaviour:
   sprint: {fileID: -8570287740624912749, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   PlayerAttPower: 5
+  _isJumping: 0
   _jumpDuration: 1
+  _jumpTimerCounter: 0
   _jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -212,6 +214,11 @@ MonoBehaviour:
   _thrownCanPrefab: {fileID: 8320437373720986423, guid: bcf9fe29e46ff224b989c489d2728c1f, type: 3}
   _healthbarGreen: {fileID: 0}
   _healthbarRed: {fileID: 0}
+  _jumpCD: 0
+  _jumpyjump: 0
+  _prefabSprintingFX: {fileID: 117513957227761166, guid: c6ba1cdca171c9646b9e2d052451b56a, type: 3}
+  _prefabJumpingFX: {fileID: 7656531068573110857, guid: 3f93a752ff3f5b2488e5d7e624124108, type: 3}
+  _prefabLandingFX: {fileID: 2407188095875816075, guid: 37c51b88c006c8747959d613cc475460, type: 3}
 --- !u!50 &5609852434891097606
 Rigidbody2D:
   serializedVersion: 4
