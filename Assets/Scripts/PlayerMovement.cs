@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         _jumpsound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
 
         _jumpTimerCounter = 0;
-        _storedHealth = _playerHealth.value;
+        _storedHealth = 100;
         _isDead= false;
         //_fistCollider = FindGameObjectWithTag("PlayerFist").Collider2D;
         //_fistCollider.enabled = false;
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
