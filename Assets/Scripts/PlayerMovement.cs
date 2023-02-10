@@ -257,6 +257,10 @@ public class PlayerMovement : MonoBehaviour
                     _prefabSprintingFX.GetComponent<SpriteRenderer>().flipX = true;
                 }
             }
+            if (!_isJumping && Mathf.Abs(_move.x) <0.1)
+            {
+                _animator.SetBool("Running", false);
+            }
             
         }
         else
