@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<GameObject> _inactiveGruntList;
     [SerializeField] private int _activeGruntAmount; //combien on autorise de grunt à être actif en même temps
     [SerializeField] private IntVariables _currentActiveGrunt; //quantité de grunts active à l'instant T
-
+    [SerializeField] private IntVariables _scoreCounter;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         _wave.value = false;
         _inactiveGruntList= new List<GameObject>();
         _currentActiveGrunt.value = 0;
+        _scoreCounter.value = 0;
     }
 
     // Update is called once per frame

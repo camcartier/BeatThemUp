@@ -168,4 +168,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myObjectSprite: {fileID: 7257196608879205120}
+  _score: {fileID: 11400000, guid: 274ea020afa76e741a4340c3828370f4, type: 2}
   _timer: 7
