@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 213920137908091538}
   - component: {fileID: 6497275535004167160}
   - component: {fileID: 6497275535004167161}
+  - component: {fileID: 875183280283592214}
   m_Layer: 0
   m_Name: jumpingVFX
   m_TagString: Untagged
@@ -105,3 +106,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &875183280283592214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7656531068573110857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29cdeccde32cb84db5dde9189eb1567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NTime: 0
