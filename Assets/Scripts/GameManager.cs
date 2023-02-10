@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private IntVariables _playerHP;
     [SerializeField] private BoolVariables _wave;
     [SerializeField] private IntVariables _enemyCount;
-    [SerializeField] public List<GameObject> _inactiveGruntList;
+    [SerializeField] public List<GameObject> _inactiveGruntList, _activeGruntList;
     [SerializeField] private int _activeGruntAmount; //combien on autorise de grunt à être actif en même temps
     [SerializeField] private IntVariables _currentActiveGrunt; //quantité de grunts active à l'instant T
     [SerializeField] private IntVariables _scoreCounter;
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         _enemyCount.value = 0;
         _wave.value = false;
         _inactiveGruntList= new List<GameObject>();
+        _activeGruntList= new List<GameObject>();
         _currentActiveGrunt.value = 0;
     }
 
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _inactiveGruntList.Count; i++)
         {
             _inactiveGruntList[0].GetComponent<NPCBehaviour>()._isActive = true;
+            _activeGruntList.Add(_inactiveGruntList[0]);
             _inactiveGruntList.Remove(_inactiveGruntList[0]);
             _currentActiveGrunt.value++;
         }
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i<qt; i++)
         {
             _inactiveGruntList[0].GetComponent<NPCBehaviour>()._isActive = true;
+            _activeGruntList.Add(_inactiveGruntList[0]);
             _inactiveGruntList.Remove(_inactiveGruntList[0]);
             _currentActiveGrunt.value++;
         }

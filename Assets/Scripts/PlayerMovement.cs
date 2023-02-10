@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _animator;
     [SerializeField] GameObject _continueMenu;
+    private GameObject _gameManager;
 
     #region sounds
     AudioSource _playerpunch;
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public IntVariables _playerHealth;
     [SerializeField] private int _lives;
     private float _storedHealth;
-    public int PlayerAttPower;
+    public int PlayerAttPower,PlayerSuperAttPower;
 
     private Vector2 _move;
     private float _movespeed = 60;
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
         _healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         _jumpyjump = false;
+        _gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     // Start is called before the first frame update
@@ -427,4 +429,15 @@ public class PlayerMovement : MonoBehaviour
         _isInvulnerable= false;
     }
 
+    private void SpecialAttack()
+    {
+        foreach (var item in _gameManager.GetComponent<GameManager>()._inactiveGruntList)
+        {
+            item.GetComponent<NPCBehaviour>()._hp -= PlayerSuperAttPower;
+        }
+        foreach (var item in _gameManager.GetComponent<GameManager>()._inactiveGruntList)
+        {
+            item.GetComponent<NPCBehaviour>()._hp -= PlayerSuperAttPower;
+        }
+    }
 }
