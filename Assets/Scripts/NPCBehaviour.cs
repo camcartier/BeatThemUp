@@ -29,6 +29,8 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] GameObject _prefabPoofingFX;
     private GameObject _gameManager;
 
+    [SerializeField] private bool grunt, biggrunt, twin, robotnik;
+
     private void Awake()
     {
         _rb= GetComponent<Rigidbody2D>();
@@ -60,8 +62,20 @@ public class NPCBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isActive && _isDead==false) Behaviour();
-        else if (!_isActive && _isDead == false ) InactiveBehaviour();
+        if (_isActive && _isDead==false)
+        {
+            if (grunt) GruntBehaviour();
+            else if (biggrunt) BigBehaviour();
+            else if (twin) TwinBehaviour();
+            else if (robotnik) RobotBehaviour();
+        }
+            
+        else if (!_isActive && _isDead == false )
+        {
+            if (grunt) InactiveBehaviour();
+            else if (biggrunt) InactiveBigBehaviour();
+
+        }
     }
 
     private void InactiveBehaviour()
@@ -71,11 +85,16 @@ public class NPCBehaviour : MonoBehaviour
         else Stop();
     }
 
-    //NPC behaviour method
-    private void Behaviour()
+    private void InactiveBigBehaviour()
     {
-        //float _distance = Vector2.Distance(transform.position, _playerTransform.position);
-        //Debug.Log(_distance);
+        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance * 3) Move();
+        else if (Vector2.Distance(transform.position, _playerTransform.position) < _moveDistance * 2) MoveAway();
+        else Stop();
+    }
+
+    //NPC behaviour method
+    private void GruntBehaviour()
+    {
         //check si la distance entre l'ennemi et le joueur est suffisante pour le bouger ou le stopper
         if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
         else 
@@ -86,6 +105,29 @@ public class NPCBehaviour : MonoBehaviour
                 Combat();
             }
         }
+
+    }
+
+    private void BigBehaviour()
+    {
+        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        else
+        {
+            Stop();
+            if (_isActive && Time.timeSinceLevelLoad > _nextAttack && _isDead == false)
+            {
+                Combat();
+            }
+        }
+    }
+
+    private void TwinBehaviour()
+    {
+        
+    }
+
+    private void RobotBehaviour()
+    {
 
     }
 
@@ -180,22 +222,6 @@ public class NPCBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         _animator.SetBool("Attack", false);
-    }
-
-
-
-    //fishtree
-    private void TakeDamage()
-    {
-        _hp -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
-    }
-    //fishtree
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("PlayerFist"))
-        {
-            //TakeDamage();
-        }
     }
 
     public void KnockBack()

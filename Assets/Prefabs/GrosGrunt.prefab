@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3180951973464743047}
   - component: {fileID: 3180951973464743064}
   - component: {fileID: 3784140954048466403}
+  - component: {fileID: 1193010302401672905}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -116,12 +117,87 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.4, y: 0.3}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &1193010302401672905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3180951973464743066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d58466d3cd55a64183b2b4b9dc345e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isOnRange: 0
+--- !u!1 &6960219131793909162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5819986832250246325}
+  - component: {fileID: 3206952029126305513}
+  - component: {fileID: 6628064951224808420}
+  m_Layer: 0
+  m_Name: SmashAttColl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5819986832250246325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960219131793909162}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2407007775841698107}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &3206952029126305513
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960219131793909162}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.15}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &6628064951224808420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960219131793909162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5fb5597d5d07a41ac571b91848121d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isOnRange: 0
 --- !u!1 &8063543691300955414
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +209,7 @@ GameObject:
   - component: {fileID: 2407007775841698107}
   - component: {fileID: 2432750625452718454}
   - component: {fileID: 4486366292018883274}
-  - component: {fileID: 6372650502884280975}
+  - component: {fileID: 5426137717330977913}
   m_Layer: 0
   m_Name: GrosGrunt
   m_TagString: Untagged
@@ -154,6 +230,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3180951973464743065}
+  - {fileID: 5819986832250246325}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,7 +244,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.25}
@@ -194,19 +271,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &6372650502884280975
-CircleCollider2D:
+--- !u!114 &5426137717330977913
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8063543691300955414}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.15}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b146b356aa97ed04ea184b24b693cd31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 70
+  _attPower: 20
+  _defPower: 0
+  _moveSpeed: 40
+  _moveDistance: 0.8
+  _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
+  _isActive: 0
+  _attackCD: 5
+  _onCombat: 0
+  _animator: {fileID: 3180951973464743047}
+  _nextAttack: 0
+  _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
+  _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
+  _prefabVynil: {fileID: 6660595527757674785, guid: ea7f6f6c2dee52642b77eb3dde8c1a16, type: 3}
+  _prefabPoofingFX: {fileID: 8506768773289262660, guid: 6a7a8b71d5abb4940b92d675de6ee473, type: 3}
+  grunt: 0
+  biggrunt: 1
+  twin: 0
+  robotnik: 0
