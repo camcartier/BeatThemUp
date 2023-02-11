@@ -28,6 +28,8 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] GameObject _prefabVynil;
     [SerializeField] GameObject _prefabPoofingFX;
     private GameObject _gameManager;
+    [SerializeField] public IntVariables _playerMana; 
+    [SerializeField] private int _manaGainValue = 10;
 
     private void Awake()
     {
@@ -54,6 +56,8 @@ public class NPCBehaviour : MonoBehaviour
         {
             _lastHP = _hp;
             KnockBack();
+            if (_playerMana.value < 100) { _playerMana.value += _manaGainValue; } else { _playerMana.value = 100; }
+
             _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         }
     }
@@ -182,21 +186,6 @@ public class NPCBehaviour : MonoBehaviour
         _animator.SetBool("Attack", false);
     }
 
-
-
-    //fishtree
-    private void TakeDamage()
-    {
-        _hp -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
-    }
-    //fishtree
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("PlayerFist"))
-        {
-            //TakeDamage();
-        }
-    }
 
     public void KnockBack()
     {

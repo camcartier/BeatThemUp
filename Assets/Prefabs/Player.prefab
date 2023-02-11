@@ -173,8 +173,10 @@ MonoBehaviour:
   sprint: {fileID: -8570287740624912749, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   attackspe: {fileID: 1180351520374875670, guid: f29112bdcd4f5484a818782c68457b9a, type: 3}
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
+  _playerMana: {fileID: 11400000, guid: 407351e0d9afa464f8277097d39dfef5, type: 2}
   _lives: 0
   PlayerAttPower: 5
+  PlayerSuperAttPower: 0
   _isJumping: 0
   _jumpDuration: 1
   _jumpTimerCounter: 0

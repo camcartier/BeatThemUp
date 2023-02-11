@@ -22,10 +22,13 @@ public class PlayerMovement : MonoBehaviour
     AudioSource _jumpsound;
 
     #endregion
-    [SerializeField] private InputActionReference movement, attack, jump, use, sprint;
+
+    [SerializeField] private InputActionReference movement, attack, jump, use, sprint, attackspe;
     [SerializeField] public IntVariables _playerHealth;
+    [SerializeField] public IntVariables _playerMana;
     [SerializeField] private int _lives;
     private float _storedHealth;
+    private float _storedMana;
     public int PlayerAttPower,PlayerSuperAttPower;
 
     private Vector2 _move;
@@ -48,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isRunning;
     private bool _isUsing;
     private float _useFloat;
+    private bool _AttackSpe;
 
 
     [SerializeField] private GameObject _throwableCanPrefab;
@@ -58,10 +62,16 @@ public class PlayerMovement : MonoBehaviour
     bool _hasCan;
     bool _canPickUp;
 
+    #region Health&Mana Bars
     [Header("HealthBar")]
     [SerializeField] Image _healthbarGreen;
     [SerializeField] Image _healthbarRed;
     private HealthBar _healthbar;
+    [Header("ManaBar")]
+    [SerializeField] Image _manabarBlue;
+    [SerializeField] Image _manabarGrey;
+    private ManaBar _manabar;
+#endregion
 
     private bool _isDead;//bool qui s'active quand le joueur meurt la première fois
     [SerializeField] private float _jumpCD; //cooldown entre 2 jumps
@@ -94,11 +104,13 @@ public class PlayerMovement : MonoBehaviour
 
         _jumpTimerCounter = 0;
         _storedHealth = 100;
+        _storedMana = 0;
         _isDead = _isInvulnerable = false;
         //_fistCollider = FindGameObjectWithTag("PlayerFist").Collider2D;
         //_fistCollider.enabled = false;
 
         _healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        _manabar = GameObject.Find("ManaBar").GetComponent<ManaBar>();
         _jumpyjump = false;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
@@ -121,6 +133,11 @@ public class PlayerMovement : MonoBehaviour
             KnockBack();
         }
 
+        if (_storedMana != _playerMana.value && !_isDead)
+        { 
+            _manabar.SetMana(_playerMana.value);
+            _storedMana = _playerMana.value;
+        }
 
         if (_playerHealth.value <= 0 && _isDead == false)
         {
@@ -161,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
 
         _isRunning = sprint.action.ReadValue<float>() > 0.1;
 
-
+        _AttackSpe = attackspe.action.ReadValue<float>() > 0.1;
 
 
         //prbs de tp
@@ -190,14 +207,9 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (_isWalking)
-        {
-            _animator.SetBool("Walking", true); 
-        }
-        else
-        {
-            _animator.SetBool("Walking", false);
-        }
+        if (_isWalking) { _animator.SetBool("Walking", true); }
+        else { _animator.SetBool("Walking", false); }
+
 
         if (_isJumping && !_jumpyjump)
         {
@@ -271,7 +283,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-
         if (_useFloat > 0 && _canPickUp)
         {
             _animator.SetBool("HasObject", true);
@@ -287,7 +298,15 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-
+        if (_AttackSpe  && _playerMana.value >=100)
+        {
+            _isInvulnerable= true;
+            _animator.SetBool("AttackSpe", true);
+            _playerMana.value = 0;
+            SpecialAttack();
+            StartCoroutine(InvulnerabilityNoBlink());
+        }
+        else { _animator.SetBool("AttackSpe", false); }
 
     }
 
@@ -431,6 +450,12 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
         }
         _isInvulnerable= false;
+    }
+
+    IEnumerator InvulnerabilityNoBlink()
+    {
+        yield return new WaitForSeconds(3f);
+        _isInvulnerable = false;
     }
 
     private void SpecialAttack()
