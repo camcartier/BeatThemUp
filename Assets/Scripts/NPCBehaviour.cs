@@ -22,12 +22,14 @@ public class NPCBehaviour : MonoBehaviour
 
     [SerializeField] private float _nextAttack =0;
     [SerializeField] private IntVariables _enemyCount;
-    [SerializeField] private IntVariables _currentActiveGrunt; //quantité de grunts active à l'instant T
+    [SerializeField] private IntVariables _currentActiveGrunt; //quantitï¿½ de grunts active ï¿½ l'instant T
     private bool _isDead;
     private bool _flipX;
     [SerializeField] GameObject _prefabVynil;
     [SerializeField] GameObject _prefabPoofingFX;
     private GameObject _gameManager;
+    [SerializeField] public IntVariables _playerMana; 
+    [SerializeField] private int _manaGainValue = 10;
 
     [SerializeField] private bool grunt, biggrunt, twin, robotnik;
 
@@ -56,6 +58,8 @@ public class NPCBehaviour : MonoBehaviour
         {
             _lastHP = _hp;
             KnockBack();
+            if (_playerMana.value < 100) { _playerMana.value += _manaGainValue; } else { _playerMana.value = 100; }
+
             _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         }
     }

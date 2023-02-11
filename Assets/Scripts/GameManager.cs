@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private IntVariables _playerHP;
+    [SerializeField] private IntVariables _playerMana;
     [SerializeField] private BoolVariables _wave;
     [SerializeField] private IntVariables _enemyCount;
     [SerializeField] public List<GameObject> _inactiveGruntList, _activeGruntList;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _playerHP.value = 100;
+        _playerMana.value = 0;
         _enemyCount.value = 0;
         _wave.value = false;
         _inactiveGruntList= new List<GameObject>();
