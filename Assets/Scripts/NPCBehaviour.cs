@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NPCBehaviour : MonoBehaviour
 {
-    [SerializeField] public int _hp, _attPower, _defPower;
+    [SerializeField] public int _hp, _attPower, _attSpePower, _defPower;
     private int _lastHP;
     [SerializeField] private float _moveSpeed;
     private Rigidbody2D _rb; //npc RB2D
@@ -32,6 +32,7 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private int _manaGainValue = 10;
 
     [SerializeField] private bool grunt, biggrunt, twin, robotnik;
+    private int pattern;
 
     private void Awake()
     {
@@ -40,8 +41,9 @@ public class NPCBehaviour : MonoBehaviour
         _playerTransform= _player.GetComponent<Transform>();
         _isActive= false;
         _isDead= false;
-        _lastHP = 40;
+        _lastHP = _hp;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        pattern = 0;
     }
     // Start is called before the first frame update
     void Start()
@@ -120,7 +122,7 @@ public class NPCBehaviour : MonoBehaviour
             Stop();
             if (_isActive && Time.timeSinceLevelLoad > _nextAttack && _isDead == false)
             {
-                Combat();
+                BigCombat();
             }
         }
     }
@@ -195,9 +197,38 @@ public class NPCBehaviour : MonoBehaviour
         StartCoroutine(AttCD());
     }
 
+    private void BigCombat()
+    {
+        //alterne attaque normale et attaque spéciale
+        if (pattern % 2 ==0)
+        {
+            //attaque normale
+            _animator.SetBool("Attack", true);
+            //condition pour savoir si on est en range de toucher (le collider d'attaque qui touche le body du player)
+            if (GetComponentInChildren<Damage>()._isOnRange == true) DealDmg();
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+            StartCoroutine(AttCD());
+        }
+        if (pattern % 2==1)
+        {
+            //attaque spéciale
+            _animator.SetBool("AttackSpe", true);
+            if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+            StartCoroutine(AttCD());
+        }
+        pattern++;
+
+    }
+
     private void DealDmg()
     {
         _playerHealth.value -= _attPower;
+    }
+
+    private void DealDmgSpe()
+    {
+        _playerHealth.value -= _attSpePower;
     }
 
     //l'ennemi va clignoter un peu avant de mourrir
@@ -226,6 +257,7 @@ public class NPCBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         _animator.SetBool("Attack", false);
+        _animator.SetBool("AttackSpe", false);
     }
 
     public void KnockBack()

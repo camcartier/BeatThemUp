@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1193010302401672905}
   m_Layer: 0
   m_Name: Graphics
-  m_TagString: Untagged
+  m_TagString: EnemyFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,9 +120,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4, y: 0.3}
+  m_Offset: {x: 0.45, y: 0.35}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.18
 --- !u!114 &1193010302401672905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 6628064951224808420}
   m_Layer: 0
   m_Name: SmashAttColl
-  m_TagString: Untagged
+  m_TagString: EnemyFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,9 +182,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.15}
+  m_Offset: {x: 0, y: 0.3}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.8
 --- !u!114 &6628064951224808420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 5426137717330977913}
   m_Layer: 0
   m_Name: GrosGrunt
-  m_TagString: Untagged
+  m_TagString: EnemyBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,8 +247,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
-  m_Size: {x: 0.5, y: 0.5}
+  m_Offset: {x: 0.033084005, y: 0.45228508}
+  m_Size: {x: 0.433832, y: 0.6020878}
   m_Direction: 0
 --- !u!50 &4486366292018883274
 Rigidbody2D:
@@ -285,12 +285,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 70
   _attPower: 20
+  _attSpePower: 30
   _defPower: 0
-  _moveSpeed: 40
-  _moveDistance: 0.8
+  _moveSpeed: 30
+  _moveDistance: 0.6
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   _isActive: 0
-  _attackCD: 5
+  _attackCD: 4
   _onCombat: 0
   _animator: {fileID: 3180951973464743047}
   _nextAttack: 0
@@ -298,6 +299,8 @@ MonoBehaviour:
   _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
   _prefabVynil: {fileID: 6660595527757674785, guid: ea7f6f6c2dee52642b77eb3dde8c1a16, type: 3}
   _prefabPoofingFX: {fileID: 8506768773289262660, guid: 6a7a8b71d5abb4940b92d675de6ee473, type: 3}
+  _playerMana: {fileID: 11400000, guid: 407351e0d9afa464f8277097d39dfef5, type: 2}
+  _manaGainValue: 10
   grunt: 0
   biggrunt: 1
   twin: 0
