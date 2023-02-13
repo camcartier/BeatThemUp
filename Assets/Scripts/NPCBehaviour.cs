@@ -23,7 +23,7 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private float _nextAttack =0;
     [SerializeField] private IntVariables _enemyCount;
     [SerializeField] private IntVariables _currentActiveGrunt; //quantit� de grunts active � l'instant T
-    private bool _isDead;
+    private bool _isDead, _jumpAtt;
     private bool _flipX;
     [SerializeField] GameObject _prefabVynil;
     [SerializeField] GameObject _prefabPoofingFX;
@@ -33,6 +33,11 @@ public class NPCBehaviour : MonoBehaviour
 
     [SerializeField] private bool grunt, biggrunt, twin, robotnik;
     private int pattern;
+    [SerializeField] AnimationCurve _jumpCurve;
+    [SerializeField] private float _jumpDuration = 1;
+    [SerializeField] private float _jumpTimerCounter;
+    [SerializeField] private float _jumpHeight;
+    private float _jumpY;
 
     private void Awake()
     {
@@ -41,9 +46,11 @@ public class NPCBehaviour : MonoBehaviour
         _playerTransform= _player.GetComponent<Transform>();
         _isActive= false;
         _isDead= false;
+        _jumpAtt = false;
         _lastHP = _hp;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
         pattern = 0;
+        _jumpTimerCounter = 0;
     }
     // Start is called before the first frame update
     void Start()
@@ -101,6 +108,7 @@ public class NPCBehaviour : MonoBehaviour
     private void GruntBehaviour()
     {
         //check si la distance entre l'ennemi et le joueur est suffisante pour le bouger ou le stopper
+
         if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
         else 
         { 
@@ -128,7 +136,8 @@ public class NPCBehaviour : MonoBehaviour
 
     private void TwinBehaviour()
     {
-        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        if (_jumpAtt) { JumpAttack(); }
+        else if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
         else
         {
             Stop();
@@ -242,10 +251,9 @@ public class NPCBehaviour : MonoBehaviour
         if (pattern % 3 == 0)
         {
             //attaque spéciale
-            _animator.SetBool("AttackSpe", true);
-            if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
-            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
-            StartCoroutine(AttCD());
+            _jumpY = transform.position.y;
+            _jumpAtt = true;
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD +1f;
         }
         else
         {
@@ -262,7 +270,25 @@ public class NPCBehaviour : MonoBehaviour
 
     private void RobotCombat()
     {
-        
+        //alterne 2 attaques normales et une attaque spéciale
+        if (pattern % 3 == 0)
+        {
+            //attaque spéciale
+            _animator.SetBool("AttackSpe", true);
+            if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+            StartCoroutine(AttCD());
+        }
+        else
+        {
+            //attaque normale
+            _animator.SetBool("Attack", true);
+            //condition pour savoir si on est en range de toucher (le collider d'attaque qui touche le body du player)
+            if (GetComponentInChildren<Damage>()._isOnRange == true) DealDmg();
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+            StartCoroutine(AttCD());
+        }
+        pattern++;
     }
 
 
@@ -296,6 +322,31 @@ public class NPCBehaviour : MonoBehaviour
         Instantiate(_prefabVynil, transform.position, Quaternion.identity);
         Destroy(gameObject);
         yield return null;
+    }
+
+    //attaqué sautée du twin
+    private void JumpAttack()
+    {
+        //première partie du jump et condition pour activer la second partie avec l'animation du poing
+        if (_jumpTimerCounter < _jumpDuration)
+        {
+            if (_animator.GetBool("Jump")==false) _animator.SetBool("Jump", true);
+            _jumpTimerCounter += Time.fixedDeltaTime;
+            float y = _jumpCurve.Evaluate(_jumpTimerCounter / _jumpDuration);
+            transform.position = new Vector2(transform.position.x, _jumpY + 1f * y);
+            if (_jumpTimerCounter > _jumpDuration * 0.66f && _animator.GetBool("AttackSpe")==false) {_animator.SetBool("AttackSpe", true); }
+        }
+
+        //application des dégâts à la retombée
+        else
+        {
+            _jumpTimerCounter = 0;
+            _jumpAtt = false;
+            _animator.SetBool("Jump", false);
+            if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+            StartCoroutine(AttCD());
+        }
     }
 
     IEnumerator AttCD()

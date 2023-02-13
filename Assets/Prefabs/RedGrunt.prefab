@@ -120,7 +120,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3, y: 0.2}
+  m_Offset: {x: 0.3, y: 0.22}
   serializedVersion: 2
   m_Radius: 0.075
 --- !u!114 &8509432458491717593
@@ -221,6 +221,15 @@ MonoBehaviour:
   biggrunt: 0
   twin: 0
   robotnik: 0
+  _jumpCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _jumpDuration: 1
+  _jumpTimerCounter: 0
+  _jumpHeight: 0
 --- !u!50 &-6084313575471613132
 Rigidbody2D:
   serializedVersion: 4

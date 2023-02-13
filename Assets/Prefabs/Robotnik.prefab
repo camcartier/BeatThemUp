@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4569365007316706281}
   - component: {fileID: -3259208957276655765}
-  - component: {fileID: 5827812528753906328}
+  - component: {fileID: 4153227697517667016}
+  - component: {fileID: 2008934759239748012}
   m_Layer: 0
   m_Name: Robotnik
   m_TagString: EnemyBody
@@ -69,20 +70,52 @@ MonoBehaviour:
   biggrunt: 0
   twin: 0
   robotnik: 1
---- !u!136 &5827812528753906328
-CapsuleCollider:
+  _jumpCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _jumpDuration: 1
+  _jumpTimerCounter: 0
+  _jumpHeight: 0
+--- !u!50 &4153227697517667016
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2400549298930765594}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!70 &2008934759239748012
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400549298930765594}
   m_Enabled: 1
-  m_Radius: 0.8
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.5}
+  m_Size: {x: 1.6, y: 1.8}
+  m_Direction: 0
 --- !u!1 &3177059383524579691
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +128,7 @@ GameObject:
   - component: {fileID: 3177059383524579692}
   - component: {fileID: 3177059383524579693}
   - component: {fileID: 156625841223331007}
+  - component: {fileID: 4567888497632326783}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: EnemyFist
@@ -197,12 +231,25 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3177059383524579691}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1
   m_Height: 3
   m_Direction: 0
   m_Center: {x: -2, y: 0.5, z: 0}
+--- !u!114 &4567888497632326783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177059383524579691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d58466d3cd55a64183b2b4b9dc345e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isOnRange: 0
 --- !u!1 &4615863358886094203
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2118500157840503387}
   - component: {fileID: 5044970985874433453}
+  - component: {fileID: 7812502320265279979}
   m_Layer: 0
   m_Name: AttackSpeCollider
   m_TagString: EnemyFist
@@ -243,9 +291,22 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4615863358886094203}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1.5
   m_Height: 4
   m_Direction: 0
   m_Center: {x: -2, y: 0.5, z: 0}
+--- !u!114 &7812502320265279979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615863358886094203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5fb5597d5d07a41ac571b91848121d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isOnRange: 0

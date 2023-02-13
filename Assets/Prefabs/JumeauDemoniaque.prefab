@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4684327031748910796}
   - component: {fileID: 8455846132342921279}
   - component: {fileID: -1990351641083384127}
+  - component: {fileID: 2673821373473121545}
   m_Layer: 0
   m_Name: JumeauDemoniaque
   m_TagString: EnemyBody
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5403867213751787307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2505928, y: 0.4518446, z: -0.0010015871}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52,8 +53,8 @@ MonoBehaviour:
   _attSpePower: 20
   _defPower: 0
   _moveSpeed: 60
-  _moveDistance: 0.4
-  _playerHealth: {fileID: 0}
+  _moveDistance: 0.6
+  _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   _isActive: 1
   _attackCD: 1
   _onCombat: 0
@@ -69,6 +70,42 @@ MonoBehaviour:
   biggrunt: 0
   twin: 1
   robotnik: 0
+  _jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.6829069
+      outSlope: 2.6829069
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.061745983
+    - serializedVersion: 3
+      time: 0.66
+      value: 1
+      inSlope: 0.020172654
+      outSlope: 0.020172654
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09299898
+    - serializedVersion: 3
+      time: 1.0015869
+      value: 0
+      inSlope: -4.257323
+      outSlope: -4.257323
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.073474444
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _jumpDuration: 1
+  _jumpTimerCounter: 0
+  _jumpHeight: 1
 --- !u!70 &-1990351641083384127
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -85,6 +122,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.32}
   m_Size: {x: 0.27, y: 0.35}
   m_Direction: 0
+--- !u!50 &2673821373473121545
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5403867213751787307}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &8784696595412921071
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +155,7 @@ GameObject:
   - component: {fileID: 891091112597484819}
   - component: {fileID: 3225075993275541151}
   - component: {fileID: 991694613979656680}
+  - component: {fileID: 7001181570206468905}
   m_Layer: 0
   m_Name: GraphicsJD
   m_TagString: EnemyFist
@@ -204,9 +263,22 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3, y: 0.2}
+  m_Offset: {x: 0.3, y: 0.25}
   serializedVersion: 2
   m_Radius: 0.075
+--- !u!114 &7001181570206468905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8784696595412921071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d58466d3cd55a64183b2b4b9dc345e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isOnRange: 0
 --- !u!1 &9196353531095409631
 GameObject:
   m_ObjectHideFlags: 0
