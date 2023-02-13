@@ -256,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.velocity = _move * _runspeed * Time.fixedDeltaTime;
             _animator.SetBool("Running", true);
-            if (!_sprintingFXexist)
+            if (!_sprintingFXexist && _move.x !=0 && !_isJumping)
             {
                 Instantiate(_prefabSprintingFX, transform.position, Quaternion.identity);
                 _sprintingFXexist = true;
