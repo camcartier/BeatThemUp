@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ScoreControl : MonoBehaviour
+public class ScoreControls : MonoBehaviour
 {
     private TMP_Text _counterTxt;
     private int _changeTracker;
