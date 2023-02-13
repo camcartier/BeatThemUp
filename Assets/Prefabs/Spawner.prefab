@@ -72,8 +72,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gruntQt: 1
-  _bigGruntQT: 0
+  _bigGruntQt: 0
+  _twinQt: 0
+  _robotQt: 0
   _gruntPrefab: {fileID: 9189822493656794918, guid: 294da52d2f6459a479e6437e114530fd, type: 3}
   _bigGruntPrefab: {fileID: 8063543691300955414, guid: a8645234e622430468769409ef5cba95, type: 3}
+  _twinPrefab: {fileID: 5403867213751787307, guid: abcdfa09ba5896540a6e631daadd5293, type: 3}
+  _robotPrefab: {fileID: 2400549298930765594, guid: e04d7dd5f0b008d4e812009679206888, type: 3}
   _toFollow: {fileID: 11400000, guid: eaa55043343762e409235bbdc0e5d18d, type: 2}
   _wave: {fileID: 11400000, guid: 5ed434f7397bac54ab22b8a06bf3957c, type: 2}

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4569365007316706281}
+  - component: {fileID: -3259208957276655765}
   m_Layer: 0
   m_Name: Robotnik
   m_TagString: Untagged
@@ -32,6 +33,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3259208957276655765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400549298930765594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b146b356aa97ed04ea184b24b693cd31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 200
+  _attPower: 40
+  _attSpePower: 0
+  _defPower: 0
+  _moveSpeed: 40
+  _moveDistance: 2
+  _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
+  _isActive: 0
+  _attackCD: 3
+  _onCombat: 0
+  _animator: {fileID: 3177059383524579693}
+  _nextAttack: 0
+  _enemyCount: {fileID: 11400000, guid: 97cdba739406983428f202996ba82ea7, type: 2}
+  _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
+  _prefabVynil: {fileID: 6660595527757674785, guid: ea7f6f6c2dee52642b77eb3dde8c1a16, type: 3}
+  _prefabPoofingFX: {fileID: 8506768773289262660, guid: 6a7a8b71d5abb4940b92d675de6ee473, type: 3}
+  _playerMana: {fileID: 11400000, guid: 407351e0d9afa464f8277097d39dfef5, type: 2}
+  _manaGainValue: 10
+  grunt: 0
+  biggrunt: 0
+  twin: 0
+  robotnik: 1
 --- !u!1 &3177059383524579691
 GameObject:
   m_ObjectHideFlags: 0

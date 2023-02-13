@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 40
   _attPower: 10
+  _attSpePower: 0
   _defPower: 0
   _moveSpeed: 40
   _moveDistance: 0.4
@@ -216,6 +217,10 @@ MonoBehaviour:
   _prefabPoofingFX: {fileID: 8506768773289262660, guid: 6a7a8b71d5abb4940b92d675de6ee473, type: 3}
   _playerMana: {fileID: 11400000, guid: 407351e0d9afa464f8277097d39dfef5, type: 2}
   _manaGainValue: 10
+  grunt: 1
+  biggrunt: 0
+  twin: 0
+  robotnik: 0
 --- !u!50 &-6084313575471613132
 Rigidbody2D:
   serializedVersion: 4

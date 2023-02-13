@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private int _gruntQt, _bigGruntQT;
-    [SerializeField] private GameObject _gruntPrefab, _bigGruntPrefab;
+    [SerializeField] private int _gruntQt, _bigGruntQt, _twinQt, _robotQt;
+    [SerializeField] private GameObject _gruntPrefab, _bigGruntPrefab, _twinPrefab, _robotPrefab;
     [SerializeField] private BoolVariables _toFollow; //bool pour dire s'il faut déplacer la caméra pour la raccrocher au joueur
     [SerializeField] private BoolVariables _wave;
     private GameObject _gameManager;
@@ -34,7 +34,9 @@ public class Spawner : MonoBehaviour
         if (collision.collider.CompareTag("PlayerBody"))
         {
             Spawn(_gruntQt,_gruntPrefab);
-            if (_bigGruntQT>0) Spawn(_bigGruntQT,_bigGruntPrefab);
+            if (_bigGruntQt>0) Spawn(_bigGruntQt,_bigGruntPrefab);
+            if (_twinQt > 0) Spawn(_twinQt, _twinPrefab);
+            if (_robotQt > 0) Spawn(_robotQt, _robotPrefab);
             Destroy(gameObject);
         }
     }
@@ -44,7 +46,9 @@ public class Spawner : MonoBehaviour
         if (collision.CompareTag("PlayerBody"))
         {
             Spawn(_gruntQt, _gruntPrefab);
-            if (_bigGruntQT > 0) Spawn(_bigGruntQT, _bigGruntPrefab);
+            if (_bigGruntQt > 0) Spawn(_bigGruntQt, _bigGruntPrefab);
+            if (_twinQt > 0) Spawn(_twinQt, _twinPrefab);
+            if (_robotQt > 0) Spawn(_robotQt, _robotPrefab);
             Destroy(gameObject);
         }
     }
