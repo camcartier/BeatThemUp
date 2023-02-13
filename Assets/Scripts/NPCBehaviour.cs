@@ -78,9 +78,8 @@ public class NPCBehaviour : MonoBehaviour
             
         else if (!_isActive && _isDead == false )
         {
-            if (grunt) InactiveBehaviour();
-            else if (biggrunt) InactiveBigBehaviour();
-
+            if (biggrunt) InactiveBigBehaviour();
+            else InactiveBehaviour();
         }
     }
 
@@ -129,12 +128,28 @@ public class NPCBehaviour : MonoBehaviour
 
     private void TwinBehaviour()
     {
-        
+        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        else
+        {
+            Stop();
+            if (_isActive && Time.timeSinceLevelLoad > _nextAttack && _isDead == false)
+            {
+                TwinCombat();
+            }
+        }
     }
 
     private void RobotBehaviour()
     {
-
+        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        else
+        {
+            Stop();
+            if (_isActive && Time.timeSinceLevelLoad > _nextAttack && _isDead == false)
+            {
+                RobotCombat();
+            }
+        }
     }
 
 
@@ -220,6 +235,36 @@ public class NPCBehaviour : MonoBehaviour
         pattern++;
 
     }
+
+    private void TwinCombat()
+    {
+        //alterne 2 attaques normales et une attaque spéciale
+        if (pattern % 3 == 0)
+        {
+            //attaque spéciale
+            _animator.SetBool("AttackSpe", true);
+            if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+            StartCoroutine(AttCD());
+        }
+        else
+        {
+            //attaque normale
+            _animator.SetBool("Attack", true);
+            //condition pour savoir si on est en range de toucher (le collider d'attaque qui touche le body du player)
+            if (GetComponentInChildren<Damage>()._isOnRange == true) DealDmg();
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+            StartCoroutine(AttCD());
+        }
+        pattern++;
+    }
+
+
+    private void RobotCombat()
+    {
+        
+    }
+
 
     private void DealDmg()
     {
