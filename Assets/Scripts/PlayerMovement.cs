@@ -464,7 +464,7 @@ public class PlayerMovement : MonoBehaviour
         {
             item.GetComponent<NPCBehaviour>()._hp -= PlayerSuperAttPower;
         }
-        foreach (var item in _gameManager.GetComponent<GameManager>()._inactiveGruntList)
+        foreach (var item in _gameManager.GetComponent<GameManager>()._activeGruntList)
         {
             item.GetComponent<NPCBehaviour>()._hp -= PlayerSuperAttPower;
         }
