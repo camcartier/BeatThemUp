@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -39,6 +40,8 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _jumpY;
 
+    private CircleCollider2D[] _robotColliders;
+
     private void Awake()
     {
         _rb= GetComponent<Rigidbody2D>();
@@ -49,8 +52,9 @@ public class NPCBehaviour : MonoBehaviour
         _jumpAtt = false;
         _lastHP = _hp;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        pattern = 0;
+        pattern = 1;
         _jumpTimerCounter = 0;
+        if(robotnik) _robotColliders = GetComponentsInChildren<CircleCollider2D>();
     }
     // Start is called before the first frame update
     void Start()
@@ -150,7 +154,7 @@ public class NPCBehaviour : MonoBehaviour
 
     private void RobotBehaviour()
     {
-        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) MoveRobot();
         else
         {
             Stop();
@@ -164,6 +168,9 @@ public class NPCBehaviour : MonoBehaviour
 
     private void Move()
     {
+        float x = 0;
+        if (grunt || twin) x = 0.3f;
+        else if (biggrunt) x = 0.45f;
         //deplacement vers le joueur, le sprite flip sur X en fonction de la direction du mouvement
         _direction2Player = _playerTransform.position - transform.position;
         _animator.SetFloat("DirX", _direction2Player.x);
@@ -172,12 +179,35 @@ public class NPCBehaviour : MonoBehaviour
         if (_direction2Player.x > 0)
         {
             GetComponentInChildren<SpriteRenderer>().flipX = false;
-            if (_offset.x<0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(0.3f, _offset.y);
+            if (_offset.x<0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(x, _offset.y);
         }
         else if (_direction2Player.x < 0)
         {
             GetComponentInChildren<SpriteRenderer>().flipX = true;
-            if (_offset.x > 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(-0.3f, _offset.y);
+            if (_offset.x > 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(-x, _offset.y);
+        }
+        _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
+    }
+
+    private void MoveRobot()
+    {
+        //deplacement vers le joueur, le sprite flip sur X en fonction de la direction du mouvement
+        _direction2Player = _playerTransform.position - transform.position;
+        _animator.SetFloat("DirX", _direction2Player.x);
+        _animator.SetBool("Idle", false);
+        foreach (var item in _robotColliders)
+        {
+            Vector2 _offset = item.offset;
+            if (_direction2Player.x > 0)
+            {
+                GetComponentInChildren<SpriteRenderer>().flipX = false;
+                if (_offset.x < 0) item.offset = new Vector2(1.5f, _offset.y);
+            }
+            else if (_direction2Player.x < 0)
+            {
+                GetComponentInChildren<SpriteRenderer>().flipX = true;
+                if (_offset.x > 0) item.offset = new Vector2(-1.5f, _offset.y);
+            }
         }
         _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
     }

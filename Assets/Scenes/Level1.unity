@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a748f2098f08134cbeed56fa07e220f, type: 2}
   m_sharedMaterial: {fileID: 1471867990357555713, guid: 8a748f2098f08134cbeed56fa07e220f, type: 2}
@@ -4196,11 +4196,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1455038653420024615, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}
       propertyPath: _twinQt
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1455038653420024615, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}
       propertyPath: _gruntQt
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455038653420024615, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}
+      propertyPath: _robotQt
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1455038653420024615, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}
       propertyPath: _bigGruntQT
