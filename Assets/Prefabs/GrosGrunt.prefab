@@ -299,9 +299,44 @@ MonoBehaviour:
   _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
   _prefabVynil: {fileID: 6660595527757674785, guid: ea7f6f6c2dee52642b77eb3dde8c1a16, type: 3}
   _prefabPoofingFX: {fileID: 8506768773289262660, guid: 6a7a8b71d5abb4940b92d675de6ee473, type: 3}
+  _prefabPopingFX: {fileID: 5903194292392318439, guid: d0c7aad565e84ba40b27f818355f7278, type: 3}
   _playerMana: {fileID: 11400000, guid: 407351e0d9afa464f8277097d39dfef5, type: 2}
   _manaGainValue: 10
   grunt: 0
   biggrunt: 1
   twin: 0
   robotnik: 0
+  _kbDuration: 0.125
+  _kbCurveY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.59517205
+      outSlope: 0.59517205
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.16804104
+    - serializedVersion: 3
+      time: 0.6
+      value: 0.125
+      inSlope: -0.009407184
+      outSlope: -0.009407184
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.23504274
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.5876573
+      outSlope: -0.5876573
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18461537
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

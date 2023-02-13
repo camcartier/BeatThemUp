@@ -28,6 +28,8 @@ public class NPCBehaviour : MonoBehaviour
     private bool _flipX;
     [SerializeField] GameObject _prefabVynil;
     [SerializeField] GameObject _prefabPoofingFX;
+    [SerializeField] private GameObject _prefabPopingFX;
+    private bool _popingFXexist;
     private GameObject _gameManager;
     [SerializeField] public IntVariables _playerMana; 
     [SerializeField] private int _manaGainValue = 10;
@@ -42,14 +44,27 @@ public class NPCBehaviour : MonoBehaviour
 
     private CircleCollider2D[] _robotColliders;
 
+    #region KB Controls
+    private float _kbTimerCounter = 0;
+    [SerializeField] private float _kbDuration = 0.01f;
+    [SerializeField] AnimationCurve _kbCurveY;
+    float tempposY;
+    bool _hasPos, _isKB;
+    float tempTimer = 0f;
+    #endregion
+
     private void Awake()
     {
         _rb= GetComponent<Rigidbody2D>();
         _player = GameObject.FindGameObjectWithTag("PlayerBody");
         _playerTransform= _player.GetComponent<Transform>();
         _isActive= false;
+<<<<<<< Updated upstream
         _isDead= false;
         _jumpAtt = false;
+=======
+        _isDead = _isKB = false;
+>>>>>>> Stashed changes
         _lastHP = _hp;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
         pattern = 1;
@@ -69,11 +84,30 @@ public class NPCBehaviour : MonoBehaviour
 
         if (_lastHP != _hp && !_isDead)
         {
+            _animator.SetTrigger("GetsHit");
+
             _lastHP = _hp;
-            KnockBack();
+            if (!_hasPos)
+            {
+                tempposY = transform.position.y;
+                _hasPos = true;
+                _isKB = true;
+
+                if (!_popingFXexist)
+                {
+                    Instantiate(_prefabPopingFX, new Vector3(transform.position.x, transform.position.y + 0.001f, transform.position.z), Quaternion.identity);
+                    _popingFXexist = true;
+                }
+            }
+
             if (_playerMana.value < 100) { _playerMana.value += _manaGainValue; } else { _playerMana.value = 100; }
 
             _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+        }
+
+        if (_isKB)
+        {
+            KnockBack();
         }
     }
 
@@ -388,8 +422,60 @@ public class NPCBehaviour : MonoBehaviour
 
     public void KnockBack()
     {
-        _animator.SetTrigger("GetsHit");
+        if (_kbTimerCounter < _kbDuration)
+        {
+            _kbTimerCounter += Time.deltaTime;
+            float y = _kbCurveY.Evaluate(_kbTimerCounter / _kbDuration);
+            transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x + 0.1f, _kbDuration), tempposY + 2 * y);
+
+        }
+        else
+        {
+            _kbTimerCounter = 0;
+            _isKB = false;
+            _hasPos = false;
+            _popingFXexist = false;
+        }
     }
 
 
+
+
+   /*
+        void DoJump3()
+    {
+        if (_jumpTimerCounter < _jumpDuration)
+        {
+            _jumpTimerCounter += Time.fixedDeltaTime;
+            float y = _jumpCurve.Evaluate(_jumpTimerCounter / _jumpDuration);
+            transform.position = new Vector2(transform.position.x, _jumpY + 1f * y);
+            if (_jumpTimerCounter > _jumpDuration * 0.75f) _animator.SetBool("Jumping", false);
+        }
+        else
+        {
+            _jumpTimerCounter = 0;
+            _isJumping = false;
+            _jumpyjump = false;
+            _animator.SetBool("Grounded", true);
+            if (!_landingFXexist)
+            {
+                Instantiate(_prefabLandingFX, transform.position, Quaternion.identity);
+                _landingFXexist = true;
+            }
+
+        }
+
+        _landingFXexist = false;
+        //verifier sii on est pas a la fin dusaut)
+        //demarrer timer -(0 au debut du saut)
+        //regarde la courbe en fonction du timer (evaluate parametrex temps )
+        //augmente le timer 
+
+        //
+    }*/
+
+
 }
+
+
+
