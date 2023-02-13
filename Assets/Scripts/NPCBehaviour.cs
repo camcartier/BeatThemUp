@@ -37,7 +37,7 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private float _jumpDuration = 1;
     [SerializeField] private float _jumpTimerCounter;
     [SerializeField] private float _jumpHeight;
-    private float _jumpY;
+    [SerializeField] private float _jumpY;
 
     private void Awake()
     {

@@ -53,10 +53,10 @@ MonoBehaviour:
   _attSpePower: 20
   _defPower: 0
   _moveSpeed: 60
-  _moveDistance: 0.6
+  _moveDistance: 0.5
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   _isActive: 1
-  _attackCD: 1
+  _attackCD: 1.5
   _onCombat: 0
   _animator: {fileID: 3225075993275541151}
   _nextAttack: 0
@@ -85,14 +85,14 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.66
       value: 1
-      inSlope: 0.020172654
-      outSlope: 0.020172654
+      inSlope: -0.04657385
+      outSlope: -0.04657385
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.09299898
+      outWeight: 0.1489259
     - serializedVersion: 3
-      time: 1.0015869
+      time: 1
       value: 0
       inSlope: -4.257323
       outSlope: -4.257323
@@ -106,6 +106,7 @@ MonoBehaviour:
   _jumpDuration: 1
   _jumpTimerCounter: 0
   _jumpHeight: 1
+  _jumpY: 0
 --- !u!70 &-1990351641083384127
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,7 +138,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

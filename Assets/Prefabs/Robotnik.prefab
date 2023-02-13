@@ -79,6 +79,7 @@ MonoBehaviour:
   _jumpDuration: 1
   _jumpTimerCounter: 0
   _jumpHeight: 0
+  _jumpY: 0
 --- !u!50 &4153227697517667016
 Rigidbody2D:
   serializedVersion: 4
@@ -94,7 +95,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
