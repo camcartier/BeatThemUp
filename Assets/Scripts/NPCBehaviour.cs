@@ -323,8 +323,8 @@ public class NPCBehaviour : MonoBehaviour
         }
         else
         {
-            Debug.Log("début smash");
-            Debug.Log(Time.timeSinceLevelLoad);
+            //Debug.Log("début smash");
+            //Debug.Log(Time.timeSinceLevelLoad);
             //attaque spéciale
             _animator.SetBool("AttackSpe", true);
             _nextAttack = Time.timeSinceLevelLoad + _attackCD;
@@ -496,24 +496,24 @@ public class NPCBehaviour : MonoBehaviour
     IEnumerator SmashAttack()
     {
         //première partie de l'animation de lever des mains
-        Debug.Log("début coroutine");
-        Debug.Log(Time.timeSinceLevelLoad);
-        yield return new WaitForSeconds(1);
-        Debug.Log("activation du smash");
-        Debug.Log(Time.timeSinceLevelLoad);
+        //Debug.Log("début coroutine");
+        //Debug.Log(Time.timeSinceLevelLoad);
+        yield return new WaitForSeconds(1.5f);
+        //Debug.Log("activation du smash");
+        //Debug.Log(Time.timeSinceLevelLoad);
         _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         //deuxième partie de l'animation
         _animator.SetBool("Smash", true);
-        yield return new WaitForSeconds(1);
-        Debug.Log("dégâts du smash");
-        Debug.Log(Time.timeSinceLevelLoad);
+        yield return new WaitForSeconds(0.5f);
+        //Debug.Log("dégâts du smash");
+        //Debug.Log(Time.timeSinceLevelLoad);
         //check si le joueur est dans la zone de dégâts pour application des dégâts
         if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
         _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         _animator.SetBool("Smash", false);
-        Debug.Log("fin du smash");
-        Debug.Log(Time.timeSinceLevelLoad);
-        StartCoroutine(AttCD());
+        _animator.SetBool("AttackSpe", false);
+        //Debug.Log("fin du smash");
+        //Debug.Log(Time.timeSinceLevelLoad);
     }
 }
 
