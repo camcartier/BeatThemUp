@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 96f03767a8e354fe1afb66655f4d6064
+guid: d37f2dfbc850f3f46b6052213d4752c1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -141,12 +141,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 50_Assets_LEVEL_2_BG_0
+      name: 50_Assets_LEVEL_2_BG 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
+        width: 30
         height: 240
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -155,19 +155,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd6e4bcf7a91413479c99ac98ecbd80d
-      internalID: -1149655627
+      spriteID: c1e91db2dbf68194fae974da6423f468
+      internalID: -1302353332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 50_Assets_LEVEL_2_BG_1
+      name: 50_Assets_LEVEL_2_BG 1_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 30
         y: 0
-        width: 64
+        width: 30
         height: 240
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -176,19 +176,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91052edb39698be48bf5c1bf03f11e49
-      internalID: 1294862750
+      spriteID: 55e91c8a9163e4f43ae11af3c7e1302c
+      internalID: 1724808435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 50_Assets_LEVEL_2_BG_2
+      name: 50_Assets_LEVEL_2_BG 1_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 60
         y: 0
-        width: 64
+        width: 30
         height: 240
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -197,19 +197,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9879fc858a8f5b24c99d62ed7448a3cf
-      internalID: 1033405734
+      spriteID: adcfbf407fe019f40b7a1b03b32c85f2
+      internalID: -373053722
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 50_Assets_LEVEL_2_BG_3
+      name: 50_Assets_LEVEL_2_BG 1_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 90
         y: 0
-        width: 64
+        width: 30
         height: 240
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -218,19 +218,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acf9c5ee906559446a5242e3ba2d036a
-      internalID: 1849631486
+      spriteID: d8c8cbeb4079c5643a0fb603dabbb0ad
+      internalID: -2062850993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 50_Assets_LEVEL_2_BG_4
+      name: 50_Assets_LEVEL_2_BG 1_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 120
         y: 0
-        width: 64
+        width: 30
         height: 240
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -239,8 +239,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a7ebe98a0b528c47b4eaabd95688b47
-      internalID: -1574674015
+      spriteID: 0fdc2abf7a9fc7247abebdffff860054
+      internalID: 271205091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 50_Assets_LEVEL_2_BG 1_5
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 30
+        height: 240
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f567c171de61c2348912090f5d4f0062
+      internalID: 1832482035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 50_Assets_LEVEL_2_BG 1_6
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 30
+        height: 240
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1440f978c1797b41aa43f2a6d7364c8
+      internalID: -681148550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 50_Assets_LEVEL_2_BG 1_7
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 0
+        width: 30
+        height: 240
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 588d529739590a44f819a6a13ed6bc4b
+      internalID: -488427646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 50_Assets_LEVEL_2_BG 1_8
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 30
+        height: 240
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f3d950029682db40bc489d4f84f27a9
+      internalID: 1053969037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 50_Assets_LEVEL_2_BG 1_9
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 30
+        height: 240
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f5832a6090cfad429c54eed815f4160
+      internalID: 143396081
       vertices: []
       indices: 
       edges: []
@@ -256,11 +361,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      50_Assets_LEVEL_2_BG_3: 1849631486
-      50_Assets_LEVEL_2_BG_4: -1574674015
-      50_Assets_LEVEL_2_BG_0: -1149655627
-      50_Assets_LEVEL_2_BG_2: 1033405734
-      50_Assets_LEVEL_2_BG_1: 1294862750
+      50_Assets_LEVEL_2_BG 1_0: -1302353332
+      50_Assets_LEVEL_2_BG 1_5: 1832482035
+      50_Assets_LEVEL_2_BG 1_1: 1724808435
+      50_Assets_LEVEL_2_BG 1_2: -373053722
+      50_Assets_LEVEL_2_BG 1_3: -2062850993
+      50_Assets_LEVEL_2_BG 1_7: -488427646
+      50_Assets_LEVEL_2_BG 1_6: -681148550
+      50_Assets_LEVEL_2_BG 1_8: 1053969037
+      50_Assets_LEVEL_2_BG 1_4: 271205091
+      50_Assets_LEVEL_2_BG 1_9: 143396081
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

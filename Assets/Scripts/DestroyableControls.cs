@@ -58,6 +58,7 @@ public class DestroyableControls : MonoBehaviour
 
         if (_destroyableHP <= 0 && gameObject.tag != "StreetLamp")
         {
+            SpawnLoot();
             DestroyDestroyable();
         }
     }
@@ -70,18 +71,6 @@ public class DestroyableControls : MonoBehaviour
             Debug.Log("canbedamage");
             _animator.SetBool("punched", true);
             _destroyableHP -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
-
-
-            /*
-            if (_canTakeDamage)
-            {
-                _canTakeDamage = false;
-                Debug.Log("canbedamage");
-                _animator.SetBool("punched", true);
-                _destroyableHP -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
-            }*/
-
-
 
             if (gameObject.tag == "StreetLamp")
             {
@@ -108,7 +97,9 @@ public class DestroyableControls : MonoBehaviour
 
     void SpawnLoot()
     {
-        Instantiate(cassette, new Vector2(transform.position.x + 0.5f, transform.position.y), Quaternion.identity);
+        float randomNumberX = Random.Range(0.1f, 0.7f);
+        float randomNumberY = Random.Range(-0.5f, 0.5f);
+        Instantiate(cassette, new Vector2(transform.position.x + randomNumberX, transform.position.y + randomNumberY), Quaternion.identity);
     }
 
 }
