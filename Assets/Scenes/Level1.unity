@@ -4273,11 +4273,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1455038653420024615, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}
       propertyPath: _twinQt
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1455038653420024615, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}
       propertyPath: _gruntQt
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1455038653420024615, guid: 5e75b066b688ed54186b2066a4ca7f40, type: 3}
       propertyPath: _robotQt
