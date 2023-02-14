@@ -59,12 +59,9 @@ public class NPCBehaviour : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("PlayerBody");
         _playerTransform= _player.GetComponent<Transform>();
         _isActive= false;
-<<<<<<< Updated upstream
-        _isDead= false;
-        _jumpAtt = false;
-=======
         _isDead = _isKB = false;
->>>>>>> Stashed changes
+        _jumpAtt = false;
+
         _lastHP = _hp;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
         pattern = 1;
