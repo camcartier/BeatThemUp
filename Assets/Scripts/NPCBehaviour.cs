@@ -11,7 +11,7 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     private Rigidbody2D _rb; //npc RB2D
     private GameObject _player;
-    private Vector2 _direction2Player; //vector2 to have the direction towards the player
+    private Vector2 _direction2Player, _direction2Target; //vector2 to have the direction towards the player
     private Transform _playerTransform;
     private float _distance;
     [SerializeField] private float _moveDistance;
@@ -43,8 +43,9 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private float _jumpY;
 
     private CircleCollider2D[] _robotColliders;
-    private Vector2 _targetPos;
-    private bool _toTarget;
+    [SerializeField] private Vector2 _targetPos;
+    private Vector2 _previousPlayerPos;
+    [SerializeField] private bool _toTarget;
 
     #region KB Controls
     private float _kbTimerCounter = 0;
@@ -52,7 +53,6 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] AnimationCurve _kbCurveY;
     float tempposY;
     bool _hasPos, _isKB;
-    float tempTimer = 0f;
     #endregion
 
     private void Awake()
@@ -143,9 +143,12 @@ public class NPCBehaviour : MonoBehaviour
     //NPC behaviour method
     private void GruntBehaviour()
     {
-        //check si la distance entre l'ennemi et le joueur est suffisante pour le bouger ou le stopper
-
-        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        if (_playerTransform.position.x != _previousPlayerPos.x || _playerTransform.position.y != _previousPlayerPos.y) _toTarget = false;
+        if (!_toTarget)
+        {
+            CheckPlayerPos();
+        }
+        if (Vector2.Distance(transform.position, _targetPos) > 0.05f) Move();
         else 
         { 
             Stop(); 
@@ -159,16 +162,11 @@ public class NPCBehaviour : MonoBehaviour
 
     private void BigBehaviour()
     {
+        //si le joueur a bougé, changer l'état de _totarget
+        if (_playerTransform.position.x != _previousPlayerPos.x || _playerTransform.position.y != _previousPlayerPos.y) _toTarget = false;
         if (!_toTarget)
         {
-            if (_playerTransform.position.x > transform.position.x)
-            {
-                _targetPos = new Vector2(_playerTransform.position.x - _moveDistance, _playerTransform.position.y);
-            }
-            else
-            {
-                _targetPos = new Vector2 (_playerTransform.position.x + _moveDistance, _playerTransform.position.y);
-            }
+            CheckPlayerPos();
         }
         //if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
         if (Vector2.Distance(transform.position, _targetPos) > 0.05f) Move();
@@ -184,8 +182,13 @@ public class NPCBehaviour : MonoBehaviour
 
     private void TwinBehaviour()
     {
+        if (_playerTransform.position.x != _previousPlayerPos.x || _playerTransform.position.y != _previousPlayerPos.y) _toTarget = false;
+        if (!_toTarget)
+        {
+            CheckPlayerPos();
+        }
         if (_jumpAtt) { JumpAttack(); }
-        else if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        else if (Vector2.Distance(transform.position, _targetPos) > 0.05f) Move();
         else
         {
             Stop();
@@ -198,7 +201,13 @@ public class NPCBehaviour : MonoBehaviour
 
     private void RobotBehaviour()
     {
-        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) MoveRobot();
+        if (_playerTransform.position.x != _previousPlayerPos.x || _playerTransform.position.y != _previousPlayerPos.y) _toTarget = false;
+        if (!_toTarget)
+        {
+            CheckPlayerPos();
+        }
+        //if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        if (Vector2.Distance(transform.position, _targetPos) > 0.05f) MoveRobot();
         else
         {
             Stop();
@@ -217,6 +226,7 @@ public class NPCBehaviour : MonoBehaviour
         else if (biggrunt) x = 0.45f;
         //deplacement vers le joueur, le sprite flip sur X en fonction de la direction du mouvement
         _direction2Player = _playerTransform.position - transform.position;
+        _direction2Target = new Vector2(_targetPos.x - transform.position.x, _targetPos.y - transform.position.y);
         _animator.SetFloat("DirX", _direction2Player.x);
         _animator.SetBool("Idle", false);
         Vector2 _offset = GetComponentInChildren<CircleCollider2D>().offset;
@@ -230,13 +240,14 @@ public class NPCBehaviour : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().flipX = true;
             if (_offset.x > 0) GetComponentInChildren<CircleCollider2D>().offset = new Vector2(-x, _offset.y);
         }
-        _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
+        _rb.velocity = _direction2Target.normalized * _moveSpeed * Time.fixedDeltaTime;
     }
 
     private void MoveRobot()
     {
         //deplacement vers le joueur, le sprite flip sur X en fonction de la direction du mouvement
         _direction2Player = _playerTransform.position - transform.position;
+        _direction2Target = new Vector2(_targetPos.x - transform.position.x, _targetPos.y - transform.position.y);
         _animator.SetFloat("DirX", _direction2Player.x);
         _animator.SetBool("Idle", false);
         foreach (var item in _robotColliders)
@@ -253,7 +264,7 @@ public class NPCBehaviour : MonoBehaviour
                 if (_offset.x < 0) item.offset = new Vector2(-1.5f, _offset.y);
             }
         }
-        _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
+        _rb.velocity = _direction2Target.normalized * _moveSpeed * Time.fixedDeltaTime;
     }
 
     private void MoveAway()
@@ -452,39 +463,54 @@ public class NPCBehaviour : MonoBehaviour
 
 
 
-   /*
-        void DoJump3()
+    /*
+         void DoJump3()
+     {
+         if (_jumpTimerCounter < _jumpDuration)
+         {
+             _jumpTimerCounter += Time.fixedDeltaTime;
+             float y = _jumpCurve.Evaluate(_jumpTimerCounter / _jumpDuration);
+             transform.position = new Vector2(transform.position.x, _jumpY + 1f * y);
+             if (_jumpTimerCounter > _jumpDuration * 0.75f) _animator.SetBool("Jumping", false);
+         }
+         else
+         {
+             _jumpTimerCounter = 0;
+             _isJumping = false;
+             _jumpyjump = false;
+             _animator.SetBool("Grounded", true);
+             if (!_landingFXexist)
+             {
+                 Instantiate(_prefabLandingFX, transform.position, Quaternion.identity);
+                 _landingFXexist = true;
+             }
+
+         }
+
+         _landingFXexist = false;
+         //verifier sii on est pas a la fin dusaut)
+         //demarrer timer -(0 au debut du saut)
+         //regarde la courbe en fonction du timer (evaluate parametrex temps )
+         //augmente le timer 
+
+         //
+     }*/
+
+    private void CheckPlayerPos()
     {
-        if (_jumpTimerCounter < _jumpDuration)
+        if (transform.position.x < _playerTransform.position.x)
         {
-            _jumpTimerCounter += Time.fixedDeltaTime;
-            float y = _jumpCurve.Evaluate(_jumpTimerCounter / _jumpDuration);
-            transform.position = new Vector2(transform.position.x, _jumpY + 1f * y);
-            if (_jumpTimerCounter > _jumpDuration * 0.75f) _animator.SetBool("Jumping", false);
+            _targetPos = new Vector2(_playerTransform.position.x - _moveDistance, _playerTransform.position.y);
+            _toTarget = true;
+            _previousPlayerPos = _playerTransform.position;
         }
         else
         {
-            _jumpTimerCounter = 0;
-            _isJumping = false;
-            _jumpyjump = false;
-            _animator.SetBool("Grounded", true);
-            if (!_landingFXexist)
-            {
-                Instantiate(_prefabLandingFX, transform.position, Quaternion.identity);
-                _landingFXexist = true;
-            }
-
+            _targetPos = new Vector2(_playerTransform.position.x + _moveDistance, _playerTransform.position.y);
+            _toTarget = true;
+            _previousPlayerPos = _playerTransform.position;
         }
-
-        _landingFXexist = false;
-        //verifier sii on est pas a la fin dusaut)
-        //demarrer timer -(0 au debut du saut)
-        //regarde la courbe en fonction du timer (evaluate parametrex temps )
-        //augmente le timer 
-
-        //
-    }*/
-
+    }
 
 }
 

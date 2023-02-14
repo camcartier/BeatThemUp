@@ -299,6 +299,7 @@ MonoBehaviour:
   _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
   _prefabVynil: {fileID: 6660595527757674785, guid: ea7f6f6c2dee52642b77eb3dde8c1a16, type: 3}
   _prefabPoofingFX: {fileID: 8506768773289262660, guid: 6a7a8b71d5abb4940b92d675de6ee473, type: 3}
+  _prefabPopingFX: {fileID: 0}
   _playerMana: {fileID: 11400000, guid: 407351e0d9afa464f8277097d39dfef5, type: 2}
   _manaGainValue: 10
   grunt: 0
@@ -315,3 +316,12 @@ MonoBehaviour:
   _jumpTimerCounter: 0
   _jumpHeight: 0
   _jumpY: 0
+  _targetPos: {x: 0, y: 0}
+  _toTarget: 0
+  _kbDuration: 0.01
+  _kbCurveY:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
