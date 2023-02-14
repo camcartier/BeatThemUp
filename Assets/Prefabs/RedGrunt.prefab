@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1207703484, guid: 0d692aecaa6064208a726100301d2d47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 40
-  _attPower: 10
+  _attPower: 5
   _attSpePower: 0
   _defPower: 0
   _moveSpeed: 40
@@ -231,6 +231,9 @@ MonoBehaviour:
   _jumpDuration: 1
   _jumpTimerCounter: 0
   _jumpHeight: 0
+  _jumpY: 0
+  _targetPos: {x: 0, y: 0}
+  _toTarget: 0
   _kbDuration: 0.2
   _kbCurveY:
     serializedVersion: 2
@@ -265,7 +268,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-
 --- !u!50 &-6084313575471613132
 Rigidbody2D:
   serializedVersion: 4

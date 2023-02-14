@@ -95,7 +95,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1628986866, guid: 78aebef6eecc1428780ef15d01bbda76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -299,7 +299,7 @@ MonoBehaviour:
   _currentActiveGrunt: {fileID: 11400000, guid: 2b26bac79632fa84db910176e82e709a, type: 2}
   _prefabVynil: {fileID: 6660595527757674785, guid: ea7f6f6c2dee52642b77eb3dde8c1a16, type: 3}
   _prefabPoofingFX: {fileID: 8506768773289262660, guid: 6a7a8b71d5abb4940b92d675de6ee473, type: 3}
-  _prefabPopingFX: {fileID: 0}
+  _prefabPopingFX: {fileID: 5903194292392318439, guid: d0c7aad565e84ba40b27f818355f7278, type: 3}
   _playerMana: {fileID: 11400000, guid: 407351e0d9afa464f8277097d39dfef5, type: 2}
   _manaGainValue: 10
   grunt: 0
