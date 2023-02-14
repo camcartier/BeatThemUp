@@ -184,7 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyableMaxHP: 20
-  _destroyableHP: 0
+  _destroyableHP: 20
+  cassette: {fileID: 2705707444421604513, guid: 3109e5750465ce041be8ec2d4ebc16ed, type: 3}
 --- !u!70 &5594280302645328829
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

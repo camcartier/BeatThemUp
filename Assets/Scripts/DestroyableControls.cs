@@ -5,19 +5,26 @@ using UnityEngine;
 public class DestroyableControls : MonoBehaviour
 {
 
-    [SerializeField] private int _destroyableMaxHP = 20;
+    [SerializeField] private int _destroyableMaxHP = 40;
     [SerializeField] public int _destroyableHP;
+    private int _currentHP;
     private GameObject _player;
     private Animator _animator;
-    //[SerializeField] GameObject cassette;
+    [SerializeField] GameObject cassette;
     //[SerializeField] GameObject poofingFX;
     private bool _canTakeDamage = true;
+
+    private float timer;
+    private float timercounter;
 
     private void Awake()
     {
         _destroyableHP = _destroyableMaxHP;
+        _currentHP = _destroyableHP;
         _player = GameObject.Find("Player");
         _animator = GetComponentInChildren<Animator>();
+        timercounter = 0;
+        timer = 20f * Time.deltaTime;
     }
 
     // Start is called before the first frame update
@@ -34,6 +41,21 @@ public class DestroyableControls : MonoBehaviour
             _animator.SetBool("punched", true);
         }
 
+        if(!_canTakeDamage)
+        {
+            if (timercounter < timer)
+            {
+                timercounter +=Time.deltaTime;
+            }
+            else
+            {
+                timercounter = 0;
+                SpawnLoot();
+                _canTakeDamage = true;
+            }
+        }
+
+
         if (_destroyableHP <= 0 && gameObject.tag != "StreetLamp")
         {
             DestroyDestroyable();
@@ -44,12 +66,24 @@ public class DestroyableControls : MonoBehaviour
     {
         if (collision.CompareTag("PlayerFist") && _player.GetComponent<PlayerMovement>()._isAttacking == true && _canTakeDamage)
         {
-            Debug.Log("aaaa");
             _canTakeDamage = false;
+            Debug.Log("canbedamage");
             _animator.SetBool("punched", true);
             _destroyableHP -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
 
-            if(gameObject.tag == "StreetLamp")
+
+            /*
+            if (_canTakeDamage)
+            {
+                _canTakeDamage = false;
+                Debug.Log("canbedamage");
+                _animator.SetBool("punched", true);
+                _destroyableHP -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
+            }*/
+
+
+
+            if (gameObject.tag == "StreetLamp")
             {
                 Debug.Log("street");
                 gameObject.GetComponentInChildren<BoxCollider2D>().enabled = false;
@@ -70,6 +104,11 @@ public class DestroyableControls : MonoBehaviour
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
         Destroy(this.gameObject);
 
+    }
+
+    void SpawnLoot()
+    {
+        Instantiate(cassette, new Vector2(transform.position.x + 0.5f, transform.position.y), Quaternion.identity);
     }
 
 }

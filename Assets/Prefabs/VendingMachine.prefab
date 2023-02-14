@@ -141,8 +141,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4309336841033729670}
-  - component: {fileID: 1583300260749510759}
   - component: {fileID: 6529082319370833580}
+  - component: {fileID: 1612193624731509013}
   m_Layer: 0
   m_Name: VendingMachine
   m_TagString: Destroyable
@@ -166,32 +166,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1583300260749510759
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325901260861113871}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0023257732, y: 0.6163447}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7969016, y: 1.2186515}
-  m_EdgeRadius: 0
 --- !u!114 &6529082319370833580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +178,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7161b4e60663ca478ba7fa0d70ce5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _vmMaxHP: 40
-  _vmHP: 0
   healthCan: {fileID: 8071913040165210301, guid: e17cce426d024ea4698ecf1c8363f5d4, type: 3}
-  poofingFXBig: {fileID: 388204797748856868, guid: a7a2674d0a2a595418832d2d56d4b763, type: 3}
+--- !u!70 &1612193624731509013
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7325901260861113871}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0034965277, y: 0.6319541}
+  m_Size: {x: 1.040261, y: 1.4536214}
+  m_Direction: 0
