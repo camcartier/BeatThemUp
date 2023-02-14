@@ -48,7 +48,7 @@ public class DestroyableControls : MonoBehaviour
             _canTakeDamage = false;
             _animator.SetBool("punched", true);
             _destroyableHP -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
-            StartCoroutine(WaitForDestroy());
+
         }
     }
 
@@ -67,11 +67,4 @@ public class DestroyableControls : MonoBehaviour
 
     }
 
-    IEnumerator WaitForDestroy()
-    {
-        yield return new WaitForSeconds(1f);
-        gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-
-        Destroy(this.gameObject);
-    }
 }
