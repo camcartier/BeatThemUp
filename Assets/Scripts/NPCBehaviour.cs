@@ -93,7 +93,7 @@ public class NPCBehaviour : MonoBehaviour
 
                 if (!_popingFXexist)
                 {
-                    Instantiate(_prefabPopingFX, new Vector3(transform.position.x, transform.position.y + 0.001f, transform.position.z), Quaternion.identity);
+                    Instantiate(_prefabPopingFX, new Vector3(transform.position.x, transform.position.y + 0.4f, transform.position.z), Quaternion.identity);
                     _popingFXexist = true;
                 }
             }
@@ -404,7 +404,7 @@ public class NPCBehaviour : MonoBehaviour
         _enemyCount.value--;
         _currentActiveGrunt.value--;
         _gameManager.GetComponent<GameManager>()._activeGruntList.Remove(gameObject);
-        Instantiate(_prefabPoofingFX, transform.position , Quaternion.identity);
+        Instantiate(_prefabPoofingFX, transform.position, Quaternion.identity);
         Instantiate(_prefabVynil, transform.position, Quaternion.identity);
         Destroy(gameObject);
         yield return null;
@@ -448,7 +448,14 @@ public class NPCBehaviour : MonoBehaviour
         {
             _kbTimerCounter += Time.deltaTime;
             float y = _kbCurveY.Evaluate(_kbTimerCounter / _kbDuration);
-            transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x + 0.1f, _kbDuration), tempposY + 2 * y);
+            if(transform.position.x -_player.transform.position.x > 0f)
+            {
+                transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x + 0.1f, _kbDuration), tempposY + 2 * y);
+            }
+            else
+            {
+                transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x - 0.1f, _kbDuration), tempposY + 2 * y);
+            }
 
         }
         else
@@ -461,40 +468,6 @@ public class NPCBehaviour : MonoBehaviour
     }
 
 
-
-
-    /*
-         void DoJump3()
-     {
-         if (_jumpTimerCounter < _jumpDuration)
-         {
-             _jumpTimerCounter += Time.fixedDeltaTime;
-             float y = _jumpCurve.Evaluate(_jumpTimerCounter / _jumpDuration);
-             transform.position = new Vector2(transform.position.x, _jumpY + 1f * y);
-             if (_jumpTimerCounter > _jumpDuration * 0.75f) _animator.SetBool("Jumping", false);
-         }
-         else
-         {
-             _jumpTimerCounter = 0;
-             _isJumping = false;
-             _jumpyjump = false;
-             _animator.SetBool("Grounded", true);
-             if (!_landingFXexist)
-             {
-                 Instantiate(_prefabLandingFX, transform.position, Quaternion.identity);
-                 _landingFXexist = true;
-             }
-
-         }
-
-         _landingFXexist = false;
-         //verifier sii on est pas a la fin dusaut)
-         //demarrer timer -(0 au debut du saut)
-         //regarde la courbe en fonction du timer (evaluate parametrex temps )
-         //augmente le timer 
-
-         //
-     }*/
 
     private void CheckPlayerPos()
     {
