@@ -169,7 +169,7 @@ public class NPCBehaviour : MonoBehaviour
             CheckPlayerPos();
         }
         //if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
-        if (Vector2.Distance(transform.position, _targetPos) > 0.05f) Move();
+        if (Vector2.Distance(transform.position, _targetPos) > 0.05f && _animator.GetBool("AttackSpe")==false) Move();
         else
         {
             Stop();
@@ -310,8 +310,10 @@ public class NPCBehaviour : MonoBehaviour
     private void BigCombat()
     {
         //alterne attaque normale et attaque spéciale
-        if (pattern % 2 ==0)
+        if (pattern % 2 ==1)
         {
+            Debug.Log("bourrepif");
+            Debug.Log(Time.timeSinceLevelLoad);
             //attaque normale
             _animator.SetBool("Attack", true);
             //condition pour savoir si on est en range de toucher (le collider d'attaque qui touche le body du player)
@@ -319,10 +321,13 @@ public class NPCBehaviour : MonoBehaviour
             _nextAttack = Time.timeSinceLevelLoad + _attackCD;
             StartCoroutine(AttCD());
         }
-        else if (pattern % 2==1)
+        else
         {
+            Debug.Log("début smash");
+            Debug.Log(Time.timeSinceLevelLoad);
             //attaque spéciale
             _animator.SetBool("AttackSpe", true);
+            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
             //if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
             //_nextAttack = Time.timeSinceLevelLoad + _attackCD;
             //StartCoroutine(AttCD());
@@ -388,6 +393,7 @@ public class NPCBehaviour : MonoBehaviour
     private void DealDmgSpe()
     {
         _playerHealth.value -= _attSpePower;
+        Debug.Log("Bim dégâts appliqué");
     }
 
     //l'ennemi va clignoter un peu avant de mourrir
@@ -490,15 +496,23 @@ public class NPCBehaviour : MonoBehaviour
     IEnumerator SmashAttack()
     {
         //première partie de l'animation de lever des mains
-        yield return new WaitForSeconds(0.5f);
+        Debug.Log("début coroutine");
+        Debug.Log(Time.timeSinceLevelLoad);
+        yield return new WaitForSeconds(1);
+        Debug.Log("activation du smash");
+        Debug.Log(Time.timeSinceLevelLoad);
         _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         //deuxième partie de l'animation
         _animator.SetBool("Smash", true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1);
+        Debug.Log("dégâts du smash");
+        Debug.Log(Time.timeSinceLevelLoad);
         //check si le joueur est dans la zone de dégâts pour application des dégâts
         if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
         _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         _animator.SetBool("Smash", false);
+        Debug.Log("fin du smash");
+        Debug.Log(Time.timeSinceLevelLoad);
         StartCoroutine(AttCD());
     }
 }
