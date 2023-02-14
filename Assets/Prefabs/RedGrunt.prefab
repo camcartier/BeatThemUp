@@ -222,7 +222,6 @@ MonoBehaviour:
   biggrunt: 0
   twin: 0
   robotnik: 0
-<<<<<<< Updated upstream
   _jumpCurve:
     serializedVersion: 2
     m_Curve: []
@@ -232,7 +231,6 @@ MonoBehaviour:
   _jumpDuration: 1
   _jumpTimerCounter: 0
   _jumpHeight: 0
-=======
   _kbDuration: 0.2
   _kbCurveY:
     serializedVersion: 2
@@ -267,7 +265,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
->>>>>>> Stashed changes
+
 --- !u!50 &-6084313575471613132
 Rigidbody2D:
   serializedVersion: 4
