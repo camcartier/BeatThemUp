@@ -62,9 +62,6 @@ public class NPCBehaviour : MonoBehaviour
         _playerTransform= _player.GetComponent<Transform>();
         _isActive= false;
         _isDead = _isKB = false;
-        _jumpAtt = false;
-
-        _isDead= false;
         _jumpAtt = _toTarget = false;
         _lastHP = _hp;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
