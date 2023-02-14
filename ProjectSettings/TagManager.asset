@@ -11,6 +11,7 @@ TagManager:
   - Loot
   - Throwable
   - GameManager
+  - Destroyable
   layers:
   - Default
   - TransparentFX

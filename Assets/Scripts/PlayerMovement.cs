@@ -87,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _jumpingFXexist;
     [SerializeField] private GameObject _prefabLandingFX;
     private bool _landingFXexist;
+
     #endregion
 
 
@@ -233,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
             _movespeed = 0f;
             _runspeed = 0f;
             _animator.SetBool("Attacking", true);
-            
+
             if (!_playerpunch.isPlaying)
             {
                 _playerpunch.Play();
@@ -243,6 +244,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 _animator.SetTrigger("Throws");
             }
+
+            
         }
         else
         {

@@ -14,7 +14,7 @@ public class DestroyFX : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _duration = 3f;
+        _duration = 2f;
     }
 
 

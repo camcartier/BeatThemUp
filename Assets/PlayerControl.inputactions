@@ -280,6 +280,17 @@
                     "action": "AttackSpe",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48da5749-1449-4a24-92d3-edd16c305631",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackSpe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
