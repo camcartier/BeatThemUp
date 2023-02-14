@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6311678214023146546}
   - component: {fileID: 9058090398268562932}
+  - component: {fileID: 1919004032367295691}
   m_Layer: 0
   m_Name: WaterMachine
   m_TagString: Destroyable
@@ -47,6 +48,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyableMaxHP: 20
   _destroyableHP: 0
+--- !u!70 &1919004032367295691
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447420713423430188}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.40026852}
+  m_Size: {x: 0.5, y: 0.9499665}
+  m_Direction: 0
 --- !u!1 &867345093637355862
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +75,7 @@ GameObject:
   - component: {fileID: 2106957021366915317}
   - component: {fileID: 2897845971315396567}
   - component: {fileID: 66804537224607873}
+  - component: {fileID: 2828128465709697159}
   m_Layer: 0
   m_Name: WMGraphics
   m_TagString: Untagged
@@ -152,3 +170,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!61 &2828128465709697159
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867345093637355862}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.010006711, y: 0.46243414}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.5, y: 0.8125}
+    newSize: {x: 1.5, y: 0.8125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.34956363, y: 0.6955479}
+  m_EdgeRadius: 0

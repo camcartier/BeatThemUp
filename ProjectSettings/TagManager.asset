@@ -12,6 +12,7 @@ TagManager:
   - Throwable
   - GameManager
   - Destroyable
+  - StreetLamp
   layers:
   - Default
   - TransparentFX

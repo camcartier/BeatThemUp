@@ -34,7 +34,7 @@ public class DestroyableControls : MonoBehaviour
             _animator.SetBool("punched", true);
         }
 
-        if (_destroyableHP <= 0)
+        if (_destroyableHP <= 0 && gameObject.tag != "StreetLamp")
         {
             DestroyDestroyable();
         }
@@ -49,6 +49,11 @@ public class DestroyableControls : MonoBehaviour
             _animator.SetBool("punched", true);
             _destroyableHP -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
 
+            if(gameObject.tag == "StreetLamp")
+            {
+                Debug.Log("street");
+                gameObject.GetComponentInChildren<BoxCollider2D>().enabled = false;
+            }
         }
     }
 
