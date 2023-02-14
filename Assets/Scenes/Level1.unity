@@ -4468,8 +4468,16 @@ PrefabInstance:
       value: popingVFX
       objectReference: {fileID: 0}
     - target: {fileID: 7457715855478847288, guid: d0c7aad565e84ba40b27f818355f7278, type: 3}
+      propertyPath: m_Size.x
+      value: 0.421875
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457715855478847288, guid: d0c7aad565e84ba40b27f818355f7278, type: 3}
+      propertyPath: m_Size.y
+      value: 0.4375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457715855478847288, guid: d0c7aad565e84ba40b27f818355f7278, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8929113362216546141, guid: d0c7aad565e84ba40b27f818355f7278, type: 3}
       propertyPath: m_RootOrder

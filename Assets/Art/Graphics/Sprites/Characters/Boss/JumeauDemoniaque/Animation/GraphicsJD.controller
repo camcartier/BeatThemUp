@@ -457,8 +457,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-<<<<<<< Updated upstream
-=======
   - m_ConditionMode: 1
     m_ConditionEvent: Attack
     m_EventTreshold: 0
@@ -484,7 +482,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
->>>>>>> Stashed changes
   - m_ConditionMode: 2
     m_ConditionEvent: Idle
     m_EventTreshold: 0
@@ -727,15 +724,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-<<<<<<< Updated upstream
   - m_Name: DirX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-=======
->>>>>>> Stashed changes
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1082,11 +1076,7 @@ AnimatorStateMachine:
     m_Position: {x: 570, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6286509169187407782}
-<<<<<<< Updated upstream
-    m_Position: {x: 290, y: -510, z: 0}
-=======
     m_Position: {x: 320, y: -200, z: 0}
->>>>>>> Stashed changes
   - serializedVersion: 1
     m_State: {fileID: -2721104416999173680}
     m_Position: {x: 920, y: 150, z: 0}
@@ -1240,12 +1230,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-<<<<<<< Updated upstream
-  - {fileID: -515632719359535271}
-=======
   - {fileID: -3144228407433196647}
   - {fileID: -4767201667055273650}
->>>>>>> Stashed changes
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
