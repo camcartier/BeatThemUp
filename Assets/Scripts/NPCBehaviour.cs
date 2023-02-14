@@ -319,13 +319,15 @@ public class NPCBehaviour : MonoBehaviour
             _nextAttack = Time.timeSinceLevelLoad + _attackCD;
             StartCoroutine(AttCD());
         }
-        if (pattern % 2==1)
+        else if (pattern % 2==1)
         {
             //attaque spéciale
             _animator.SetBool("AttackSpe", true);
             if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
             _nextAttack = Time.timeSinceLevelLoad + _attackCD;
             StartCoroutine(AttCD());
+            //coroutine pour l'attaque spé qui découpe l'action en 2
+            //StartCoroutine(SmashAttack());
         }
         pattern++;
 
@@ -485,6 +487,20 @@ public class NPCBehaviour : MonoBehaviour
         }
     }
 
+    IEnumerator SmashAttack()
+    {
+        //première partie de l'animation de lever des mains
+        yield return new WaitForSeconds(0.5f);
+        _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+        //deuxième partie de l'animation
+        _animator.SetBool("Smash", true);
+        yield return new WaitForSeconds(0.5f);
+        //check si le joueur est dans la zone de dégâts pour application des dégâts
+        if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
+        _nextAttack = Time.timeSinceLevelLoad + _attackCD;
+        _animator.SetBool("Smash", false);
+        StartCoroutine(AttCD());
+    }
 }
 
 
