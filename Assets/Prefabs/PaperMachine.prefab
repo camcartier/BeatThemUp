@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1397624848437859867}
   - component: {fileID: 8506320857145531177}
+  - component: {fileID: 6792610510477773569}
+  - component: {fileID: 9129418941932037561}
   m_Layer: 0
   m_Name: PMGraphics
   m_TagString: Untagged
@@ -84,6 +86,57 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &6792610510477773569
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80908209793377918}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.14}
+    oldSize: {x: 0.75, y: 0.75}
+    newSize: {x: 0.75, y: 0.75}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.24163723, y: 0.5585122}
+      - {x: -0.23723584, y: 0.1408189}
+      - {x: -0.13864435, y: 0.049929723}
+      - {x: 0.22601226, y: 0.045528322}
+      - {x: 0.23041368, y: 0.47444522}
+      - {x: 0.14590657, y: 0.5629136}
+--- !u!95 &9129418941932037561
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80908209793377918}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eeb491a4403cac444a7965a123e734fe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &8694189985490843637
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234903218066996093}
   - component: {fileID: 604130132862415116}
+  - component: {fileID: 5594280302645328829}
   m_Layer: 0
   m_Name: PaperMachine
   m_TagString: Destroyable
@@ -131,3 +185,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyableMaxHP: 20
   _destroyableHP: 0
+--- !u!70 &5594280302645328829
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8694189985490843637}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.004401386, y: 0.26574793}
+  m_Size: {x: 0.5880283, y: 0.7455166}
+  m_Direction: 0

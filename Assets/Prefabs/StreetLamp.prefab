@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1253328171642019360}
   - component: {fileID: 2477866803314288560}
-  - component: {fileID: 3777584197950480377}
+  - component: {fileID: 7221541252146111161}
   m_Layer: 0
   m_Name: StreetLamp
-  m_TagString: Destroyable
+  m_TagString: StreetLamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyableMaxHP: 20
   _destroyableHP: 0
---- !u!61 &3777584197950480377
-BoxCollider2D:
+--- !u!70 &7221541252146111161
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -61,19 +61,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.040702507, y: 0.99042666}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.33971563, y: 1.949724}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.031943917, y: 1.0062346}
+  m_Size: {x: 0.39352024, y: 1.990263}
+  m_Direction: 0
 --- !u!1 &6869704034629435666
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +78,7 @@ GameObject:
   - component: {fileID: 8664036743082869733}
   m_Layer: 0
   m_Name: SLGraphics
-  m_TagString: Untagged
+  m_TagString: StreetLamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

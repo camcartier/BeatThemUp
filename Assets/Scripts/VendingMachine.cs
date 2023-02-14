@@ -14,6 +14,7 @@ public class VendingMachine : MonoBehaviour
     {
         _vmHP = 40;
         _player = GameObject.Find("Player");
+        _animator = GetComponentInChildren<Animator>();   
     }
 
     // Start is called before the first frame update
@@ -33,8 +34,11 @@ public class VendingMachine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerFist"))
+        Debug.Log("collide");
+
+        if (collision.CompareTag("PlayerFist") && _player.GetComponent<PlayerMovement>()._isAttacking == true)
         {
+            Debug.Log("oui");
             _vmHP -= _player.GetComponent<PlayerMovement>().PlayerAttPower;
         }
 
