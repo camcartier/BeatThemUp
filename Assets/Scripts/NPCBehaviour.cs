@@ -41,6 +41,8 @@ public class NPCBehaviour : MonoBehaviour
     [SerializeField] private float _jumpY;
 
     private CircleCollider2D[] _robotColliders;
+    private Vector2 _targetPos;
+    private bool _toTarget;
 
     private void Awake()
     {
@@ -49,7 +51,7 @@ public class NPCBehaviour : MonoBehaviour
         _playerTransform= _player.GetComponent<Transform>();
         _isActive= false;
         _isDead= false;
-        _jumpAtt = false;
+        _jumpAtt = _toTarget = false;
         _lastHP = _hp;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
         pattern = 1;
@@ -127,7 +129,19 @@ public class NPCBehaviour : MonoBehaviour
 
     private void BigBehaviour()
     {
-        if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        if (!_toTarget)
+        {
+            if (_playerTransform.position.x > transform.position.x)
+            {
+                _targetPos = new Vector2(_playerTransform.position.x - _moveDistance, _playerTransform.position.y);
+            }
+            else
+            {
+                _targetPos = new Vector2 (_playerTransform.position.x + _moveDistance, _playerTransform.position.y);
+            }
+        }
+        //if (Vector2.Distance(transform.position, _playerTransform.position) > _moveDistance) Move();
+        if (Vector2.Distance(transform.position, _targetPos) > 0.05f) Move();
         else
         {
             Stop();
@@ -201,12 +215,12 @@ public class NPCBehaviour : MonoBehaviour
             if (_direction2Player.x > 0)
             {
                 GetComponentInChildren<SpriteRenderer>().flipX = false;
-                if (_offset.x < 0) item.offset = new Vector2(1.5f, _offset.y);
+                if (_offset.x > 0) item.offset = new Vector2(1.5f, _offset.y);
             }
             else if (_direction2Player.x < 0)
             {
                 GetComponentInChildren<SpriteRenderer>().flipX = true;
-                if (_offset.x > 0) item.offset = new Vector2(-1.5f, _offset.y);
+                if (_offset.x < 0) item.offset = new Vector2(-1.5f, _offset.y);
             }
         }
         _rb.velocity = _direction2Player.normalized * _moveSpeed * Time.fixedDeltaTime;
@@ -240,6 +254,7 @@ public class NPCBehaviour : MonoBehaviour
         //s'assurer que le NPC regarde le joueur (flip X une fois quand il move away)
         _animator.SetBool("Idle", true);
         _rb.velocity = UnityEngine.Vector2.zero;
+        _toTarget = false;
     }
 
     private void Combat()

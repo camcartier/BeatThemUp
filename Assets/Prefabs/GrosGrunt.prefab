@@ -288,7 +288,7 @@ MonoBehaviour:
   _attSpePower: 30
   _defPower: 0
   _moveSpeed: 30
-  _moveDistance: 0.6
+  _moveDistance: 0.7
   _playerHealth: {fileID: 11400000, guid: 5420c0297f893894280611072d66d7c2, type: 2}
   _isActive: 0
   _attackCD: 4
@@ -305,3 +305,13 @@ MonoBehaviour:
   biggrunt: 1
   twin: 0
   robotnik: 0
+  _jumpCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _jumpDuration: 1
+  _jumpTimerCounter: 0
+  _jumpHeight: 0
+  _jumpY: 0
