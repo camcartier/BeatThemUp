@@ -323,11 +323,11 @@ public class NPCBehaviour : MonoBehaviour
         {
             //attaque spéciale
             _animator.SetBool("AttackSpe", true);
-            if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
-            _nextAttack = Time.timeSinceLevelLoad + _attackCD;
-            StartCoroutine(AttCD());
+            //if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
+            //_nextAttack = Time.timeSinceLevelLoad + _attackCD;
+            //StartCoroutine(AttCD());
             //coroutine pour l'attaque spé qui découpe l'action en 2
-            //StartCoroutine(SmashAttack());
+            StartCoroutine(SmashAttack());
         }
         pattern++;
 
