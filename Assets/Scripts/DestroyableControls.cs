@@ -13,6 +13,7 @@ public class DestroyableControls : MonoBehaviour
     [SerializeField] GameObject cassette;
     //[SerializeField] GameObject poofingFX;
     private bool _canTakeDamage = true;
+    private bool _canInstantiate = true;
 
     private float timer;
     private float timercounter;
@@ -55,12 +56,17 @@ public class DestroyableControls : MonoBehaviour
             }
         }
 
-
-        if (_destroyableHP <= 0 && gameObject.tag != "StreetLamp")
+        /*
+        if (_destroyableHP <= 0 && _canInstantiate)
         {
             SpawnLoot();
+            _canInstantiate = false;
+        }*/
+        if (_destroyableHP <= 0 && gameObject.tag != "StreetLamp")
+        {
             DestroyDestroyable();
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -90,16 +96,65 @@ public class DestroyableControls : MonoBehaviour
 
     void DestroyDestroyable()
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
         Destroy(this.gameObject);
-
     }
 
+    /*
     void SpawnLoot()
     {
         float randomNumberX = Random.Range(0.1f, 0.7f);
         float randomNumberY = Random.Range(-0.5f, 0.5f);
         Instantiate(cassette, new Vector2(transform.position.x + randomNumberX, transform.position.y + randomNumberY), Quaternion.identity);
+    }*/
+
+    void SpawnLoot()
+    {
+        float randomNumberX = Random.Range(0.1f, 0.7f);
+        float randomNumberY = Random.Range(-0.5f, 0.5f);
+        if (transform.position.x - _player.transform.position.x > 0f)
+        {
+            Instantiate(cassette, new Vector2(transform.position.x + randomNumberX, transform.position.y + randomNumberY), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(cassette, new Vector2(transform.position.x - randomNumberX, transform.position.y - randomNumberY), Quaternion.identity);
+        }
     }
+            
+
+    #region test
+    /*
+    public float _kbTimerCounter;
+    public float _kbDuration;
+    [SerializeField] AnimationCurve _kbCurveY;
+    float tempposY;
+
+
+    public void KnockBack()
+    {
+        float randomNumberX = Random.Range(0.1f, 0.7f);
+        float randomNumberY = Random.Range(-0.5f, 0.5f);
+        if (_kbTimerCounter < _kbDuration)
+        {
+            _kbTimerCounter += Time.deltaTime;
+            float y = _kbCurveY.Evaluate(_kbTimerCounter / _kbDuration);
+            if (transform.position.x - _player.transform.position.x > 0f)
+            {
+                transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x + randomNumberX, _kbDuration), tempposY + 2 * y);
+            }
+            else
+            {
+                transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x - 0.05f, _kbDuration), tempposY + 2 * y);
+            }
+
+        }
+        else
+        {
+            _kbTimerCounter = 0;
+        }
+    }
+    */
+    #endregion
+
 
 }
