@@ -14,6 +14,7 @@ public class DestroyableControls : MonoBehaviour
     //[SerializeField] GameObject poofingFX;
     private bool _canTakeDamage = true;
     private bool _canInstantiate = true;
+    private bool _hasSpawned = false;
 
     private float timer;
     private float timercounter;
@@ -42,7 +43,7 @@ public class DestroyableControls : MonoBehaviour
             _animator.SetBool("punched", true);
         }
 
-        if(!_canTakeDamage)
+        if(!_canTakeDamage && _hasSpawned==false)
         {
             if (timercounter < timer)
             {
@@ -52,6 +53,7 @@ public class DestroyableControls : MonoBehaviour
             {
                 timercounter = 0;
                 SpawnLoot();
+                _hasSpawned = true;
                 _canTakeDamage = true;
             }
         }
