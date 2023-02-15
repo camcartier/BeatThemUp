@@ -146,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 _isDead = true;
                 Death();
+                _gameManager.GetComponent<GameManager>().GameOver();
                 //activer le menu gameover
             }
             else if (_lives > 0)

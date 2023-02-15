@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
         //faire un loadscene du gameover
     }
 
@@ -95,5 +95,10 @@ public class GameManager : MonoBehaviour
     public void LoadLvl1()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void Victory()
+    {
+        SceneManager.LoadScene(2);
     }
 }
