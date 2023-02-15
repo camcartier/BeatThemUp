@@ -87,4 +87,13 @@ public class GameManager : MonoBehaviour
         //faire un loadscene du gameover
     }
 
+    public void Quit()
+    {
+        Application.Quit();        
+    }
+
+    public void LoadLvl1()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
