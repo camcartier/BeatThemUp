@@ -15,17 +15,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _activeGruntAmount; //combien on autorise de grunt à être actif en même temps
     [SerializeField] private IntVariables _currentActiveGrunt; //quantité de grunts active à l'instant T
     [SerializeField] private IntVariables _scoreCounter;
+    private bool _init = false;
 
     private void Awake()
     {
-        _scoreCounter.value = 0;
+        if (!_init) _scoreCounter.value = 0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _playerHP.value = 100;
-        _playerMana.value = 0;
+        if (!_init)
+        {
+            _playerHP.value = 100;
+            _playerMana.value = 0;
+            _init= true;
+        }
         _enemyCount.value = 0;
         _wave.value = false;
         _inactiveGruntList= new List<GameObject>();
