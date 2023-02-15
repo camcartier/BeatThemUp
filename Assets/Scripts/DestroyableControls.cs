@@ -64,6 +64,7 @@ public class DestroyableControls : MonoBehaviour
         }*/
         if (_destroyableHP <= 0 && gameObject.tag != "StreetLamp")
         {
+            _canTakeDamage = false;
             DestroyDestroyable();
         }
 
