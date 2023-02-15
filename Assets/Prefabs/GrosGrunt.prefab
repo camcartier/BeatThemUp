@@ -318,10 +318,37 @@ MonoBehaviour:
   _jumpY: 0
   _targetPos: {x: 0, y: 0}
   _toTarget: 0
-  _kbDuration: 0.01
+  _kbDuration: 0.1
   _kbCurveY:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.60960805
+      outSlope: 0.60960805
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.08568443
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.16
+      inSlope: 0.017278373
+      outSlope: 0.017278373
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.5534787
+      outSlope: -0.5534787
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0815047
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

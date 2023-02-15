@@ -234,7 +234,7 @@ MonoBehaviour:
   _jumpY: 0
   _targetPos: {x: 0, y: 0}
   _toTarget: 0
-  _kbDuration: 0.2
+  _kbDuration: 0.15
   _kbCurveY:
     serializedVersion: 2
     m_Curve:

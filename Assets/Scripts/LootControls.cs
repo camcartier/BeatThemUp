@@ -50,7 +50,6 @@ public class LootControls : MonoBehaviour
         if (collision.CompareTag("PlayerBody"))
         {
             _score.value += _vynilScoreValue;
-            Debug.Log($"{_score.value}");
             Destroy(gameObject);
 
         }

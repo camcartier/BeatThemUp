@@ -42,7 +42,6 @@ public class Spawner : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision");
         if (collision.CompareTag("PlayerBody"))
         {
             Spawn(_gruntQt, _gruntPrefab);

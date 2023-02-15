@@ -458,11 +458,11 @@ public class NPCBehaviour : MonoBehaviour
             float y = _kbCurveY.Evaluate(_kbTimerCounter / _kbDuration);
             if(transform.position.x -_player.transform.position.x > 0f)
             {
-                transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x + 0.1f, _kbDuration), tempposY + 2 * y);
+                transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x + 0.05f, _kbDuration), tempposY + 2 * y);
             }
             else
             {
-                transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x - 0.1f, _kbDuration), tempposY + 2 * y);
+                transform.position = new Vector2(Mathf.Lerp(transform.position.x, transform.position.x - 0.05f, _kbDuration), tempposY + 2 * y);
             }
 
         }
@@ -508,7 +508,7 @@ public class NPCBehaviour : MonoBehaviour
         //Debug.Log("dégâts du smash");
         //Debug.Log(Time.timeSinceLevelLoad);
         //check si le joueur est dans la zone de dégâts pour application des dégâts
-        if (GetComponentInChildren<SmashDamage>()._isOnRange == true) DealDmgSpe();
+        if (GetComponentInChildren<SmashDamage>()._isOnRange == true && _isDead==false) DealDmgSpe();
         _nextAttack = Time.timeSinceLevelLoad + _attackCD;
         _animator.SetBool("Smash", false);
         _animator.SetBool("AttackSpe", false);
