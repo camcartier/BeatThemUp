@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLvl1()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void Victory()
