@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (!_init) _scoreCounter.value = 0;
-        _scoreCounter.value = 0;
         DontDestroyOnLoad(this.gameObject);
     }
 
