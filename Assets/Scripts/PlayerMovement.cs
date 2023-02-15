@@ -43,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AnimationCurve _jumpCurve;
     [SerializeField] private float _jumpHeight;
     private Vector2 _initialPos;
+    private bool _isRed;
+    private float _redTimer;
+    private float _redTimerCounter;
 
     //private Collider2D _fistCollider;
 
@@ -114,6 +117,9 @@ public class PlayerMovement : MonoBehaviour
         _manabar = GameObject.Find("ManaBar").GetComponent<ManaBar>();
         _jumpyjump = false;
         _gameManager = GameObject.FindGameObjectWithTag("GameManager");
+
+        _redTimer = 0.25f;
+        _redTimerCounter = 0f;
     }
 
     // Start is called before the first frame update
@@ -157,6 +163,13 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
+
+        if (_isRed && _redTimerCounter<_redTimer)
+        {
+            _redTimerCounter += Time.deltaTime;
+        }
+        else { _player.GetComponentInChildren<SpriteRenderer>().color = Color.white; _redTimerCounter = 0f; _isRed = false; }
+
     }
 
     private void FixedUpdate()
@@ -426,6 +439,8 @@ public class PlayerMovement : MonoBehaviour
     public void KnockBack()
     {
         _animator.SetTrigger("GetsHit");
+        _isRed= true;
+        _player.GetComponentInChildren<SpriteRenderer>().color = Color.red;
         /*
         float force = 1000;
         _rb.AddForce(transform.right *force);
