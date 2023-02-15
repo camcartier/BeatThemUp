@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 40
-  _attPower: 5
+  _attPower: 10
   _attSpePower: 0
   _defPower: 0
   _moveSpeed: 40

@@ -285,7 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 70
   _attPower: 20
-  _attSpePower: 30
+  _attSpePower: 50
   _defPower: 0
   _moveSpeed: 30
   _moveDistance: 0.7
