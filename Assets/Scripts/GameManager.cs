@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _scoreCounter.value = 0;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called before the first frame update
