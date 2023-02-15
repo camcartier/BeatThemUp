@@ -18,15 +18,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        _scoreCounter.value = 0;
+        if (SceneManager.GetActiveScene().buildIndex == 1) _scoreCounter.value = 0;
         DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _playerHP.value = 100;
-        _playerMana.value = 0;
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            _playerHP.value = 100;
+            _playerMana.value = 0;
+        }
         _enemyCount.value = 0;
         _wave.value = false;
         _inactiveGruntList= new List<GameObject>();
